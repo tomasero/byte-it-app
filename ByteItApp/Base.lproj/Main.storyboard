@@ -12,13 +12,13 @@
         <!--Gestures-->
         <scene sceneID="n11-6g-cmg">
             <objects>
-                <tableViewController id="Arc-lG-Yam" customClass="GesturesViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Arc-lG-Yam" customClass="GesturesViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lrx-MM-uK9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="GestureCell" textLabel="d5U-Vv-cQc" detailTextLabel="DMQ-Ql-sAu" style="IBUITableViewCellStyleSubtitle" id="2b0-Ab-vBG" customClass="GestureTableViewCell" customModule="GestureiOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="GestureCell" textLabel="d5U-Vv-cQc" detailTextLabel="DMQ-Ql-sAu" style="IBUITableViewCellStyleSubtitle" id="2b0-Ab-vBG" customClass="GestureTableViewCell" customModule="ByteItApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2b0-Ab-vBG" id="9Xu-td-wfh">
@@ -68,7 +68,7 @@
         <!--Add Gesture-->
         <scene sceneID="Nbj-b6-If1">
             <objects>
-                <tableViewController id="IZf-Xa-uHb" customClass="GestureDetailsViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="IZf-Xa-uHb" customClass="GestureDetailsViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="GAf-yE-yQp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,7 +216,7 @@
         <!--Choose Sensors-->
         <scene sceneID="ryb-Uc-0hd">
             <objects>
-                <tableViewController title="Choose Sensors" id="Yrh-bn-mP7" customClass="SensorPickerViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Choose Sensors" id="Yrh-bn-mP7" customClass="SensorPickerViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MCk-rI-gEb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -314,13 +314,13 @@
         <!--Moments-->
         <scene sceneID="FgD-kd-Ki6">
             <objects>
-                <tableViewController id="dgc-Ws-NaO" customClass="MomentsViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dgc-Ws-NaO" customClass="MomentsViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wXG-iN-DUJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="x9J-aV-BOF" detailTextLabel="j7M-3E-b6s" style="IBUITableViewCellStyleSubtitle" id="kvq-jk-v7H" customClass="MomentTableViewCell" customModule="GestureiOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="x9J-aV-BOF" detailTextLabel="j7M-3E-b6s" style="IBUITableViewCellStyleSubtitle" id="kvq-jk-v7H" customClass="MomentTableViewCell" customModule="ByteItApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kvq-jk-v7H" id="bIY-HO-We6">
@@ -368,7 +368,7 @@
         <!--Add Place-->
         <scene sceneID="ohj-aq-3Cq">
             <objects>
-                <tableViewController storyboardIdentifier="PlaceViewController" id="Hxv-yR-NR0" userLabel="Add Place" customClass="MomentViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PlaceViewController" id="Hxv-yR-NR0" userLabel="Add Place" customClass="MomentViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="EiU-3y-efL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -562,7 +562,7 @@
         <!--Search Place-->
         <scene sceneID="xA8-HG-c3W">
             <objects>
-                <tableViewController title="Pick Place" id="ZEb-oe-FQr" userLabel="Search Place" customClass="SearchPlaceViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Pick Place" id="ZEb-oe-FQr" userLabel="Search Place" customClass="SearchPlaceViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="IDx-l7-2Pt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -767,7 +767,7 @@
         <!--Select Place-->
         <scene sceneID="gU6-Hr-NS3">
             <objects>
-                <tableViewController storyboardIdentifier="SelectPlaceTableViewController" title="Select Place" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bsD-B3-XQX" customClass="SelectPlaceTableViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SelectPlaceTableViewController" title="Select Place" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bsD-B3-XQX" customClass="SelectPlaceTableViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qDe-Y1-jKy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -825,13 +825,13 @@
         <!--Classified Gesture-->
         <scene sceneID="JCE-QA-WIm">
             <objects>
-                <tableViewController id="Knc-Cs-ydw" customClass="ClassifyViewController" customModule="GestureiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Knc-Cs-ydw" customClass="ClassifyViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="i2s-Vy-7Y8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gestureCell" textLabel="xQb-6j-M2y" detailTextLabel="5uF-5v-H4X" style="IBUITableViewCellStyleSubtitle" id="3fn-xd-OKE" customClass="ClassifiedGestureTableViewCell" customModule="GestureiOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gestureCell" textLabel="xQb-6j-M2y" detailTextLabel="5uF-5v-H4X" style="IBUITableViewCellStyleSubtitle" id="3fn-xd-OKE" customClass="ClassifiedGestureTableViewCell" customModule="ByteItApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3fn-xd-OKE" id="YcD-Iv-6x3">
@@ -863,7 +863,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Classified Gesture" id="KO0-NT-Nau">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="play" id="5Q7-dI-WfR"/>
+                            <barButtonItem systemItem="play" id="5Q7-dI-WfR">
+                                <connections>
+                                    <action selector="toggleClassify:" destination="Knc-Cs-ydw" id="D9P-fE-d8D"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Test" id="dye-4m-VFS">
                                 <connections>
                                     <action selector="testAddGesture:" destination="Knc-Cs-ydw" id="GBX-rf-mrc"/>
@@ -878,7 +882,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7N-9l-QsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1722" y="-9"/>
+            <point key="canvasLocation" x="1775" y="63"/>
         </scene>
         <!--Classify-->
         <scene sceneID="d5r-EW-oNi">

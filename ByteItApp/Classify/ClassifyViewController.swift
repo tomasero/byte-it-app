@@ -73,14 +73,29 @@ class ClassifyViewController: UITableViewController {
         cell.selectionStyle = .none
         cell.switchView.setOn(gesture.correct, animated: false)
         cell.index = indexPath
-//        theCell.switchView.setOn(theCell.state, animated: false)
         return cell
     }
-
+    
+    var classifying: Bool = false
+    @IBAction @objc func toggleClassify(_ sender: AnyObject) {
+        print("toggleClassify")
+        var btn: UIBarButtonItem
+        if classifying {
+            btn = getButton(item: UIBarButtonItem.SystemItem.play)
+        } else {
+            btn = getButton(item: UIBarButtonItem.SystemItem.pause)
+        }
+        classifying = !classifying
+        navigationItem.rightBarButtonItems?[0] = btn
+    }
+    
+    func getButton(item: UIBarButtonItem.SystemItem) -> UIBarButtonItem {
+        return UIBarButtonItem(barButtonSystemItem: item, target: self, action: Selector(("toggleClassify:")))
+    }
     /*
-    // Override to support conditional editing of the table view.
+     Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+         Return false if you do not want the specified item to be editable.
         return true
     }
     */

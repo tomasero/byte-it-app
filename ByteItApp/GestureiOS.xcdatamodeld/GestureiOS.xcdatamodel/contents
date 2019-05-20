@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Gesture" representedClassName=".Gesture" syncable="YES">
+        <attribute name="fileName" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sensor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueFileCount" optional="YES" attributeType="Transformable" customClassName="[String:Int]" syncable="YES"/>
+        <attribute name="uniqueFileName" optional="YES" attributeType="Transformable" customClassName="[String:String]" syncable="YES"/>
+    </entity>
+    <entity name="Moment" representedClassName=".Moment" syncable="YES">
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="person" optional="YES" attributeType="String" customClassName="[String:Int]" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="String" customClassName="[String:String]" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Gesture" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Moment" positionX="-63" positionY="-18" width="128" height="135"/>
+    </elements>
+</model>

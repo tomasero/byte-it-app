@@ -7,35 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0007EA4D21978EA3006433E7 /* GestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007EA4C21978EA3006433E7 /* GestureTableViewCell.swift */; };
-		0007EA51219CC800006433E7 /* StoreSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007EA50219CC7FF006433E7 /* StoreSensorData.swift */; };
-		008967F421ABAD0B007C91A0 /* Gesture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008967F221ABAD0B007C91A0 /* Gesture+CoreDataClass.swift */; };
-		008967F721ABB82D007C91A0 /* Gesture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008967F621ABB82D007C91A0 /* Gesture+CoreDataProperties.swift */; };
-		00955D832194E7C000CC0469 /* GesturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00955D822194E7C000CC0469 /* GesturesViewController.swift */; };
-		00955D852194F15300CC0469 /* GestureDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00955D842194F15300CC0469 /* GestureDetailsViewController.swift */; };
-		00955D87219765BC00CC0469 /* SensorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00955D86219765BC00CC0469 /* SensorPickerViewController.swift */; };
-		00CD72852194CEA10063DC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD72842194CEA10063DC56 /* AppDelegate.swift */; };
-		00CD728A2194CEA10063DC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00CD72882194CEA10063DC56 /* Main.storyboard */; };
-		00CD728F2194CEAC0063DC56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00CD728E2194CEAC0063DC56 /* Assets.xcassets */; };
-		00CD72922194CEAC0063DC56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00CD72902194CEAC0063DC56 /* LaunchScreen.storyboard */; };
-		00CD729D2194CEAC0063DC56 /* GestureiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD729C2194CEAC0063DC56 /* GestureiOSTests.swift */; };
-		00CD72A82194CEAC0063DC56 /* GestureiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD72A72194CEAC0063DC56 /* GestureiOSUITests.swift */; };
-		00F9852421A51F580063D780 /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F9852321A51F580063D780 /* DynamicDataSource.swift */; };
-		FF8C96D6229260B1005CAE95 /* ClassifiedGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8C96D5229260B1005CAE95 /* ClassifiedGesture.swift */; };
-		FF9724C622921F2E00A56C97 /* MomentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9724C522921F2E00A56C97 /* MomentDetailsViewController.swift */; };
-		FF9724C922921F6800A56C97 /* GestureiOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF9724C722921F6800A56C97 /* GestureiOS.xcdatamodeld */; };
-		FF9724CD2292237E00A56C97 /* ClassifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9724CC2292237E00A56C97 /* ClassifyViewController.swift */; };
-		FF9724CF229248EE00A56C97 /* ClassifiedGestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9724CE229248EE00A56C97 /* ClassifiedGestureTableViewCell.swift */; };
-		FFB46C5621AE07CC0045F0C0 /* ExoEarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB46C5521AE07CC0045F0C0 /* ExoEarController.swift */; };
-		FFE0FE2921EC5EA4002CF495 /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE2821EC5EA4002CF495 /* MomentsViewController.swift */; };
-		FFE0FE2D21EC69DB002CF495 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE2C21EC69DB002CF495 /* PlaceTableViewCell.swift */; };
-		FFE0FE3421ED28E6002CF495 /* SearchPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3321ED28E6002CF495 /* SearchPlaceViewController.swift */; };
-		FFE0FE3621ED2A47002CF495 /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3521ED2A47002CF495 /* MapDataSource.swift */; };
-		FFE0FE3821EEA508002CF495 /* SelectPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3721EEA508002CF495 /* SelectPlaceTableViewController.swift */; };
-		FFE0FE3A21F03EA5002CF495 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3921F03EA5002CF495 /* Objects.swift */; };
-		FFE0FE3C21F05D3E002CF495 /* Moment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3B21F05D3E002CF495 /* Moment+CoreDataProperties.swift */; };
-		FFE0FE3E21F05EB6002CF495 /* Moment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3D21F05EB6002CF495 /* Moment+CoreDataClass.swift */; };
-		FFE0FE4021F1B437002CF495 /* MomentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE0FE3F21F1B437002CF495 /* MomentTableViewCell.swift */; };
+		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
+		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
+		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
+		FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE02296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift */; };
+		FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE12296231E0026E8BD /* ClassifiedGesturee.swift */; };
+		FFACFD082296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE22296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift */; };
+		FFACFD092296231E0026E8BD /* ClassifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE32296231E0026E8BD /* ClassifyViewController.swift */; };
+		FFACFD0A2296231E0026E8BD /* ClassifiedGestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE42296231E0026E8BD /* ClassifiedGestureTableViewCell.swift */; };
+		FFACFD0B2296231E0026E8BD /* Moment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE62296231E0026E8BD /* Moment+CoreDataProperties.swift */; };
+		FFACFD0C2296231E0026E8BD /* MomentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE72296231E0026E8BD /* MomentTableViewCell.swift */; };
+		FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE82296231E0026E8BD /* MomentDetailsViewController.swift */; };
+		FFACFD0E2296231E0026E8BD /* Moment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCE92296231E0026E8BD /* Moment+CoreDataClass.swift */; };
+		FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFACFCEA2296231E0026E8BD /* Assets.xcassets */; };
+		FFACFD102296231E0026E8BD /* GestureData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */; };
+		FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */; };
+		FFACFD122296231E0026E8BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFACFCEE2296231E0026E8BD /* Main.storyboard */; };
+		FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */; };
+		FFACFD152296231E0026E8BD /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF42296231E0026E8BD /* Gestures.swift */; };
+		FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */; };
+		FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF62296231E0026E8BD /* PlaceTableViewCell.swift */; };
+		FFACFD182296231E0026E8BD /* SelectPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF72296231E0026E8BD /* SelectPlaceTableViewController.swift */; };
+		FFACFD192296231E0026E8BD /* Gesture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF82296231E0026E8BD /* Gesture+CoreDataClass.swift */; };
+		FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF92296231E0026E8BD /* GesturesViewController.swift */; };
+		FFACFD1B2296231E0026E8BD /* SearchPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFA2296231E0026E8BD /* SearchPlaceViewController.swift */; };
+		FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */; };
+		FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */; };
+		FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFE2296231E0026E8BD /* AppDelegate.swift */; };
+		FFACFD212296231E0026E8BD /* ExoEarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD012296231E0026E8BD /* ExoEarController.swift */; };
+		FFACFD222296231E0026E8BD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFACFD022296231E0026E8BD /* Info.plist */; };
+		FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */; };
+		FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2422962B440026E8BD /* MapDataSource.swift */; };
+		FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2622962BA40026E8BD /* MomentsViewController.swift */; };
+		FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,41 +60,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0007EA4C21978EA3006433E7 /* GestureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureTableViewCell.swift; sourceTree = "<group>"; };
-		0007EA50219CC7FF006433E7 /* StoreSensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSensorData.swift; sourceTree = "<group>"; };
-		008967F221ABAD0B007C91A0 /* Gesture+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gesture+CoreDataClass.swift"; sourceTree = "<group>"; };
-		008967F621ABB82D007C91A0 /* Gesture+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gesture+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		00955D822194E7C000CC0469 /* GesturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesViewController.swift; sourceTree = "<group>"; };
-		00955D842194F15300CC0469 /* GestureDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureDetailsViewController.swift; sourceTree = "<group>"; };
-		00955D86219765BC00CC0469 /* SensorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorPickerViewController.swift; sourceTree = "<group>"; };
 		00CD72812194CEA10063DC56 /* ByteItApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteItApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		00CD72842194CEA10063DC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		00CD72892194CEA10063DC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		00CD728E2194CEAC0063DC56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		00CD72912194CEAC0063DC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		00CD72932194CEAC0063DC56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00CD72982194CEAC0063DC56 /* ByteItAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00CD729C2194CEAC0063DC56 /* GestureiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureiOSTests.swift; sourceTree = "<group>"; };
-		00CD729E2194CEAC0063DC56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00CD72A32194CEAC0063DC56 /* ByteItAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00CD72A72194CEAC0063DC56 /* GestureiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureiOSUITests.swift; sourceTree = "<group>"; };
-		00CD72A92194CEAC0063DC56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00F9852321A51F580063D780 /* DynamicDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
-		FF8C96D5229260B1005CAE95 /* ClassifiedGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedGesture.swift; sourceTree = "<group>"; };
-		FF9724C522921F2E00A56C97 /* MomentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentDetailsViewController.swift; sourceTree = "<group>"; };
-		FF9724C822921F6800A56C97 /* GestureiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GestureiOS.xcdatamodel; sourceTree = "<group>"; };
-		FF9724CC2292237E00A56C97 /* ClassifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifyViewController.swift; sourceTree = "<group>"; };
-		FF9724CE229248EE00A56C97 /* ClassifiedGestureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedGestureTableViewCell.swift; sourceTree = "<group>"; };
-		FFB46C5521AE07CC0045F0C0 /* ExoEarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExoEarController.swift; sourceTree = "<group>"; };
-		FFE0FE2821EC5EA4002CF495 /* MomentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
-		FFE0FE2C21EC69DB002CF495 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
-		FFE0FE3321ED28E6002CF495 /* SearchPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceViewController.swift; sourceTree = "<group>"; };
-		FFE0FE3521ED2A47002CF495 /* MapDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
-		FFE0FE3721EEA508002CF495 /* SelectPlaceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlaceTableViewController.swift; sourceTree = "<group>"; };
-		FFE0FE3921F03EA5002CF495 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
-		FFE0FE3B21F05D3E002CF495 /* Moment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moment+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FFE0FE3D21F05EB6002CF495 /* Moment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moment+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FFE0FE3F21F1B437002CF495 /* MomentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentTableViewCell.swift; sourceTree = "<group>"; };
+		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
+		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
+		FFACFCE02296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClassifiedGesture+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFACFCE12296231E0026E8BD /* ClassifiedGesturee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedGesturee.swift; sourceTree = "<group>"; };
+		FFACFCE22296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClassifiedGesture+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFACFCE32296231E0026E8BD /* ClassifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifyViewController.swift; sourceTree = "<group>"; };
+		FFACFCE42296231E0026E8BD /* ClassifiedGestureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedGestureTableViewCell.swift; sourceTree = "<group>"; };
+		FFACFCE62296231E0026E8BD /* Moment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFACFCE72296231E0026E8BD /* MomentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentTableViewCell.swift; sourceTree = "<group>"; };
+		FFACFCE82296231E0026E8BD /* MomentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentDetailsViewController.swift; sourceTree = "<group>"; };
+		FFACFCE92296231E0026E8BD /* Moment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFACFCEA2296231E0026E8BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GestureData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFACFCED2296231E0026E8BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FFACFCEF2296231E0026E8BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FFACFCF12296231E0026E8BD /* GestureiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GestureiOS.xcdatamodel; sourceTree = "<group>"; };
+		FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureDetailsViewController.swift; sourceTree = "<group>"; };
+		FFACFCF42296231E0026E8BD /* Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
+		FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gesture+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FFACFCF62296231E0026E8BD /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
+		FFACFCF72296231E0026E8BD /* SelectPlaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlaceTableViewController.swift; sourceTree = "<group>"; };
+		FFACFCF82296231E0026E8BD /* Gesture+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gesture+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFACFCF92296231E0026E8BD /* GesturesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturesViewController.swift; sourceTree = "<group>"; };
+		FFACFCFA2296231E0026E8BD /* SearchPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceViewController.swift; sourceTree = "<group>"; };
+		FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTableViewCell.swift; sourceTree = "<group>"; };
+		FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GestureData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FFACFCFE2296231E0026E8BD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FFACFD012296231E0026E8BD /* ExoEarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExoEarController.swift; sourceTree = "<group>"; };
+		FFACFD022296231E0026E8BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFACFD2422962B440026E8BD /* MapDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
+		FFACFD2622962BA40026E8BD /* MomentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
+		FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,9 +126,7 @@
 		00CD72782194CEA00063DC56 = {
 			isa = PBXGroup;
 			children = (
-				00CD72832194CEA10063DC56 /* GestureiOS */,
-				00CD729B2194CEAC0063DC56 /* GestureiOSTests */,
-				00CD72A62194CEAC0063DC56 /* GestureiOSUITests */,
+				FFACFCDB2296231E0026E8BD /* ByteItApp */,
 				00CD72822194CEA10063DC56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,82 +141,68 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00CD72832194CEA10063DC56 /* GestureiOS */ = {
+		FFACFCDB2296231E0026E8BD /* ByteItApp */ = {
 			isa = PBXGroup;
 			children = (
-				00CD72842194CEA10063DC56 /* AppDelegate.swift */,
-				00CD72882194CEA10063DC56 /* Main.storyboard */,
-				FF9724C722921F6800A56C97 /* GestureiOS.xcdatamodeld */,
-				FFB46C5521AE07CC0045F0C0 /* ExoEarController.swift */,
-				FF9DF8A822926F81001BD7BA /* Classify */,
-				FF9DF8A722926F39001BD7BA /* Moment */,
-				FF9DF8A622926F29001BD7BA /* Gesture */,
-				00CD728E2194CEAC0063DC56 /* Assets.xcassets */,
-				00CD72902194CEAC0063DC56 /* LaunchScreen.storyboard */,
-				00CD72932194CEAC0063DC56 /* Info.plist */,
-				FFE0FE3921F03EA5002CF495 /* Objects.swift */,
-				00F9852321A51F580063D780 /* DynamicDataSource.swift */,
+				FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */,
+				FFACFCDD2296231E0026E8BD /* Objects.swift */,
+				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
+				FFACFCDF2296231E0026E8BD /* Classify */,
+				FFACFCE52296231E0026E8BD /* Moment */,
+				FFACFCEA2296231E0026E8BD /* Assets.xcassets */,
+				FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */,
+				FFACFCEE2296231E0026E8BD /* Main.storyboard */,
+				FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */,
+				FFACFCF22296231E0026E8BD /* Gesture */,
+				FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */,
+				FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */,
+				FFACFCFE2296231E0026E8BD /* AppDelegate.swift */,
+				FFACFD012296231E0026E8BD /* ExoEarController.swift */,
+				FFACFD022296231E0026E8BD /* Info.plist */,
 			);
-			name = GestureiOS;
 			path = ByteItApp;
 			sourceTree = "<group>";
 		};
-		00CD729B2194CEAC0063DC56 /* GestureiOSTests */ = {
+		FFACFCDF2296231E0026E8BD /* Classify */ = {
 			isa = PBXGroup;
 			children = (
-				00CD729C2194CEAC0063DC56 /* GestureiOSTests.swift */,
-				00CD729E2194CEAC0063DC56 /* Info.plist */,
+				FFACFCE02296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift */,
+				FFACFCE22296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift */,
+				FFACFCE12296231E0026E8BD /* ClassifiedGesturee.swift */,
+				FFACFCE32296231E0026E8BD /* ClassifyViewController.swift */,
+				FFACFCE42296231E0026E8BD /* ClassifiedGestureTableViewCell.swift */,
 			);
-			path = GestureiOSTests;
+			path = Classify;
 			sourceTree = "<group>";
 		};
-		00CD72A62194CEAC0063DC56 /* GestureiOSUITests */ = {
+		FFACFCE52296231E0026E8BD /* Moment */ = {
 			isa = PBXGroup;
 			children = (
-				00CD72A72194CEAC0063DC56 /* GestureiOSUITests.swift */,
-				00CD72A92194CEAC0063DC56 /* Info.plist */,
-			);
-			path = GestureiOSUITests;
-			sourceTree = "<group>";
-		};
-		FF9DF8A622926F29001BD7BA /* Gesture */ = {
-			isa = PBXGroup;
-			children = (
-				008967F221ABAD0B007C91A0 /* Gesture+CoreDataClass.swift */,
-				008967F621ABB82D007C91A0 /* Gesture+CoreDataProperties.swift */,
-				00955D822194E7C000CC0469 /* GesturesViewController.swift */,
-				00955D842194F15300CC0469 /* GestureDetailsViewController.swift */,
-				0007EA4C21978EA3006433E7 /* GestureTableViewCell.swift */,
-				00955D86219765BC00CC0469 /* SensorPickerViewController.swift */,
-				0007EA50219CC7FF006433E7 /* StoreSensorData.swift */,
-			);
-			path = Gesture;
-			sourceTree = "<group>";
-		};
-		FF9DF8A722926F39001BD7BA /* Moment */ = {
-			isa = PBXGroup;
-			children = (
-				FFE0FE3321ED28E6002CF495 /* SearchPlaceViewController.swift */,
-				FFE0FE3D21F05EB6002CF495 /* Moment+CoreDataClass.swift */,
-				FFE0FE3B21F05D3E002CF495 /* Moment+CoreDataProperties.swift */,
-				FFE0FE2821EC5EA4002CF495 /* MomentsViewController.swift */,
-				FF9724C522921F2E00A56C97 /* MomentDetailsViewController.swift */,
-				FFE0FE3F21F1B437002CF495 /* MomentTableViewCell.swift */,
-				FFE0FE3721EEA508002CF495 /* SelectPlaceTableViewController.swift */,
-				FFE0FE2C21EC69DB002CF495 /* PlaceTableViewCell.swift */,
-				FFE0FE3521ED2A47002CF495 /* MapDataSource.swift */,
+				FFACFD2622962BA40026E8BD /* MomentsViewController.swift */,
+				FFACFD2422962B440026E8BD /* MapDataSource.swift */,
+				FFACFCF62296231E0026E8BD /* PlaceTableViewCell.swift */,
+				FFACFCF72296231E0026E8BD /* SelectPlaceTableViewController.swift */,
+				FFACFCFA2296231E0026E8BD /* SearchPlaceViewController.swift */,
+				FFACFCE62296231E0026E8BD /* Moment+CoreDataProperties.swift */,
+				FFACFCE72296231E0026E8BD /* MomentTableViewCell.swift */,
+				FFACFCE82296231E0026E8BD /* MomentDetailsViewController.swift */,
+				FFACFCE92296231E0026E8BD /* Moment+CoreDataClass.swift */,
 			);
 			path = Moment;
 			sourceTree = "<group>";
 		};
-		FF9DF8A822926F81001BD7BA /* Classify */ = {
+		FFACFCF22296231E0026E8BD /* Gesture */ = {
 			isa = PBXGroup;
 			children = (
-				FF9724CC2292237E00A56C97 /* ClassifyViewController.swift */,
-				FF8C96D5229260B1005CAE95 /* ClassifiedGesture.swift */,
-				FF9724CE229248EE00A56C97 /* ClassifiedGestureTableViewCell.swift */,
+				FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */,
+				FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */,
+				FFACFCF42296231E0026E8BD /* Gestures.swift */,
+				FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */,
+				FFACFCF82296231E0026E8BD /* Gesture+CoreDataClass.swift */,
+				FFACFCF92296231E0026E8BD /* GesturesViewController.swift */,
+				FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */,
 			);
-			path = Classify;
+			path = Gesture;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,9 +309,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00CD72922194CEAC0063DC56 /* LaunchScreen.storyboard in Resources */,
-				00CD728F2194CEAC0063DC56 /* Assets.xcassets in Resources */,
-				00CD728A2194CEA10063DC56 /* Main.storyboard in Resources */,
+				FFACFD222296231E0026E8BD /* Info.plist in Resources */,
+				FFACFD122296231E0026E8BD /* Main.storyboard in Resources */,
+				FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */,
+				FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,30 +337,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00F9852421A51F580063D780 /* DynamicDataSource.swift in Sources */,
-				FFB46C5621AE07CC0045F0C0 /* ExoEarController.swift in Sources */,
-				008967F721ABB82D007C91A0 /* Gesture+CoreDataProperties.swift in Sources */,
-				FFE0FE3A21F03EA5002CF495 /* Objects.swift in Sources */,
-				FF9724C622921F2E00A56C97 /* MomentDetailsViewController.swift in Sources */,
-				FFE0FE3C21F05D3E002CF495 /* Moment+CoreDataProperties.swift in Sources */,
-				FFE0FE3421ED28E6002CF495 /* SearchPlaceViewController.swift in Sources */,
-				00955D852194F15300CC0469 /* GestureDetailsViewController.swift in Sources */,
-				00955D832194E7C000CC0469 /* GesturesViewController.swift in Sources */,
-				008967F421ABAD0B007C91A0 /* Gesture+CoreDataClass.swift in Sources */,
-				FFE0FE2921EC5EA4002CF495 /* MomentsViewController.swift in Sources */,
-				FFE0FE4021F1B437002CF495 /* MomentTableViewCell.swift in Sources */,
-				00955D87219765BC00CC0469 /* SensorPickerViewController.swift in Sources */,
-				FF9724CF229248EE00A56C97 /* ClassifiedGestureTableViewCell.swift in Sources */,
-				00CD72852194CEA10063DC56 /* AppDelegate.swift in Sources */,
-				FF8C96D6229260B1005CAE95 /* ClassifiedGesture.swift in Sources */,
-				FFE0FE3621ED2A47002CF495 /* MapDataSource.swift in Sources */,
-				0007EA51219CC800006433E7 /* StoreSensorData.swift in Sources */,
-				0007EA4D21978EA3006433E7 /* GestureTableViewCell.swift in Sources */,
-				FFE0FE3E21F05EB6002CF495 /* Moment+CoreDataClass.swift in Sources */,
-				FF9724CD2292237E00A56C97 /* ClassifyViewController.swift in Sources */,
-				FFE0FE2D21EC69DB002CF495 /* PlaceTableViewCell.swift in Sources */,
-				FF9724C922921F6800A56C97 /* GestureiOS.xcdatamodeld in Sources */,
-				FFE0FE3821EEA508002CF495 /* SelectPlaceTableViewController.swift in Sources */,
+				FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */,
+				FFACFD0A2296231E0026E8BD /* ClassifiedGestureTableViewCell.swift in Sources */,
+				FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */,
+				FFACFD042296231E0026E8BD /* Objects.swift in Sources */,
+				FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */,
+				FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */,
+				FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */,
+				FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */,
+				FFACFD0C2296231E0026E8BD /* MomentTableViewCell.swift in Sources */,
+				FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */,
+				FFACFD082296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift in Sources */,
+				FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */,
+				FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */,
+				FFACFD1B2296231E0026E8BD /* SearchPlaceViewController.swift in Sources */,
+				FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */,
+				FFACFD212296231E0026E8BD /* ExoEarController.swift in Sources */,
+				FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */,
+				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
+				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
+				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
+				FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */,
+				FFACFD0E2296231E0026E8BD /* Moment+CoreDataClass.swift in Sources */,
+				FFACFD192296231E0026E8BD /* Gesture+CoreDataClass.swift in Sources */,
+				FFACFD152296231E0026E8BD /* Gestures.swift in Sources */,
+				FFACFD092296231E0026E8BD /* ClassifyViewController.swift in Sources */,
+				FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */,
+				FFACFD182296231E0026E8BD /* SelectPlaceTableViewController.swift in Sources */,
+				FFACFD0B2296231E0026E8BD /* Moment+CoreDataProperties.swift in Sources */,
+				FFACFD102296231E0026E8BD /* GestureData+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00CD729D2194CEAC0063DC56 /* GestureiOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +380,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00CD72A82194CEAC0063DC56 /* GestureiOSUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,20 +399,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		00CD72882194CEA10063DC56 /* Main.storyboard */ = {
+		FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				00CD72892194CEA10063DC56 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		00CD72902194CEAC0063DC56 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				00CD72912194CEAC0063DC56 /* Base */,
+				FFACFCED2296231E0026E8BD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FFACFCEE2296231E0026E8BD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FFACFCEF2296231E0026E8BD /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -701,13 +694,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		FF9724C722921F6800A56C97 /* GestureiOS.xcdatamodeld */ = {
+		FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				FF9724C822921F6800A56C97 /* GestureiOS.xcdatamodel */,
+				FFACFCF12296231E0026E8BD /* GestureiOS.xcdatamodel */,
 			);
-			currentVersion = FF9724C822921F6800A56C97 /* GestureiOS.xcdatamodel */;
-			path = GestureiOS.xcdatamodeld;
+			currentVersion = FFACFCF12296231E0026E8BD /* GestureiOS.xcdatamodel */;
+			path = ByteIt.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

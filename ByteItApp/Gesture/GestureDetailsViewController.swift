@@ -56,7 +56,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         nameTextField.delegate = self
-        if let gesture = gesture{
+        if let gesture = gesture {
             navigationItem.title = gesture.name
             nameTextField.text = gesture.name
             detailLabel.text = gesture.sensor
@@ -114,32 +114,30 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         
         if self.flag{
         // 2
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Gesture",
-                                       in: managedContext)!
-        
-        self.gesture = Gesture(entity: entity,
-                               insertInto: managedContext)
-        
-        self.gesture?.name = gestureName
-        self.gesture?.sensor = gestureSensor
-        self.gesture?.fileName = gestureFiles
-        self.gesture?.uniqueFileCount = gestureFileCount
-        self.gesture?.uniqueFileName = gestureUniqueFileName
+            let entity =
+                NSEntityDescription.entity(forEntityName: "Gesture",
+                                           in: managedContext)!
             
-        }
-        else{
-        if let id = self.gesture?.objectID {
-            do{
-            try self.gesture = managedContext.existingObject(with: id) as? Gesture
-                self.gesture?.name = gestureName
-                self.gesture?.sensor = gestureSensor
-                self.gesture?.fileName = gestureFiles
-                self.gesture?.uniqueFileCount = gestureFileCount
-                self.gesture?.uniqueFileName = gestureUniqueFileName
-            } catch {
-                print("Error loading and editing existing CoreData object")
-            }
+            self.gesture = Gesture(entity: entity,
+                                   insertInto: managedContext)
+            
+            self.gesture?.name = gestureName
+            self.gesture?.sensor = gestureSensor
+            self.gesture?.fileName = gestureFiles
+            self.gesture?.uniqueFileCount = gestureFileCount
+            self.gesture?.uniqueFileName = gestureUniqueFileName
+        } else{
+            if let id = self.gesture?.objectID {
+                do {
+                    try self.gesture = managedContext.existingObject(with: id) as? Gesture
+                        self.gesture?.name = gestureName
+                        self.gesture?.sensor = gestureSensor
+                        self.gesture?.fileName = gestureFiles
+                        self.gesture?.uniqueFileCount = gestureFileCount
+                        self.gesture?.uniqueFileName = gestureUniqueFileName
+                } catch {
+                    print("Error loading and editing existing CoreData object")
+                }
             }
         }
         

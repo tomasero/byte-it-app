@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ClassifiedGesture: CustomStringConvertible {
+struct ClassifiedGesturee: CustomStringConvertible {
     let gestureClass: String
     let time: String
     let correct: Bool
@@ -19,5 +19,5 @@ struct ClassifiedGesture: CustomStringConvertible {
 class Shared {
     private init() { }
     static let instance = Shared()
-    var gestures: [ClassifiedGesture] = []
+    var gestures: [ClassifiedGesturee] = []
 }

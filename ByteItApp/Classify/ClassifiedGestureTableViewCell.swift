@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class ClassifiedGestureTableViewCell: UITableViewCell {
-    var index: IndexPath?
+//    var index: IndexPath?
+    var index: NSManagedObjectID?
     let switchView = UISwitch(frame: .zero)
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,9 +27,34 @@ class ClassifiedGestureTableViewCell: UITableViewCell {
         print(detailTextLabel?.text ?? "")
         print((textLabel?.text ?? "") + " switch is " + (sender.isOn ? "ON" : "OFF"))
         guard let index = index else { return }
-
-        let gesture = Shared.instance.gestures[index.row]
-        Shared.instance.gestures[index.row] = ClassifiedGesture(gestureClass: gesture.gestureClass, time: gesture.time, correct: sender.isOn)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        do {
+            let gesture = try managedContext.existingObject(with: index) as? ClassifiedGesture
+            print(sender.isOn)
+            print(gesture?.correct ?? -1)
+            gesture?.correct = sender.isOn as NSNumber
+            print(gesture?.correct ?? -1)
+        } catch {
+            print("Error loading and editing existing CoreData object")
+        }
+        do {
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+//        let gesture = Shared.instance.gestures[index.row]
+//        Shared.instance.gestures[index.row] = ClassifiedGesturee(gestureClass: gesture.gestureClass, time: gesture.time, correct: sender.isOn)
+        
+        
+        
         print(Shared.instance.gestures)
         
     }

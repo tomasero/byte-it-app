@@ -10,22 +10,21 @@ import UIKit
 import CoreData
 
 class ClassifiedGestureTableViewCell: UITableViewCell {
+    
 //    var index: IndexPath?
     var index: NSManagedObjectID?
     let switchView = UISwitch(frame: .zero)
+    var automaticSave = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        switchView.setOn(false, animated: false)
         switchView.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         accessoryView = switchView
+//        accessoryView = switchView
     }
     
     @objc func valueChanged(sender: UISwitch) {
-        print("ValueChanged")
-        print(textLabel?.text ?? "")
-        print(detailTextLabel?.text ?? "")
-        print((textLabel?.text ?? "") + " switch is " + (sender.isOn ? "ON" : "OFF"))
+        print("value changed:")
         guard let index = index else { return }
         
         guard let appDelegate =
@@ -37,25 +36,28 @@ class ClassifiedGestureTableViewCell: UITableViewCell {
             appDelegate.persistentContainer.viewContext
         do {
             let gesture = try managedContext.existingObject(with: index) as? ClassifiedGesture
-            print(sender.isOn)
-            print(gesture?.correct ?? -1)
             gesture?.correct = sender.isOn as NSNumber
-            print(gesture?.correct ?? -1)
+            if sender.isOn {
+                gesture?.actualGesture = gesture?.gesture
+                self.detailTextLabel?.text = gesture?.getTime()
+            } else {
+                gesture?.actualGesture = "nil"
+                self.detailTextLabel?.text = (gesture?.getTime())! + " | " + (gesture?.actualGesture)!
+            }
+            
         } catch {
             print("Error loading and editing existing CoreData object")
         }
-        do {
-            try managedContext.save()
-            
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+        if automaticSave {
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
         }
+
 //        let gesture = Shared.instance.gestures[index.row]
 //        Shared.instance.gestures[index.row] = ClassifiedGesturee(gestureClass: gesture.gestureClass, time: gesture.time, correct: sender.isOn)
-        
-        
-        
-        print(Shared.instance.gestures)
         
     }
     

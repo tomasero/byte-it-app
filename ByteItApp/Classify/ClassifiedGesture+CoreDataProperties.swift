@@ -17,7 +17,15 @@ extension ClassifiedGesture {
     }
     
     @NSManaged public var gesture: String?
+    @NSManaged public var actualGesture: String?
     @NSManaged public var time: Date?
     @NSManaged public var correct: NSNumber?
     
+    func getTime() -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
+        let time = formatter.string(from: self.time!)
+        return time
+    }
 }

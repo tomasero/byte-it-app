@@ -156,8 +156,11 @@ class GesturesViewController: UITableViewController {
         }
     }
     
-    @IBAction func cancelToGesturesViewController(_ segue: UIStoryboardSegue) {
+    @IBAction func unwindToGesturesViewController(_ segue: UIStoryboardSegue) {
     }
+    
+//    @IBAction func cancelToGesturesViewController(_ segue: UIStoryboardSegue) {
+//    }
     
     @IBAction func saveGestureDetail(_ segue: UIStoryboardSegue) {
         if let gestureDetailsViewController = segue.source as? GestureDetailsViewController {

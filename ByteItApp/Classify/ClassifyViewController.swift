@@ -14,11 +14,12 @@ class ClassifyViewController: UITableViewController {
     @IBOutlet weak var testBtn: UIBarButtonItem!
     
     var classifiedGestures = [ClassifiedGesture]()
+    var gestures = [Gesture]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableCellID")
-        Shared.instance.gestures = []
+//        Shared.instance.gestures = []
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,19 +32,9 @@ class ClassifyViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "ClassifiedGesture")
-        do {
-            classifiedGestures = try managedContext.fetch(fetchRequest) as! [ClassifiedGesture]
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        print("hello")
+        reloadGestures()
+//        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -67,15 +58,53 @@ class ClassifyViewController: UITableViewController {
         return time
     }
     
-    func addClassifiedGesture() {
-        let gestureClasses = ["left", "right", "front", "none"]
+    func addRandomClassifiedGesture() {
+        let gestureClasses = gestures
+        if gestureClasses.count == 0 {
+            let alert = UIAlertController(title: "No gestures available", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }
         let number = Int.random(in: 0 ..< gestureClasses.count)
         let gesture = gestureClasses[number]
-        let time = getTime(date: Date())
+        //        let time = getTime(date: Date())
         //        let gestureElem = [gesture, time, "false"]
-        let gestureElem = ClassifiedGesturee(gestureClass: gesture, time: time, correct: false)
-        Shared.instance.gestures.insert(gestureElem, at: 0)
-        print(Shared.instance.gestures)
+        //        let gestureElem = ClassifiedGesturee(gestureClass: gesture, time: time, correct: false)
+        //        Shared.instance.gestures.insert(gestureElem, at: 0)
+        //        print(Shared.instance.gestures)
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        let entity =
+            NSEntityDescription.entity(forEntityName: "ClassifiedGesture",
+                                       in: managedContext)!
+        
+        let classifiedGesture = ClassifiedGesture(entity: entity,
+                                                  insertInto: managedContext)
+        
+        classifiedGesture.gesture = gesture.name
+        classifiedGesture.time = Date()
+        classifiedGesture.correct = true
+        
+        do {
+            try managedContext.save()
+            
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+        let newIndexPath = IndexPath(row: 0, section: 0)
+        classifiedGestures.insert(classifiedGesture, at: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+    
+    func addClassifiedGesture(predictedLabel: String) {
         
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -91,9 +120,9 @@ class ClassifyViewController: UITableViewController {
         let classifiedGesture = ClassifiedGesture(entity: entity,
                                insertInto: managedContext)
         
-        classifiedGesture.gesture = gesture
+        classifiedGesture.gesture = predictedLabel
         classifiedGesture.time = Date()
-        classifiedGesture.correct = false
+        classifiedGesture.correct = true
         
         do {
             try managedContext.save()
@@ -108,9 +137,10 @@ class ClassifyViewController: UITableViewController {
     }
     
     @IBAction func testAddGesture(_ sender: UIBarButtonItem) {
-        addClassifiedGesture()
+        addRandomClassifiedGesture()
 //        self.tableView.reloadData()
     }
+    
     
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "gestureCell", for: indexPath) as! ClassifiedGestureTableViewCell
@@ -131,11 +161,17 @@ class ClassifyViewController: UITableViewController {
         let gesture = classifiedGestures[indexPath.row]
         print(gesture)
         cell.textLabel?.text = gesture.gesture
-        cell.detailTextLabel?.text = getTime(date: gesture.time!)
-        cell.selectionStyle = .none
         cell.switchView.setOn(Bool(truncating: gesture.correct!), animated: false)
+        if cell.switchView.isOn {
+            cell.detailTextLabel?.text = getTime(date: gesture.time!)
+        } else {
+            let actualGesture = gesture.actualGesture ?? "nil"
+            cell.detailTextLabel?.text = getTime(date: gesture.time!) + " | " + actualGesture
+        }
+        
 //        cell.index = indexPath
         cell.index = gesture.objectID
+        cell.automaticSave = true
         return cell
     }
     
@@ -145,8 +181,17 @@ class ClassifyViewController: UITableViewController {
         var btn: UIBarButtonItem
         if classifying {
             btn = getButton(item: UIBarButtonItem.SystemItem.play)
+            // stop classifying
         } else {
+            let gestureClasses = gestures
+            if gestureClasses.count == 0 {
+                let alert = UIAlertController(title: "No gestures available", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+                return
+            }
             btn = getButton(item: UIBarButtonItem.SystemItem.pause)
+            // start classifying continuous
         }
         classifying = !classifying
         navigationItem.rightBarButtonItems?[0] = btn
@@ -155,6 +200,8 @@ class ClassifyViewController: UITableViewController {
     func getButton(item: UIBarButtonItem.SystemItem) -> UIBarButtonItem {
         return UIBarButtonItem(barButtonSystemItem: item, target: self, action: Selector(("toggleClassify:")))
     }
+    
+    
     /*
      Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -200,4 +247,84 @@ class ClassifyViewController: UITableViewController {
      }
      */
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+        case "GestureFeedback":
+            guard let classifiedGestureFeedbackViewController = segue.destination as? ClassifiedGestureFeedbackViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let selectedClassifiedGestureCell = sender as? ClassifiedGestureTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedClassifiedGestureCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            let selectedGesture = classifiedGestures[indexPath.row]
+            classifiedGestureFeedbackViewController.classifiedGesture = selectedGesture
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(String(describing: segue.identifier))")
+            
+        }
+    }
+    
+    @IBAction func unwindToClassifiedGesturesViewController(_ segue: UIStoryboardSegue) {
+        print("unwind")
+    }
+    
+    @IBAction func saveClassifiedGesture(_ segue: UIStoryboardSegue) {
+        print("saveClassifiedGestures")
+        
+        if let classifiedGestureFeedback = segue.source as? ClassifiedGestureFeedbackViewController {
+            classifiedGestureFeedback.saveGesture()
+            reloadGestures()
+            tableView.reloadData()
+        
+        }
+//        if let gestureDetailsViewController = segue.source as? GestureDetailsViewController {
+//            if let gesture = gestureDetailsViewController.gesture {
+//
+//                if let selectedIndexPath = tableView.indexPathForSelectedRow {
+//                    // Update an existing gesture.
+//                    gestures[selectedIndexPath.row] = gesture
+//                    tableView.reloadRows(at: [selectedIndexPath], with: .none)
+//                }
+//                else {
+//                    // Add a new gesture.
+//                    let newIndexPath = IndexPath(row: gestures.count, section: 0)
+//
+//                    gestures.append(gesture)
+//                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+    }
+    
+    func reloadGestures() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        var fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "ClassifiedGesture")
+        do {
+            classifiedGestures = try managedContext.fetch(fetchRequest) as! [ClassifiedGesture]
+            classifiedGestures.reverse()
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Gesture")
+        do {
+            gestures = try managedContext.fetch(fetchRequest) as! [Gesture]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
 }

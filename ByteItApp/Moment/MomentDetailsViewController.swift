@@ -132,7 +132,7 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
             print("Could not save. \(error), \(error.userInfo)")
         }
         
-         self.delegate?.pass(moment:self.moment as! Moment)
+        self.delegate?.pass(moment:self.moment as! Moment)
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
 }

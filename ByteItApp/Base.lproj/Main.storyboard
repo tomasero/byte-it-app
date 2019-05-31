@@ -191,7 +191,8 @@
                     <navigationItem key="navigationItem" title="Add Gesture" id="6Xe-21-nWN">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="g4z-6g-bNA">
                             <connections>
-                                <segue destination="UTz-Q2-BUW" kind="unwind" unwindAction="cancelToGesturesViewController:" id="eyO-oB-Ne5"/>
+                                <action selector="cancelGestureEdit:" destination="IZf-Xa-uHb" id="Agn-XL-as0"/>
+                                <segue destination="UTz-Q2-BUW" kind="unwind" unwindAction="unwindToGesturesViewController:" id="UYI-Bv-Xd9"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Nx1-VU-UKT">
@@ -854,6 +855,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="hk5-iC-Xf5" kind="show" identifier="GestureFeedback" id="eid-ua-Rsv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -901,9 +905,90 @@
             </objects>
             <point key="canvasLocation" x="881" y="-10"/>
         </scene>
+        <!--Classified Gesture Feedback-->
+        <scene sceneID="hl2-QA-1Gq">
+            <objects>
+                <tableViewController id="hk5-iC-Xf5" userLabel="Classified Gesture Feedback" customClass="ClassifiedGestureFeedbackViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="8b2-W7-kcp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Classified Gesture" id="zcE-L1-y5c">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="gestureFeedbackCell" textLabel="PQB-Nl-Vhj" detailTextLabel="Vrl-e9-Toz" style="IBUITableViewCellStyleSubtitle" id="uAs-Dy-72P" customClass="ClassifiedGestureTableViewCell" customModule="ByteItApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uAs-Dy-72P" id="pyt-9B-0fZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PQB-Nl-Vhj">
+                                                    <rect key="frame" x="16.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vrl-e9-Toz">
+                                                    <rect key="frame" x="15.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Actual Gesture" id="FqX-0G-WZb">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="fRz-dS-WHS">
+                                        <rect key="frame" x="0.0" y="155.33333333333334" width="375" height="200.00000000000003"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fRz-dS-WHS" id="SyJ-Y1-gYo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.66666666666666"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5t-Wf-ZhJ">
+                                                    <rect key="frame" x="0.0" y="-8" width="375" height="215"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Classified Gesture Feedback" id="mVX-se-Dmq">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="oWu-ga-znk" userLabel="Back">
+                            <connections>
+                                <action selector="cancelGestureFeedback:" destination="hk5-iC-Xf5" id="QD1-Tw-ngW"/>
+                                <segue destination="c5w-td-Z0F" kind="unwind" unwindAction="unwindToClassifiedGesturesViewController:" id="JSn-OK-s66"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="nll-nq-ia8">
+                            <connections>
+                                <segue destination="c5w-td-Z0F" kind="unwind" unwindAction="saveClassifiedGesture:" id="AmO-ru-2VS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="classifiedGestureCell" destination="uAs-Dy-72P" id="8Tf-lV-mAJ"/>
+                        <outlet property="doneBtn" destination="nll-nq-ia8" id="6Lg-XZ-R8O"/>
+                        <outlet property="gesturePicker" destination="h5t-Wf-ZhJ" id="DoX-zb-r64"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qB8-PQ-7DR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="c5w-td-Z0F" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3696.8000000000002" y="62.807881773399018"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="p1a-D0-xNt"/>
-        <segue reference="q6P-BC-Tek"/>
+        <segue reference="ucA-kH-k9T"/>
     </inferredMetricsTieBreakers>
 </document>

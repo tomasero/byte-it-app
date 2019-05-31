@@ -40,6 +40,7 @@
 		FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2422962B440026E8BD /* MapDataSource.swift */; };
 		FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2622962BA40026E8BD /* MomentsViewController.swift */; };
 		FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */; };
+		FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2A2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		FFACFD2422962B440026E8BD /* MapDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
 		FFACFD2622962BA40026E8BD /* MomentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
 		FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorPickerViewController.swift; sourceTree = "<group>"; };
+		FFACFD2A2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedGestureFeedbackViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				FFACFCE12296231E0026E8BD /* ClassifiedGesturee.swift */,
 				FFACFCE32296231E0026E8BD /* ClassifyViewController.swift */,
 				FFACFCE42296231E0026E8BD /* ClassifiedGestureTableViewCell.swift */,
+				FFACFD2A2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift */,
 			);
 			path = Classify;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
 				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
+				FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */,
 				FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */,
 				FFACFD0E2296231E0026E8BD /* Moment+CoreDataClass.swift in Sources */,
 				FFACFD192296231E0026E8BD /* Gesture+CoreDataClass.swift in Sources */,

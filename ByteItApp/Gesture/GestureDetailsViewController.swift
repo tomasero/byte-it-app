@@ -403,9 +403,9 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 }
 
     
-func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        self.dismiss(animated: true, completion: nil)
-}
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            self.dismiss(animated: true, completion: nil)
+    }
     
 
 }
@@ -438,6 +438,7 @@ extension GestureDetailsViewController {
 
 
 extension GestureDetailsViewController{
-    
-    
+    @IBAction func cancelGestureEdit(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToGesturesViewController", sender: self)
+    }
 }

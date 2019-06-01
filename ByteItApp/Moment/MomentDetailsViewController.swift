@@ -35,6 +35,10 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var cellPerson: UITableViewCell!
     @IBOutlet weak var cellPlace: UITableViewCell!
     
+    var timeEnabled: Bool = true
+    var personEnabled: Bool = true
+    var placeEnabled: Bool = true
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +58,15 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
             datePicker.date = moment.time ?? Date()
             cellPlace.textLabel?.text = moment.place
             self.flag = false
+            self.switchTime.isOn = moment.timeBool as! Bool
+            self.switchPlace.isOn = moment.placeBool as! Bool
+            self.switchPerson.isOn = moment.personBool as! Bool
+            timeEnabled = moment.timeBool as! Bool
+            personEnabled = moment.personBool as! Bool
+            placeEnabled = moment.placeBool as! Bool
+            didToggleSwitch(switchTime)
+            didToggleSwitch(switchPlace)
+            didToggleSwitch(switchPerson)
         }
         
     }
@@ -65,10 +78,6 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
                 return
         }
     }
-    
-    var timeEnabled: Bool = true
-    var personEnabled: Bool = false
-    var placeEnabled: Bool = true
     
     @IBAction func cancelAddMoment(_ sender: UIBarButtonItem) {
         print("cancelAddMoment")
@@ -105,6 +114,10 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
         self.moment?.setValue(placeName, forKey: "place")
         self.moment?.setValue(coordinates.longitude, forKey: "lon")
         self.moment?.setValue(coordinates.latitude, forKey: "lat")
+        self.moment?.setValue(timeEnabled, forKey: "timeBool")
+        print("This is not working ", timeEnabled)
+        self.moment?.setValue(placeEnabled, forKey: "placeBool")
+        self.moment?.setValue(personEnabled, forKey: "personBool")
 
 //        self.delegate?.pass(moment:moment as! Moment)
             
@@ -118,6 +131,10 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
                     self.moment?.setValue(placeName, forKey: "place")
                     self.moment?.setValue(coordinates.longitude, forKey: "lon")
                     self.moment?.setValue(coordinates.latitude, forKey: "lat")
+                    self.moment?.setValue(timeEnabled, forKey: "timeBool")
+                    print("This may be not working ", timeEnabled)
+                    self.moment?.setValue(placeEnabled, forKey: "placeBool")
+                    self.moment?.setValue(personEnabled, forKey: "personBool")
                     self.delegate?.pass(moment:self.moment as! Moment)
 //                    self.delegate?.pass(moment:(self.moment)!)
                 }catch{
@@ -132,7 +149,7 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
             print("Could not save. \(error), \(error.userInfo)")
         }
         
-         self.delegate?.pass(moment:self.moment as! Moment)
+        self.delegate?.pass(moment:self.moment as! Moment)
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
 }
@@ -142,6 +159,7 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
         let state: Bool = sender.isOn
         switch id {
         case "switchTime":
+            timeEnabled = state
             cellTime.isUserInteractionEnabled = state
             datePicker.isEnabled = state
             break
@@ -149,6 +167,7 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
             personEnabled = state
             cellPerson.isUserInteractionEnabled = state
             cellPerson.textLabel?.isEnabled = state
+//            cellPlace.textLabel?.isEnabled = state
             break
         case "switchPlace":
             placeEnabled = state

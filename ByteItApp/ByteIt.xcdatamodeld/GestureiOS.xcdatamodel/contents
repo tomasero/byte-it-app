@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ClassifiedGesture" representedClassName=".ClassifiedGesture" syncable="YES">
         <attribute name="correct" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="gesture" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,12 +17,15 @@
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="person" optional="YES" attributeType="String" customClassName="[String:Int]" syncable="YES"/>
+        <attribute name="personBool" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="place" optional="YES" attributeType="String" customClassName="[String:String]" syncable="YES"/>
+        <attribute name="placeBool" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="timeBool" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="ClassifiedGesture" positionX="-54" positionY="36" width="128" height="90"/>
         <element name="Gesture" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Moment" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Moment" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>

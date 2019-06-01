@@ -622,11 +622,11 @@
             </objects>
             <point key="canvasLocation" x="2697" y="-1118"/>
         </scene>
-        <!--Place-->
+        <!--Moments-->
         <scene sceneID="NsC-1O-7An">
             <objects>
-                <navigationController id="McK-3B-DC5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Place" id="siR-3R-Fae"/>
+                <navigationController id="McK-3B-DC5" userLabel="Moments" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Moments" id="siR-3R-Fae" userLabel="Moments"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HTt-hF-F5T">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

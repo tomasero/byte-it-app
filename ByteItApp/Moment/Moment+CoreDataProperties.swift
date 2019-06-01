@@ -22,5 +22,8 @@ extension Moment {
     @NSManaged public var place: String?
     @NSManaged public var lon: NSNumber?
     @NSManaged public var lat: NSNumber?
+    @NSManaged public var timeBool: NSNumber?
+    @NSManaged public var personBool: NSNumber?
+    @NSManaged public var placeBool: NSNumber?
     
 }

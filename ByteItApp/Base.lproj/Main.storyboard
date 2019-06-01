@@ -866,6 +866,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Classified Gesture" id="KO0-NT-Nau">
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" id="Nu9-hw-efP"/>
+                            <barButtonItem title="0%" id="ShF-cO-daR"/>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="play" id="5Q7-dI-WfR">
                                 <connections>
@@ -880,7 +884,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="batBtn" destination="ShF-cO-daR" id="Y0g-We-rGT"/>
                         <outlet property="classifyBtn" destination="5Q7-dI-WfR" id="v9W-Ei-pb8"/>
+                        <outlet property="connectBtn" destination="Nu9-hw-efP" id="ynP-MI-ZQx"/>
                         <outlet property="testBtn" destination="dye-4m-VFS" id="Q1M-2N-o6D"/>
                     </connections>
                 </tableViewController>

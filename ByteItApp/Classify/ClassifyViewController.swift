@@ -12,6 +12,8 @@ import CoreData
 class ClassifyViewController: UITableViewController {
     @IBOutlet weak var classifyBtn: UIBarButtonItem!
     @IBOutlet weak var testBtn: UIBarButtonItem!
+    @IBOutlet weak var connectBtn: UIBarButtonItem!
+    @IBOutlet weak var batBtn: UIBarButtonItem!
     
     var classifiedGestures = [ClassifiedGesture]()
     var gestures = [Gesture]()
@@ -26,6 +28,21 @@ class ClassifyViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+//        batBtn.isEnabled = false
+        batBtn.tintColor = UIColor.black
+        
+        let circBtn = UIButton()
+        circBtn.contentEdgeInsets = .zero
+        circBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        print(connectBtn.width)
+        circBtn.backgroundColor = UIColor.red
+        circBtn.layer.cornerRadius = 20
+        circBtn.layer.masksToBounds = true
+        
+        circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connectBtn.customView = circBtn
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +54,19 @@ class ClassifyViewController: UITableViewController {
 //        tableView.reloadData()
     }
     
+    var isConnected = false
+    
+    @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
+        print("toggleConnect")
+        if isConnected {
+            connectBtn.customView?.backgroundColor = UIColor.red
+            // disconnet
+        } else {
+            connectBtn.customView?.backgroundColor = UIColor.green
+            // connect
+        }
+        isConnected = !isConnected
+    }
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {

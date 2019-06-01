@@ -23,8 +23,8 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     var sampleFileNames: [String] = ["TestData"]//[String]()
     var nameToSave: String = ""
     var fileNameCount: [String: Int] = [:]
-    var exoEar = ExoEarController()
     var fileNameToUniqueName: [String: String] = [:]
+    var gruController = Shared.instance.gruController
   
     var sensor: String = "Accelerometer" {
         didSet {
@@ -47,7 +47,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        exoEar.initExoEar()
+        gruController.connect()
         sampleTableView.dataSource = dataSource
         sampleTableView.delegate = dataSource
         // Uncomment the following line to preserve selection between presentations
@@ -100,6 +100,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         let gestureName = nameTextField.text ?? ""
         
         save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", gestureFiles: self.dataSource.getData(), gestureFileCount: self.dataSource.getCount(), gestureUniqueFileName: self.dataSource.getName())
+        gruController.disconnect()
     }
     
     func save(gestureName: String, gestureSensor: String, gestureFiles: [String], gestureFileCount: [String: Int], gestureUniqueFileName: [String: String]){
@@ -295,7 +296,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
               
               self.timer = Timer(fire: Date(), interval: (1.0/60.0),
                                  repeats: true, block: { (timer) in
-                                  let dataAcc = self.exoEar.getData()
+                                    let dataAcc = self.gruController.getData()
                                   print(dataAcc)
                                   self.sensorData.append("\(dataAcc)")
                                     secondAlertController.message = "Recording values: Acc: \(dataAcc[0]), Gyr: \(dataAcc[1]))"
@@ -439,6 +440,7 @@ extension GestureDetailsViewController {
 
 extension GestureDetailsViewController{
     @IBAction func cancelGestureEdit(_ sender: Any) {
+        gruController.disconnect()
         performSegue(withIdentifier: "unwindToGesturesViewController", sender: self)
     }
 }

@@ -17,19 +17,11 @@ class ClassifyViewController: UITableViewController {
     
     var classifiedGestures = [ClassifiedGesture]()
     var gestures = [Gesture]()
+    var gruController = Shared.instance.gruController
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TableCellID")
-//        Shared.instance.gestures = []
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-//        batBtn.isEnabled = false
         batBtn.tintColor = UIColor.black
         
         let circBtn = UIButton()
@@ -42,6 +34,11 @@ class ClassifyViewController: UITableViewController {
         
         circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
         connectBtn.customView = circBtn
+        stopVBatUpdate()
+        
+//        let vc = UIApplication.shared.keyWindow!.rootViewController as! ViewController
+        
+//        vc.peripheralStateChanged(state: "Connected")
 
     }
     
@@ -58,15 +55,54 @@ class ClassifyViewController: UITableViewController {
     
     @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
         print("toggleConnect")
-        if isConnected {
-            connectBtn.customView?.backgroundColor = UIColor.red
+        if gruController.getPeripheralState() == "Disconnected" {
+            gruController.connect()
             // disconnet
+            connectBtn.customView?.backgroundColor = UIColor.lightGray
         } else {
-            connectBtn.customView?.backgroundColor = UIColor.green
+            gruController.disconnect()
+//            connectBtn.customView?.backgroundColor = UIColor.green
             // connect
         }
-        isConnected = !isConnected
+//        isConnected = !isConnected
     }
+    
+    func peripheralStateChanged(state: String) {
+        if state == "Connected" {
+            connected()
+        } else {
+            disconnected()
+        }
+    }
+    
+    func disconnected() {
+        connectBtn.customView!.backgroundColor = UIColor.red
+//        self.connectBtn.setTitle("Connect", for: .normal)
+        stopVBatUpdate()
+    }
+    
+    func connected() {
+        connectBtn.customView!.backgroundColor = UIColor.green
+//        self.connectBtn.setTitle("Disconnect", for: .normal)
+        startVBatUpdate()
+    }
+    
+    @objc func updateBattery() {
+        let vBat = gruController.getVBat()
+        batBtn.title = String(vBat) + "%"
+    }
+    
+    func startVBatUpdate() {
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateBattery), userInfo: nil, repeats: true)
+    }
+    
+    func stopVBatUpdate() {
+        timer.invalidate()
+        timer = Timer()
+        batBtn.title = "0%"
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,11 +134,6 @@ class ClassifyViewController: UITableViewController {
         }
         let number = Int.random(in: 0 ..< gestureClasses.count)
         let gesture = gestureClasses[number]
-        //        let time = getTime(date: Date())
-        //        let gestureElem = [gesture, time, "false"]
-        //        let gestureElem = ClassifiedGesturee(gestureClass: gesture, time: time, correct: false)
-        //        Shared.instance.gestures.insert(gestureElem, at: 0)
-        //        print(Shared.instance.gestures)
         
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -170,20 +201,7 @@ class ClassifyViewController: UITableViewController {
         addRandomClassifiedGesture()
 //        self.tableView.reloadData()
     }
-    
-    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "gestureCell", for: indexPath) as! ClassifiedGestureTableViewCell
-//
-//        let gesture = Shared.instance.gestures[indexPath.row]
-//        print(gesture)
-//        cell.textLabel?.text = gesture.gestureClass
-//        cell.detailTextLabel?.text = gesture.time
-//        cell.selectionStyle = .none
-//        cell.switchView.setOn(gesture.correct, animated: false)
-//        cell.index = indexPath
-//        return cell
-//    }
+
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "gestureCell", for: indexPath) as! ClassifiedGestureTableViewCell

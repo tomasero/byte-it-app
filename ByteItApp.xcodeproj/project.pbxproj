@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF44950422A30EB7009F46AA /* GRUController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44950322A30EB7009F46AA /* GRUController.swift */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -34,7 +35,6 @@
 		FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */; };
 		FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */; };
 		FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFE2296231E0026E8BD /* AppDelegate.swift */; };
-		FFACFD212296231E0026E8BD /* ExoEarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD012296231E0026E8BD /* ExoEarController.swift */; };
 		FFACFD222296231E0026E8BD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFACFD022296231E0026E8BD /* Info.plist */; };
 		FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */; };
 		FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2422962B440026E8BD /* MapDataSource.swift */; };
@@ -64,6 +64,7 @@
 		00CD72812194CEA10063DC56 /* ByteItApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteItApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72982194CEAC0063DC56 /* ByteItAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72A32194CEAC0063DC56 /* ByteItAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF44950322A30EB7009F46AA /* GRUController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRUController.swift; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureTableViewCell.swift; sourceTree = "<group>"; };
 		FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GestureData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FFACFCFE2296231E0026E8BD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FFACFD012296231E0026E8BD /* ExoEarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExoEarController.swift; sourceTree = "<group>"; };
 		FFACFD022296231E0026E8BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFACFD2422962B440026E8BD /* MapDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
 		FFACFD2622962BA40026E8BD /* MomentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
@@ -159,8 +159,8 @@
 				FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */,
 				FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */,
 				FFACFCFE2296231E0026E8BD /* AppDelegate.swift */,
-				FFACFD012296231E0026E8BD /* ExoEarController.swift */,
 				FFACFD022296231E0026E8BD /* Info.plist */,
+				FF44950322A30EB7009F46AA /* GRUController.swift */,
 			);
 			path = ByteItApp;
 			sourceTree = "<group>";
@@ -348,6 +348,7 @@
 				FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */,
 				FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */,
 				FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */,
+				FF44950422A30EB7009F46AA /* GRUController.swift in Sources */,
 				FFACFD0C2296231E0026E8BD /* MomentTableViewCell.swift in Sources */,
 				FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */,
 				FFACFD082296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift in Sources */,
@@ -355,7 +356,6 @@
 				FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */,
 				FFACFD1B2296231E0026E8BD /* SearchPlaceViewController.swift in Sources */,
 				FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */,
-				FFACFD212296231E0026E8BD /* ExoEarController.swift in Sources */,
 				FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */,
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,

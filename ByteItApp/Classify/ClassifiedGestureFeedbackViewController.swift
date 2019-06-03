@@ -1,4 +1,3 @@
-//
 //  ClassifiedGestureFeedbackViewController.swift
 //  ByteItApp
 //
@@ -11,28 +10,39 @@ import CoreData
 
 class ClassifiedGestureFeedbackViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    
+    @IBOutlet weak var doneBtn: UIBarButtonItem!
+    @IBOutlet weak var gesturePicker: UIPickerView!
+    @IBOutlet weak var activityPicker: UIPickerView!
+    var classifiedGesture: ClassifiedGesture?
+    var gestures = [Gesture]()
+    let switchView = UISwitch(frame: .zero)
+    let activities = Shared.instance.activities
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gestures.count
+        if pickerView.tag == 0 {
+            return gestures.count
+        } else {
+            return activities.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gestures[row].name
+        if pickerView.tag == 0 {
+            return gestures[row].name
+        } else {
+            return activities[row].capitalized
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        classifiedGesture?.actualGesture = gestures[row].name
     }
-    
-    @IBOutlet weak var doneBtn: UIBarButtonItem!
-    
-    @IBOutlet weak var gesturePicker: UIPickerView!
-    var classifiedGesture: ClassifiedGesture?
-    var gestures = [Gesture]()
-    let switchView = UISwitch(frame: .zero)
     
     
     @IBOutlet weak var classifiedGestureCell: UITableViewCell!
@@ -70,13 +80,21 @@ class ClassifiedGestureFeedbackViewController: UITableViewController, UIPickerVi
         
         gesturePicker.delegate = self
         gesturePicker.dataSource = self
+        activityPicker.delegate = self
+        activityPicker.dataSource = self
         
-        let index:Int = gestures.index(where: { (gesture) -> Bool in
+        let gestureIndex:Int = gestures.index(where: { (gesture) -> Bool in
             gesture.name == classifiedGesture?.actualGesture
         }) ?? 0
         
 //        let index = gestures.firstIndex(of: classifiedGesture?.gesture)
-        gesturePicker.selectRow(index, inComponent: 0, animated: false)
+        gesturePicker.selectRow(gestureIndex, inComponent: 0, animated: false)
+        
+        let activityIndex:Int = activities.index(where: { (activity) -> Bool in
+            activity == classifiedGesture?.activity
+        }) ?? 0
+        
+        activityPicker.selectRow(activityIndex, inComponent: 0, animated: false)
         switchView.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         classifiedGestureCell.accessoryView = switchView
     }
@@ -104,7 +122,7 @@ class ClassifiedGestureFeedbackViewController: UITableViewController, UIPickerVi
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,7 +152,7 @@ class ClassifiedGestureFeedbackViewController: UITableViewController, UIPickerVi
             } else {
                 gesture?.actualGesture = (gestures[gesturePicker.selectedRow(inComponent: 0)] as Gesture).name
             }
-            
+            gesture?.activity = activities[activityPicker.selectedRow(inComponent: 0)]
         } catch {
             print("Error loading and editing existing CoreData object")
         }

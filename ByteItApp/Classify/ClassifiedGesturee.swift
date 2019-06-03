@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 struct ClassifiedGesturee: CustomStringConvertible {
     let gestureClass: String
@@ -22,6 +23,7 @@ class Shared {
     static let instance = Shared()
     var gestures: [ClassifiedGesturee] = []
     var gruController: GRUController = GRUController()
+    let activities = ["still", "walking", "running", "biking"]
     
     func getVC(name: String) -> UIViewController? {
         let children = UIApplication.shared.windows[0].rootViewController?.children
@@ -37,4 +39,21 @@ class Shared {
         }
         return nil
     }
+    
+//    func loadData(entityName: String) -> [NSFetchRequestResult] {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//        let fetchRequest =
+//            NSFetchRequest<NSManagedObject>(entityName: "ClassifiedGesture")
+//        do {
+//            classifiedGestures = try managedContext.fetch(fetchRequest) as! [ClassifiedGesture]
+//            classifiedGestures.reverse()
+//        } catch let error as NSError {
+//            print("Could not fetch. \(error), \(error.userInfo)")
+//        }
+//    }
 }

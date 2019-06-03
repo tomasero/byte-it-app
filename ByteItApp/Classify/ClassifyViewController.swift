@@ -76,13 +76,18 @@ class ClassifyViewController: UITableViewController {
     }
     
     func disconnected() {
-        connectBtn.customView!.backgroundColor = UIColor.red
+        if connectBtn.customView != nil {
+            connectBtn.customView!.backgroundColor = UIColor.red
+        }
+        
 //        self.connectBtn.setTitle("Connect", for: .normal)
         stopVBatUpdate()
     }
     
     func connected() {
-        connectBtn.customView!.backgroundColor = UIColor.green
+        if connectBtn.customView != nil {
+            connectBtn.customView!.backgroundColor = UIColor.green
+        }
 //        self.connectBtn.setTitle("Disconnect", for: .normal)
         startVBatUpdate()
     }
@@ -184,6 +189,7 @@ class ClassifyViewController: UITableViewController {
         classifiedGesture.gesture = predictedLabel
         classifiedGesture.time = Date()
         classifiedGesture.correct = true
+        classifiedGesture.activity = Shared.instance.activities[0]
         
         do {
             try managedContext.save()

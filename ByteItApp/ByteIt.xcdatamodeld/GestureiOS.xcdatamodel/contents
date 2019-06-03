@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ClassifiedGesture" representedClassName=".ClassifiedGesture" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="actualGesture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="correct" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="gesture" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,7 +23,7 @@
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ClassifiedGesture" positionX="-54" positionY="36" width="128" height="105"/>
+        <element name="ClassifiedGesture" positionX="-54" positionY="36" width="128" height="120"/>
         <element name="Gesture" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Moment" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>

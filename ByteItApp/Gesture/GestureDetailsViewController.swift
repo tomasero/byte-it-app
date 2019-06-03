@@ -440,7 +440,7 @@ extension GestureDetailsViewController {
 
 extension GestureDetailsViewController{
     @IBAction func cancelGestureEdit(_ sender: Any) {
-        gruController.disconnect()
+        
         performSegue(withIdentifier: "unwindToGesturesViewController", sender: self)
     }
 }

@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FF44950422A30EB7009F46AA /* GRUController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44950322A30EB7009F46AA /* GRUController.swift */; };
+		FF44950822A3463B009F46AA /* gestureIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950522A34639009F46AA /* gestureIcon@3x.png */; };
+		FF44950922A3463B009F46AA /* gestureIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950622A34639009F46AA /* gestureIcon@2x.png */; };
+		FF44950A22A3463B009F46AA /* gestureIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950722A3463A009F46AA /* gestureIcon.png */; };
+		FF44950F22A34E14009F46AA /* startIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950C22A34E13009F46AA /* startIcon@3x.png */; };
+		FF44951022A34E14009F46AA /* startIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950D22A34E13009F46AA /* startIcon.png */; };
+		FF44951122A34E14009F46AA /* startIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950E22A34E14009F46AA /* startIcon@2x.png */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -65,6 +71,12 @@
 		00CD72982194CEAC0063DC56 /* ByteItAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72A32194CEAC0063DC56 /* ByteItAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF44950322A30EB7009F46AA /* GRUController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRUController.swift; sourceTree = "<group>"; };
+		FF44950522A34639009F46AA /* gestureIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureIcon@3x.png"; sourceTree = "<group>"; };
+		FF44950622A34639009F46AA /* gestureIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gestureIcon@2x.png"; sourceTree = "<group>"; };
+		FF44950722A3463A009F46AA /* gestureIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gestureIcon.png; sourceTree = "<group>"; };
+		FF44950C22A34E13009F46AA /* startIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startIcon@3x.png"; sourceTree = "<group>"; };
+		FF44950D22A34E13009F46AA /* startIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startIcon.png; sourceTree = "<group>"; };
+		FF44950E22A34E14009F46AA /* startIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startIcon@2x.png"; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -143,9 +155,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FF44950B22A346CE009F46AA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FF44950D22A34E13009F46AA /* startIcon.png */,
+				FF44950E22A34E14009F46AA /* startIcon@2x.png */,
+				FF44950C22A34E13009F46AA /* startIcon@3x.png */,
+				FF44950722A3463A009F46AA /* gestureIcon.png */,
+				FF44950622A34639009F46AA /* gestureIcon@2x.png */,
+				FF44950522A34639009F46AA /* gestureIcon@3x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		FFACFCDB2296231E0026E8BD /* ByteItApp */ = {
 			isa = PBXGroup;
 			children = (
+				FF44950B22A346CE009F46AA /* Assets */,
+				FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */,
 				FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */,
 				FFACFCDD2296231E0026E8BD /* Objects.swift */,
 				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
@@ -154,7 +181,6 @@
 				FFACFCEA2296231E0026E8BD /* Assets.xcassets */,
 				FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */,
 				FFACFCEE2296231E0026E8BD /* Main.storyboard */,
-				FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */,
 				FFACFCF22296231E0026E8BD /* Gesture */,
 				FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */,
 				FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */,
@@ -315,7 +341,13 @@
 				FFACFD222296231E0026E8BD /* Info.plist in Resources */,
 				FFACFD122296231E0026E8BD /* Main.storyboard in Resources */,
 				FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */,
+				FF44950922A3463B009F46AA /* gestureIcon@2x.png in Resources */,
+				FF44951122A34E14009F46AA /* startIcon@2x.png in Resources */,
 				FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */,
+				FF44950F22A34E14009F46AA /* startIcon@3x.png in Resources */,
+				FF44950822A3463B009F46AA /* gestureIcon@3x.png in Resources */,
+				FF44951022A34E14009F46AA /* startIcon.png in Resources */,
+				FF44950A22A3463B009F46AA /* gestureIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

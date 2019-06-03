@@ -10,6 +10,7 @@
     <entity name="Gesture" representedClassName=".Gesture" syncable="YES">
         <attribute name="fileName" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="samples" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="sensor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueFileCount" optional="YES" attributeType="Transformable" customClassName="[String:Int]" syncable="YES"/>
         <attribute name="uniqueFileName" optional="YES" attributeType="Transformable" customClassName="[String:String]" syncable="YES"/>
@@ -22,9 +23,18 @@
         <attribute name="place" optional="YES" attributeType="String" customClassName="[String:String]" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="Sample" representedClassName=".Sample" syncable="YES">
+        <attribute name="accX" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="accY" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="accZ" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="gyrX" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="gyrY" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="gyrZ" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="ClassifiedGesture" positionX="-54" positionY="36" width="128" height="120"/>
-        <element name="Gesture" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Moment" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="ClassifiedGesture" positionX="-198.109375" positionY="-7.28125" width="128" height="120"/>
+        <element name="Gesture" positionX="-335.5390625" positionY="-251.671875" width="128" height="133"/>
+        <element name="Moment" positionX="13.61328125" positionY="-214.83203125" width="128" height="135"/>
+        <element name="Sample" positionX="-162" positionY="-90" width="128" height="135"/>
     </elements>
 </model>

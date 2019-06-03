@@ -115,7 +115,6 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
         self.moment?.setValue(coordinates.longitude, forKey: "lon")
         self.moment?.setValue(coordinates.latitude, forKey: "lat")
         self.moment?.setValue(timeEnabled, forKey: "timeBool")
-        print("This is not working ", timeEnabled)
         self.moment?.setValue(placeEnabled, forKey: "placeBool")
         self.moment?.setValue(personEnabled, forKey: "personBool")
 
@@ -132,7 +131,6 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
                     self.moment?.setValue(coordinates.longitude, forKey: "lon")
                     self.moment?.setValue(coordinates.latitude, forKey: "lat")
                     self.moment?.setValue(timeEnabled, forKey: "timeBool")
-                    print("This may be not working ", timeEnabled)
                     self.moment?.setValue(placeEnabled, forKey: "placeBool")
                     self.moment?.setValue(personEnabled, forKey: "personBool")
                     self.delegate?.pass(moment:self.moment as! Moment)

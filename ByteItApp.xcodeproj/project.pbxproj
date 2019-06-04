@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E82D516E22A4D446004B1A55 /* MomentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */; };
+		E82D517122A4D9D5004B1A55 /* MindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D517022A4D9D5004B1A55 /* MindersViewController.swift */; };
+		E82D517322A4DA14004B1A55 /* MinderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */; };
+		E82D517522A4DBBC004B1A55 /* MinderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D517422A4DBBC004B1A55 /* MinderTableViewCell.swift */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -63,6 +67,10 @@
 		00CD72812194CEA10063DC56 /* ByteItApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteItApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72982194CEAC0063DC56 /* ByteItAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72A32194CEAC0063DC56 /* ByteItAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentPickerViewController.swift; sourceTree = "<group>"; };
+		E82D517022A4D9D5004B1A55 /* MindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindersViewController.swift; sourceTree = "<group>"; };
+		E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinderDetailsViewController.swift; sourceTree = "<group>"; };
+		E82D517422A4DBBC004B1A55 /* MinderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinderTableViewCell.swift; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -141,9 +149,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E82D516F22A4D9BF004B1A55 /* Minders */ = {
+			isa = PBXGroup;
+			children = (
+				E82D517022A4D9D5004B1A55 /* MindersViewController.swift */,
+				E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */,
+				E82D517422A4DBBC004B1A55 /* MinderTableViewCell.swift */,
+				E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */,
+			);
+			path = Minders;
+			sourceTree = "<group>";
+		};
 		FFACFCDB2296231E0026E8BD /* ByteItApp */ = {
 			isa = PBXGroup;
 			children = (
+				E82D516F22A4D9BF004B1A55 /* Minders */,
 				FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */,
 				FFACFCDD2296231E0026E8BD /* Objects.swift */,
 				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
@@ -337,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E82D517322A4DA14004B1A55 /* MinderDetailsViewController.swift in Sources */,
 				FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */,
 				FFACFD0A2296231E0026E8BD /* ClassifiedGestureTableViewCell.swift in Sources */,
 				FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */,
@@ -357,9 +378,12 @@
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
 				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
+				E82D516E22A4D446004B1A55 /* MomentPickerViewController.swift in Sources */,
+				E82D517522A4DBBC004B1A55 /* MinderTableViewCell.swift in Sources */,
 				FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */,
 				FFACFD0E2296231E0026E8BD /* Moment+CoreDataClass.swift in Sources */,
 				FFACFD192296231E0026E8BD /* Gesture+CoreDataClass.swift in Sources */,
+				E82D517122A4D9D5004B1A55 /* MindersViewController.swift in Sources */,
 				FFACFD152296231E0026E8BD /* Gestures.swift in Sources */,
 				FFACFD092296231E0026E8BD /* ClassifyViewController.swift in Sources */,
 				FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */,

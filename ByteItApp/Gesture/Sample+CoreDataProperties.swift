@@ -24,4 +24,6 @@ extension Sample {
     @NSManaged public var gyrY: [Double]?
     @NSManaged public var gyrZ: [Double]?
     
+    @NSManaged public var gesture: Gesture
+    
 }

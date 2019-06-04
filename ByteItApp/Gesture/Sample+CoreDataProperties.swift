@@ -16,11 +16,12 @@ extension Sample {
         return NSFetchRequest<Sample>(entityName: "Sample")
     }
     
-    @NSManaged public var accX: Array<Float>?
-    @NSManaged public var accY: Array<Float>?
-    @NSManaged public var accZ: Array<Float>?
-    @NSManaged public var gyrX: Array<Float>?
-    @NSManaged public var gyrY: Array<Float>?
-    @NSManaged public var gyrZ: Array<Float>?
+    @NSManaged public var name: String?
+    @NSManaged public var accX: [Double]?
+    @NSManaged public var accY: [Double]?
+    @NSManaged public var accZ: [Double]?
+    @NSManaged public var gyrX: [Double]?
+    @NSManaged public var gyrY: [Double]?
+    @NSManaged public var gyrZ: [Double]?
     
 }

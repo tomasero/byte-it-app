@@ -133,7 +133,19 @@ class MomentsViewController: UITableViewController, isAbleToReceiveMoment {
         let place = moment.value(forKeyPath: "place") as? String
         let placeName = place ?? "None"
         let time = date?.description ?? "None"
-        cell.detailTextLabel?.text = placeName + " | " + time
+        let tb = moment.value(forKey: "timeBool") as? Bool
+        let pb = moment.value(forKey: "placeBool") as? Bool
+        let timeBool = tb ?? true
+        let placeBool = pb ?? true
+        if timeBool && placeBool{
+                cell.detailTextLabel?.text = placeName + " | " + time
+        } else if timeBool{
+            cell.detailTextLabel?.text = time
+        } else if placeBool{
+            cell.detailTextLabel?.text = placeName
+        } else {
+          cell.detailTextLabel?.text = ""
+        }
         return cell
     }
     

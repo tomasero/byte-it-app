@@ -9,12 +9,24 @@
 import UIKit
 
 class MinderDetailsViewController: UITableViewController {
-
+    
+    var moment: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func unwindWithSelectedMoment(segue: UIStoryboardSegue) {
+        if let momentPickerViewController = segue.source as? MomentPickerViewController,
+            let selectedMoment = momentPickerViewController.selectedMoment {
+            print("herererere")
+            moment = selectedMoment.name!
+            print(moment)
+        }
+    }
+    
     
 
     /*

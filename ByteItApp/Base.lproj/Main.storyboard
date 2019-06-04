@@ -1094,11 +1094,15 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="l4U-rm-6a1" kind="unwind" identifier="SaveSelectedMoment" trigger="accessoryAction" unwindAction="unwindWithSelectedMomentWithSegue:" id="LlA-CE-Nd6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qe1-mQ-TXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="l4U-rm-6a1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4766" y="842"/>
         </scene>

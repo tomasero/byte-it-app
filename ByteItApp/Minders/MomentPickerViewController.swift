@@ -67,7 +67,7 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard segue.identifier == "SaveSelectedSensor",
+        guard segue.identifier == "SaveSelectedMoment",
             let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell) else {
                 return
@@ -98,8 +98,6 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-        print("I am here")
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         // 1

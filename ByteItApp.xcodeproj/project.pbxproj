@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0829B5C922A6F3D8003BE532 /* KNNDTW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B5C822A6F3D8003BE532 /* KNNDTW.swift */; };
 		0829B5CB22A6F3F1003BE532 /* RTClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B5CA22A6F3F1003BE532 /* RTClassifier.swift */; };
-		0829B5CD22A6F3FF003BE532 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B5CC22A6F3FF003BE532 /* Helper.swift */; };
 		FF44950422A30EB7009F46AA /* GRUController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44950322A30EB7009F46AA /* GRUController.swift */; };
 		FF44950822A3463B009F46AA /* gestureIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950522A34639009F46AA /* gestureIcon@3x.png */; };
 		FF44950922A3463B009F46AA /* gestureIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950622A34639009F46AA /* gestureIcon@2x.png */; };
@@ -20,6 +19,11 @@
 		FF44951322A5C08C009F46AA /* Sample+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951222A5C08C009F46AA /* Sample+CoreDataClass.swift */; };
 		FF44951522A5C0A1009F46AA /* Sample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */; };
 		FF44951722A5C3A7009F46AA /* NewDynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */; };
+		FF44951A22A614BD009F46AA /* CommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951922A614BD009F46AA /* CommandsViewController.swift */; };
+		FF44951C22A614D3009F46AA /* CommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951B22A614D3009F46AA /* CommandViewController.swift */; };
+		FF44951E22A618DF009F46AA /* Command+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951D22A618DF009F46AA /* Command+CoreDataClass.swift */; };
+		FF44952022A618F2009F46AA /* Command+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951F22A618F2009F46AA /* Command+CoreDataProperties.swift */; };
+		FF6DFBD022A728F900990347 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B5CC22A6F3FF003BE532 /* Helper.swift */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -88,6 +92,10 @@
 		FF44951222A5C08C009F46AA /* Sample+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sample+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sample+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDynamicDataSource.swift; sourceTree = "<group>"; };
+		FF44951922A614BD009F46AA /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
+		FF44951B22A614D3009F46AA /* CommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewController.swift; sourceTree = "<group>"; };
+		FF44951D22A618DF009F46AA /* Command+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF44951F22A618F2009F46AA /* Command+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -178,20 +186,32 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		FF44951822A6149D009F46AA /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				FF44951922A614BD009F46AA /* CommandsViewController.swift */,
+				FF44951B22A614D3009F46AA /* CommandViewController.swift */,
+				FF44951D22A618DF009F46AA /* Command+CoreDataClass.swift */,
+				FF44951F22A618F2009F46AA /* Command+CoreDataProperties.swift */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
 		FFACFCDB2296231E0026E8BD /* ByteItApp */ = {
 			isa = PBXGroup;
 			children = (
+				FFACFCEE2296231E0026E8BD /* Main.storyboard */,
 				FF44950B22A346CE009F46AA /* Assets */,
 				FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */,
 				FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */,
 				FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */,
 				FFACFCDD2296231E0026E8BD /* Objects.swift */,
 				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
+				FF44951822A6149D009F46AA /* Command */,
 				FFACFCDF2296231E0026E8BD /* Classify */,
 				FFACFCE52296231E0026E8BD /* Moment */,
 				FFACFCEA2296231E0026E8BD /* Assets.xcassets */,
 				FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */,
-				FFACFCEE2296231E0026E8BD /* Main.storyboard */,
 				FFACFCF22296231E0026E8BD /* Gesture */,
 				FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */,
 				FFACFCEB2296231E0026E8BD /* GestureData+CoreDataProperties.swift */,
@@ -387,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF6DFBD022A728F900990347 /* Helper.swift in Sources */,
 				FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */,
 				FFACFD0A2296231E0026E8BD /* ClassifiedGestureTableViewCell.swift in Sources */,
 				FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */,
@@ -397,19 +418,22 @@
 				FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */,
 				FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */,
 				FF44950422A30EB7009F46AA /* GRUController.swift in Sources */,
+				FF44951E22A618DF009F46AA /* Command+CoreDataClass.swift in Sources */,
 				FFACFD0C2296231E0026E8BD /* MomentTableViewCell.swift in Sources */,
 				FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */,
 				FFACFD082296231E0026E8BD /* ClassifiedGesture+CoreDataProperties.swift in Sources */,
 				FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */,
 				0829B5C922A6F3D8003BE532 /* KNNDTW.swift in Sources */,
 				FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */,
+				FF44951C22A614D3009F46AA /* CommandViewController.swift in Sources */,
 				FFACFD1B2296231E0026E8BD /* SearchPlaceViewController.swift in Sources */,
 				FF44951722A5C3A7009F46AA /* NewDynamicDataSource.swift in Sources */,
 				FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */,
 				FF44951322A5C08C009F46AA /* Sample+CoreDataClass.swift in Sources */,
 				FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */,
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
-				0829B5CD22A6F3FF003BE532 /* Helper.swift in Sources */,
+				FF44952022A618F2009F46AA /* Command+CoreDataProperties.swift in Sources */,
+				FF44951A22A614BD009F46AA /* CommandsViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
 				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
 				FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */,
@@ -596,7 +620,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4D734D2GN8;
+				DEVELOPMENT_TEAM = 7UQD3GFB9F;
 				INFOPLIST_FILE = ByteItApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,7 +640,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4D734D2GN8;
+				DEVELOPMENT_TEAM = 7UQD3GFB9F;
 				INFOPLIST_FILE = ByteItApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (

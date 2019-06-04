@@ -349,7 +349,6 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //                                        print(self.sampleDict)
 //                                        print("print getData")
 //                                        print(self.samples.first?.accX)
-                                        print(self.dataSource.getData().first?.accX)
 //                                        self.dataSource.setCount(fileDict: self.fileNameCount)
 //                                        self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
 //                                        print("name of file", self.nameToSave)

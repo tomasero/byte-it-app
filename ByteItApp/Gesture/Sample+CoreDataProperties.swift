@@ -26,4 +26,14 @@ extension Sample {
     
     @NSManaged public var gesture: Gesture
     
+    func normalizeVals() {
+        let maxAccX: Double = self.accX!.max()!
+        self.accX = self.accX!.map{$0/maxAccX}
+        
+        let maxAccY = self.accY!.max()!
+        self.accY = self.accY!.map{$0/maxAccY}
+        
+        let maxAccZ = self.accZ!.max()!
+        self.accZ = self.accZ!.map{$0/maxAccZ}
+    }
 }

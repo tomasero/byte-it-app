@@ -15,6 +15,7 @@ class ClassifyViewController: UITableViewController {
     @IBOutlet weak var connectBtn: UIBarButtonItem!
     @IBOutlet weak var batBtn: UIBarButtonItem!
     
+    let classifier = Shared.instance.classifier
     var classifiedGestures = [ClassifiedGesture]()
     var gestures = [Gesture]()
     var gruController = Shared.instance.gruController
@@ -22,6 +23,7 @@ class ClassifyViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classifier.configure()
         batBtn.tintColor = UIColor.black
         
         let circBtn = UIButton()
@@ -236,6 +238,7 @@ class ClassifyViewController: UITableViewController {
         if classifying {
             btn = getButton(item: UIBarButtonItem.SystemItem.play)
             // stop classifying
+            self.classifier.stopTrain()
         } else {
             let gestureClasses = gestures
             if gestureClasses.count == 0 {
@@ -245,7 +248,29 @@ class ClassifyViewController: UITableViewController {
                 return
             }
             btn = getButton(item: UIBarButtonItem.SystemItem.pause)
-            // start classifying continuous
+            // training...
+            var n=0
+            for gesture in self.gestures {
+                let gestureName = gesture.name
+                var samples = gesture.samples
+                
+                for sample in samples {
+                    let currentSample = SampleData(number: 0)
+                    currentSample.accX = sample.accX!.map {Float($0)}
+                    currentSample.accY = sample.accY!.map {Float($0)}
+                    currentSample.accZ = sample.accZ!.map {Float($0)}
+                    currentSample.gyrX = sample.gyrX!.map {Float($0)}
+                    currentSample.gyrY = sample.gyrY!.map {Float($0)}
+                    currentSample.gyrZ = sample.gyrZ!.map {Float($0)}
+                    
+                    self.classifier.stepTrain(gesture: gestureName!, count: n, sample: currentSample)
+                    n+=1
+                }
+            }
+            self.classifier.finalTrain()
+            //now doing real time classification
+            self.classifier.runRealTime()
+            
         }
         classifying = !classifying
         navigationItem.rightBarButtonItems?[0] = btn
@@ -360,6 +385,6 @@ class ClassifyViewController: UITableViewController {
     func reloadGestures() {
         classifiedGestures = Shared.instance.loadData(entityName: "ClassifiedGesture") as! [ClassifiedGesture]
         classifiedGestures.reverse()
-        gestures = Shared.instance.loadData(entityName: "ClassifiedGesture") as! [Gesture]
+        gestures = Shared.instance.loadData(entityName: "Gesture") as! [Gesture]
     }
 }

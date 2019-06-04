@@ -14,6 +14,9 @@
 		FF44950F22A34E14009F46AA /* startIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950C22A34E13009F46AA /* startIcon@3x.png */; };
 		FF44951022A34E14009F46AA /* startIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950D22A34E13009F46AA /* startIcon.png */; };
 		FF44951122A34E14009F46AA /* startIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF44950E22A34E14009F46AA /* startIcon@2x.png */; };
+		FF44951322A5C08C009F46AA /* Sample+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951222A5C08C009F46AA /* Sample+CoreDataClass.swift */; };
+		FF44951522A5C0A1009F46AA /* Sample+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */; };
+		FF44951722A5C3A7009F46AA /* NewDynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -31,7 +34,6 @@
 		FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFACFCEC2296231E0026E8BD /* LaunchScreen.storyboard */; };
 		FFACFD122296231E0026E8BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFACFCEE2296231E0026E8BD /* Main.storyboard */; };
 		FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */; };
-		FFACFD152296231E0026E8BD /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF42296231E0026E8BD /* Gestures.swift */; };
 		FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */; };
 		FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF62296231E0026E8BD /* PlaceTableViewCell.swift */; };
 		FFACFD182296231E0026E8BD /* SelectPlaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF72296231E0026E8BD /* SelectPlaceTableViewController.swift */; };
@@ -77,6 +79,9 @@
 		FF44950C22A34E13009F46AA /* startIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startIcon@3x.png"; sourceTree = "<group>"; };
 		FF44950D22A34E13009F46AA /* startIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startIcon.png; sourceTree = "<group>"; };
 		FF44950E22A34E14009F46AA /* startIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "startIcon@2x.png"; sourceTree = "<group>"; };
+		FF44951222A5C08C009F46AA /* Sample+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sample+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sample+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -95,7 +100,6 @@
 		FFACFCEF2296231E0026E8BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFACFCF12296231E0026E8BD /* GestureiOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GestureiOS.xcdatamodel; sourceTree = "<group>"; };
 		FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureDetailsViewController.swift; sourceTree = "<group>"; };
-		FFACFCF42296231E0026E8BD /* Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 		FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gesture+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FFACFCF62296231E0026E8BD /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
 		FFACFCF72296231E0026E8BD /* SelectPlaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlaceTableViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				FF44950B22A346CE009F46AA /* Assets */,
 				FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */,
 				FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */,
+				FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */,
 				FFACFCDD2296231E0026E8BD /* Objects.swift */,
 				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
 				FFACFCDF2296231E0026E8BD /* Classify */,
@@ -225,11 +230,12 @@
 			children = (
 				FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */,
 				FFACFCF32296231E0026E8BD /* GestureDetailsViewController.swift */,
-				FFACFCF42296231E0026E8BD /* Gestures.swift */,
 				FFACFCF52296231E0026E8BD /* Gesture+CoreDataProperties.swift */,
 				FFACFCF82296231E0026E8BD /* Gesture+CoreDataClass.swift */,
 				FFACFCF92296231E0026E8BD /* GesturesViewController.swift */,
 				FFACFCFB2296231E0026E8BD /* GestureTableViewCell.swift */,
+				FF44951222A5C08C009F46AA /* Sample+CoreDataClass.swift */,
+				FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */,
 			);
 			path = Gesture;
 			sourceTree = "<group>";
@@ -387,16 +393,18 @@
 				FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */,
 				FFACFD162296231E0026E8BD /* Gesture+CoreDataProperties.swift in Sources */,
 				FFACFD1B2296231E0026E8BD /* SearchPlaceViewController.swift in Sources */,
+				FF44951722A5C3A7009F46AA /* NewDynamicDataSource.swift in Sources */,
 				FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */,
+				FF44951322A5C08C009F46AA /* Sample+CoreDataClass.swift in Sources */,
 				FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */,
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
 				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
 				FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */,
 				FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */,
+				FF44951522A5C0A1009F46AA /* Sample+CoreDataProperties.swift in Sources */,
 				FFACFD0E2296231E0026E8BD /* Moment+CoreDataClass.swift in Sources */,
 				FFACFD192296231E0026E8BD /* Gesture+CoreDataClass.swift in Sources */,
-				FFACFD152296231E0026E8BD /* Gestures.swift in Sources */,
 				FFACFD092296231E0026E8BD /* ClassifyViewController.swift in Sources */,
 				FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */,
 				FFACFD182296231E0026E8BD /* SelectPlaceTableViewController.swift in Sources */,

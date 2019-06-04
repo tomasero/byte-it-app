@@ -358,27 +358,8 @@ class ClassifyViewController: UITableViewController {
     }
     
     func reloadGestures() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        var fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "ClassifiedGesture")
-        do {
-            classifiedGestures = try managedContext.fetch(fetchRequest) as! [ClassifiedGesture]
-            classifiedGestures.reverse()
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Gesture")
-        do {
-            gestures = try managedContext.fetch(fetchRequest) as! [Gesture]
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        classifiedGestures = Shared.instance.loadData(entityName: "ClassifiedGesture") as! [ClassifiedGesture]
+        classifiedGestures.reverse()
+        gestures = Shared.instance.loadData(entityName: "ClassifiedGesture") as! [Gesture]
     }
 }

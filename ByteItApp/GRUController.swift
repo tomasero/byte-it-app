@@ -49,7 +49,9 @@ CBPeripheralDelegate {
     }
     
     func disconnect() {
-        manager.cancelPeripheralConnection(_peripheral)
+        if manager != nil && _peripheral != nil{
+            manager.cancelPeripheralConnection(_peripheral)
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {

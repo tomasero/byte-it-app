@@ -168,13 +168,16 @@ class GesturesViewController: UITableViewController {
     
                 if let selectedIndexPath = tableView.indexPathForSelectedRow {
                     // Update an existing gesture.
+                    print("update existing gesture")
                     gestures[selectedIndexPath.row] = gesture
                     tableView.reloadRows(at: [selectedIndexPath], with: .none)
                 }
                 else {
                     // Add a new gesture.
+                    print("create new gesture")
                     let newIndexPath = IndexPath(row: gestures.count, section: 0)
-                    
+                    print("new index path")
+                    print(gesture)
                     gestures.append(gesture)
                     tableView.insertRows(at: [newIndexPath], with: .automatic)
                     self.tableView.reloadData()

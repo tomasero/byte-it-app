@@ -18,14 +18,34 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     var gesture: Gesture?
     let motion = CMMotionManager()
     var timer: Timer = Timer()
-    var flag = true
+    var isNew = true
     var sensorData = [String]()
     var sampleFileNames: [String] = ["TestData"]//[String]()
     var nameToSave: String = ""
+    var samples: [Sample] = [Sample]()
     var fileNameCount: [String: Int] = [:]
     var fileNameToUniqueName: [String: String] = [:]
     var gruController = Shared.instance.gruController
+    var sampleDict: [String: [Double]] = [
+        "accX": [Double](),
+        "accY": [Double](),
+        "accZ": [Double](),
+        "gyrX": [Double](),
+        "gyrY": [Double](),
+        "gyrZ": [Double]()
+    ]
   
+    func newSampleDict() -> [String: [Double]] {
+        return [
+            "accX": [Double](),
+            "accY": [Double](),
+            "accZ": [Double](),
+            "gyrX": [Double](),
+            "gyrY": [Double](),
+            "gyrZ": [Double]()
+        ]
+    }
+    
     var sensor: String = "Accelerometer" {
         didSet {
             detailLabel.text = sensor
@@ -33,19 +53,22 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     }
     
     @IBOutlet weak var nameTextField: UITextField!
-    
-    
     @IBOutlet weak var detailLabel: UILabel!
-    
-    
     @IBOutlet weak var saveGesture: UIBarButtonItem!
-    
-    
     @IBOutlet weak var sampleTableView: UITableView!
     
-    var dataSource = DynamicDataSource()
+//    var dataSource = DynamicDataSource()
+    var dataSource = NewDynamicDataSource()
+    
+    var appDelegate: AppDelegate?
+    var managedContext: NSManagedObjectContext?
     
     override func viewDidLoad() {
+        
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
+        managedContext =
+            appDelegate!.persistentContainer.viewContext
+        
         super.viewDidLoad()
         gruController.connect()
         sampleTableView.dataSource = dataSource
@@ -63,10 +86,13 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             self.sampleFileNames = gesture.fileName ?? []
             self.fileNameCount = gesture.uniqueFileCount ?? [:]
             self.fileNameToUniqueName = gesture.uniqueFileName ?? [:]
-            self.dataSource.setData(sampleFileNames: self.sampleFileNames)
-            self.dataSource.setCount(fileDict: self.fileNameCount)
-            self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
-            self.flag = false
+            self.dataSource.setData(samples: Array(gesture.samples))
+            self.samples.append(contentsOf: self.dataSource.getData())
+            
+//            self.dataSource.setData(sampleFileNames: self.sampleFileNames)
+//            self.dataSource.setCount(fileDict: self.fileNameCount)
+//            self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
+            self.isNew = false
         }
         
         
@@ -99,43 +125,48 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         
         let gestureName = nameTextField.text ?? ""
         
-        save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", gestureFiles: self.dataSource.getData(), gestureFileCount: self.dataSource.getCount(), gestureUniqueFileName: self.dataSource.getName())
+        save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", samples: self.dataSource.getData())
         gruController.disconnect()
     }
-    
-    func save(gestureName: String, gestureSensor: String, gestureFiles: [String], gestureFileCount: [String: Int], gestureUniqueFileName: [String: String]){
+
+    func save(gestureName: String, gestureSensor: String, samples: [Sample]){
+        print("save")
         // 1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
         
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        
-        if self.flag{
-        // 2
+        if self.isNew{
+            print("isNew")
+            // 2
             let entity =
                 NSEntityDescription.entity(forEntityName: "Gesture",
-                                           in: managedContext)!
+                                           in: managedContext!)!
             
             self.gesture = Gesture(entity: entity,
                                    insertInto: managedContext)
             
             self.gesture?.name = gestureName
             self.gesture?.sensor = gestureSensor
-            self.gesture?.fileName = gestureFiles
-            self.gesture?.uniqueFileCount = gestureFileCount
-            self.gesture?.uniqueFileName = gestureUniqueFileName
+            self.gesture?.samples = Set(samples)
+//            for sample in samples {
+//                self.gesture?.samples.insert(sample)
+//            }
+            
+            print(samples)
+            //            self.gesture?.samples =
         } else{
             if let id = self.gesture?.objectID {
                 do {
-                    try self.gesture = managedContext.existingObject(with: id) as? Gesture
-                        self.gesture?.name = gestureName
-                        self.gesture?.sensor = gestureSensor
-                        self.gesture?.fileName = gestureFiles
-                        self.gesture?.uniqueFileCount = gestureFileCount
-                        self.gesture?.uniqueFileName = gestureUniqueFileName
+                    try self.gesture = managedContext!.existingObject(with: id) as? Gesture
+                    self.gesture?.name = gestureName
+                    self.gesture?.sensor = gestureSensor
+                    self.gesture?.samples = Set(samples)
+//                    self.gesture?.samples = samples
                 } catch {
                     print("Error loading and editing existing CoreData object")
                 }
@@ -143,12 +174,62 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         }
         
         do {
-            try managedContext.save()
+            print("Saving")
+            try managedContext!.save()
+            print("Saved")
             
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+//    func save(gestureName: String, gestureSensor: String, gestureFiles: [String], gestureFileCount: [String: Int], gestureUniqueFileName: [String: String]){
+//        // 1
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+//
+//        let managedContext =
+//            appDelegate.persistentContainer.viewContext
+//
+//        if self.isNew{
+//        // 2
+//            let entity =
+//                NSEntityDescription.entity(forEntityName: "Gesture",
+//                                           in: managedContext)!
+//
+//            self.gesture = Gesture(entity: entity,
+//                                   insertInto: managedContext)
+//
+//            self.gesture?.name = gestureName
+//            self.gesture?.sensor = gestureSensor
+//            self.gesture?.fileName = gestureFiles
+//            self.gesture?.uniqueFileCount = gestureFileCount
+//            self.gesture?.uniqueFileName = gestureUniqueFileName
+////            self.gesture?.samples =
+//        } else{
+//            if let id = self.gesture?.objectID {
+//                do {
+//                    try self.gesture = managedContext.existingObject(with: id) as? Gesture
+//                        self.gesture?.name = gestureName
+//                        self.gesture?.sensor = gestureSensor
+//                        self.gesture?.fileName = gestureFiles
+//                        self.gesture?.uniqueFileCount = gestureFileCount
+//                        self.gesture?.uniqueFileName = gestureUniqueFileName
+//                } catch {
+//                    print("Error loading and editing existing CoreData object")
+//                }
+//            }
+//        }
+//
+//        do {
+//            try managedContext.save()
+//
+//        } catch let error as NSError {
+//            print("Could not save. \(error), \(error.userInfo)")
+//        }
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
@@ -212,41 +293,70 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                             }
                                         self.nameToSave = textField.text as! String
                                         
-                                        self.sampleFileNames = self.dataSource.getData()
-                                        self.fileNameCount = self.dataSource.getCount()
-                                        self.fileNameToUniqueName = self.dataSource.getName()
-                                        let newIndexPath = IndexPath(row: self.sampleFileNames.count, section: 0)
+//                                        self.sampleFileNames = self.dataSource.getData()
+//                                        self.fileNameCount = self.dataSource.getCount()
+//                                        self.fileNameToUniqueName = self.dataSource.getName()
+                                        let newIndexPath = IndexPath(row: self.dataSource.samples.count, section: 0)
                                         
                                         //make filename unique
                                         
-                                        if self.sampleFileNames.contains(self.nameToSave){
-                                            if self.fileNameCount[self.nameToSave] == nil {
-                                                self.fileNameCount[self.nameToSave] = 1
-                                            } else {
-                                                if let count = self.fileNameCount[self.nameToSave]
-                                                {
-                                                    self.fileNameCount[self.nameToSave] = count + 1
-                                                }
-                                            }
-                                            if let count = self.fileNameCount[self.nameToSave]{
-                                                self.nameToSave = self.nameToSave + "-\(count)"
-                                            }
-                                        }
+//                                        if self.sampleFileNames.contains(self.nameToSave){
+//                                            if self.fileNameCount[self.nameToSave] == nil {
+//                                                self.fileNameCount[self.nameToSave] = 1
+//                                            } else {
+//                                                if let count = self.fileNameCount[self.nameToSave]
+//                                                {
+//                                                    self.fileNameCount[self.nameToSave] = count + 1
+//                                                }
+//                                            }
+//                                            if let count = self.fileNameCount[self.nameToSave]{
+//                                                self.nameToSave = self.nameToSave + "-\(count)"
+//                                            }
+//                                        }
                                         
                                         // convert fileName to unique fileName using UUID
                                         var uuid = UUID().uuidString
-                                        var uniqueNameToSave = self.nameToSave + "_\(uuid)"
-                                        self.fileNameToUniqueName[self.nameToSave] = uniqueNameToSave
+//                                        var uniqueNameToSave = self.nameToSave + "_\(uuid)"
+//                                        self.fileNameToUniqueName[self.nameToSave] = uniqueNameToSave
                                         
-                                        self.sampleFileNames.append(self.nameToSave)
+//                                        self.sampleFileNames.append(self.nameToSave)
                                         
-                                        self.dataSource.setData(sampleFileNames: self.sampleFileNames)
-                                        self.dataSource.setCount(fileDict: self.fileNameCount)
-                                        self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
-                                        print("name of file", self.nameToSave)
+//                                        self.dataSource.setData(sampleFileNames: self.sampleFileNames)
                                         
-                                        self.saveToFile(fileName: self.fileNameToUniqueName[self.nameToSave]!, stringToWrite: self.sensorData)
-                                        self.sensorData = []
+
+
+                                        // 2
+                                        let entity =
+                                            NSEntityDescription.entity(forEntityName: "Sample",
+                                                                       in: self.managedContext!)!
+                                        
+                                        let sample = Sample(entity: entity,
+                                                            insertInto: self.managedContext)
+                                        
+                                        
+                                        sample.accX = self.sampleDict["accX"]
+                                        sample.accY = self.sampleDict["accY"]
+                                        sample.accZ = self.sampleDict["accZ"]
+                                        sample.gyrX = self.sampleDict["gyrX"]
+                                        sample.gyrY = self.sampleDict["gyrX"]
+                                        sample.gyrZ = self.sampleDict["gyrX"]
+                                        sample.name = self.nameToSave
+//                                        print(self.sampleDict)
+//                                        print(self.samples)
+                                        self.samples.append(sample)
+//                                        print(self.samples)
+                                        self.dataSource.setData(samples: self.samples)
+//                                        print(self.sampleDict)
+//                                        print("print getData")
+//                                        print(self.samples.first?.accX)
+                                        print(self.dataSource.getData().first?.accX)
+//                                        self.dataSource.setCount(fileDict: self.fileNameCount)
+//                                        self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
+//                                        print("name of file", self.nameToSave)
+                                        
+//                                        self.saveToFile(fileName: self.fileNameToUniqueName[self.nameToSave]!, stringToWrite: self.sensorData)
+//                                        self.sensorData = []
+                                        self.sampleDict = self.newSampleDict()
                                         
                                         self.sampleTableView.beginUpdates()
                                         self.sampleTableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -266,7 +376,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                 print("STOP")
                 //self.motion.stopAccelerometerUpdates()
                 self.timer.invalidate()
-                print("sensorData", self.sensorData)
+//                print("sensorData", self.sensorData)
             
                 //create a third alert view here to get the file name and save it
             
@@ -280,8 +390,9 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             print("CANCEL")
             self.timer.invalidate()
             //self.motion.stopAccelerometerUpdates()
-            print("sensorData", self.sensorData)
-            self.sensorData = []
+//            print("sensorData", self.sensorData)
+//            self.sensorData = []
+            self.sampleDict = self.newSampleDict()
         }))
 
         
@@ -293,13 +404,20 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             print ("START")
             
             func startAccelerometers(){
-              
+              self.sampleDict = self.newSampleDict()
               self.timer = Timer(fire: Date(), interval: (1.0/60.0),
                                  repeats: true, block: { (timer) in
-                                    let dataAcc = self.gruController.getData()
-                                  print(dataAcc)
-                                  self.sensorData.append("\(dataAcc)")
-                                    secondAlertController.message = "Recording values: Acc: \(dataAcc[0]), Gyr: \(dataAcc[1]))"
+                                    let data = self.gruController.getData()
+                                    let acc = data[0]
+                                    let gyr = data[1]
+                                    self.sampleDict["accX"]!.append(Double(acc.0))
+                                    self.sampleDict["accY"]!.append(Double(acc.1))
+                                    self.sampleDict["accZ"]!.append(Double(acc.2))
+                                    self.sampleDict["gyrX"]!.append(Double(gyr.0))
+                                    self.sampleDict["gyrY"]!.append(Double(gyr.1))
+                                    self.sampleDict["gyrZ"]!.append(Double(gyr.2))
+//                                    self.sensorData.append("\(data)")
+                                    secondAlertController.message = "Recording values: Acc: \(data[0]), Gyr: \(data[1]))"
               })
                 
               //self.timer.fire()

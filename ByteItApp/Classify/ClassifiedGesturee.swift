@@ -60,6 +60,7 @@ class Shared {
     var gestures: [ClassifiedGesturee] = []
     var gruController: GRUController = GRUController()
     let activities = ["still", "walking", "running", "biking"]
+    let classifier = RTClassifier()
     
     func getVC(name: String) -> UIViewController? {
         let children = UIApplication.shared.windows[0].rootViewController?.children

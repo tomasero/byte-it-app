@@ -93,9 +93,12 @@ class GesturesViewController: UITableViewController {
             let managedContext =
                 appDelegate.persistentContainer.viewContext
             
-            managedContext.delete(gestures[indexPath.row] as NSManagedObject)
-            
             // Delete the row from the data source
+            for sample in Array(gestures[indexPath.row].samples) {
+                managedContext.delete(sample as NSManagedObject)
+            }
+            
+            managedContext.delete(gestures[indexPath.row] as NSManagedObject)
             gestures.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             

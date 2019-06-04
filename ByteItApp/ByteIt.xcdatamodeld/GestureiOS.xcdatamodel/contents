@@ -7,12 +7,19 @@
         <attribute name="gesture" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="Command" representedClassName=".Command" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="gesture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gesture" inverseName="commands" inverseEntity="Gesture" syncable="YES"/>
+    </entity>
     <entity name="Gesture" representedClassName=".Gesture" syncable="YES">
         <attribute name="fileName" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sensor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uniqueFileCount" optional="YES" attributeType="Transformable" customClassName="[String:Int]" syncable="YES"/>
         <attribute name="uniqueFileName" optional="YES" attributeType="Transformable" customClassName="[String:String]" syncable="YES"/>
+        <relationship name="commands" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Command" inverseName="gesture" inverseEntity="Command" syncable="YES"/>
         <relationship name="samples" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sample" inverseName="gesture" inverseEntity="Sample" syncable="YES"/>
     </entity>
     <entity name="Moment" representedClassName=".Moment" syncable="YES">
@@ -35,8 +42,9 @@
     </entity>
     <elements>
         <element name="ClassifiedGesture" positionX="-198.109375" positionY="-7.28125" width="128" height="120"/>
-        <element name="Gesture" positionX="-335.5390625" positionY="-251.671875" width="128" height="133"/>
+        <element name="Gesture" positionX="-335.5390625" positionY="-251.671875" width="128" height="148"/>
         <element name="Moment" positionX="13.61328125" positionY="-214.83203125" width="128" height="135"/>
         <element name="Sample" positionX="-162" positionY="-90" width="128" height="165"/>
+        <element name="Command" positionX="-153" positionY="-90" width="128" height="105"/>
     </elements>
 </model>

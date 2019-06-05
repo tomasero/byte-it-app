@@ -107,7 +107,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         print("deinit GestureDetailsViewController")
     }
 
-    
+    var saved = false
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
         if segue.identifier == "PickSensor",
@@ -115,34 +115,57 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             sensorPickerViewController.selectedSensor = detailLabel.text //sensor
         }
         
-        super.prepare(for: segue, sender: sender)
+        
         
         // Configure the destination view controller only when the save button is pressed.
         guard let button = sender as? UIBarButtonItem, button === saveGesture else {
             os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
             return
         }
-        
-        let gestureName = nameTextField.text ?? ""
-        
-        save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", samples: self.dataSource.getData())
-        gruController.disconnect()
+        super.prepare(for: segue, sender: sender)
+
     }
 
-    func save(gestureName: String, gestureSensor: String, samples: [Sample]){
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("should perform segue")
+        print(identifier)
+        if identifier == "PickSensor" {
+            return true
+        } else if identifier == "SaveGestureDetail" {
+            let gestureName = nameTextField.text ?? ""
+            
+            saved = save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", samples: self.dataSource.getData())
+            if saved {
+                print("saved")
+                gruController.disconnect()
+                
+            } else {
+                print("boooo")
+                let errorAlertController = UIAlertController(
+                    title: "Error",
+                    message: "Gesture must have at least one sample",
+                    preferredStyle: UIAlertController.Style.alert)
+                
+                errorAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+                    errorAlertController.dismiss(animated: true, completion: nil)
+                    print("CANCEL")
+                }))
+                
+                self.present(errorAlertController, animated: true)//, completion: nil)
+            }
+            return saved
+        } else {
+            return true
+        }
+    }
+
+    func save(gestureName: String, gestureSensor: String, samples: [Sample]) -> Bool {
         print("save")
-        // 1
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
-//
-//        let managedContext =
-//            appDelegate.persistentContainer.viewContext
-        
+        if samples.count == 0 {
+            return false
+        }
         if self.isNew{
             print("isNew")
-            // 2
             let entity =
                 NSEntityDescription.entity(forEntityName: "Gesture",
                                            in: managedContext!)!
@@ -153,12 +176,6 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             self.gesture?.name = gestureName
             self.gesture?.sensor = gestureSensor
             self.gesture?.samples = Set(samples)
-//            for sample in samples {
-//                self.gesture?.samples.insert(sample)
-//            }
-            
-            print(samples)
-            //            self.gesture?.samples =
         } else{
             if let id = self.gesture?.objectID {
                 do {
@@ -181,6 +198,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        return true
     }
     
 //    func save(gestureName: String, gestureSensor: String, gestureFiles: [String], gestureFileCount: [String: Int], gestureUniqueFileName: [String: String]){
@@ -373,24 +391,14 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         secondAlertController.addAction(UIAlertAction(title: "Stop", style: UIAlertAction.Style.default, handler: { (action) in
             firstAlertController.dismiss(animated: true, completion: nil)
                 print("STOP")
-                //self.motion.stopAccelerometerUpdates()
                 self.timer.invalidate()
-//                print("sensorData", self.sensorData)
-            
-                //create a third alert view here to get the file name and save it
-            
                 self.present(thirdAlertController, animated: true, completion: nil)
-                //self.sensorData = []
-                //save the .txt file here and update the table view row
         }))
         
         secondAlertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (action) in
             firstAlertController.dismiss(animated: true, completion: nil)
             print("CANCEL")
             self.timer.invalidate()
-            //self.motion.stopAccelerometerUpdates()
-//            print("sensorData", self.sensorData)
-//            self.sensorData = []
             self.sampleDict = self.newSampleDict()
         }))
 
@@ -455,70 +463,62 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         saveGesture.isEnabled = !text.isEmpty
     }
   
-  @IBAction func exportData(_ sender: Any) {
-    
-    let emailAlertController = UIAlertController(
-        title: "Export files to your email",
-        message: "Please enter your email below",
-        preferredStyle: UIAlertController.Style.alert)
-    
-    let sendEmail = UIAlertAction(title: "Send",
-                                  style: .default) {
-                                    [unowned self] action in
-                                    
-                guard let textField = emailAlertController.textFields?.first
-                else {return}
-                            
-                                    
-                let email = textField.text as! String
-                                    
-                print("Sending email to", email)
-                                    
-            do{//Check to see the device can send email.
-                 if(try MFMailComposeViewController.canSendMail()) {
-                    print("Can send email.")
+    @IBAction func exportData(_ sender: Any) {
+        
+        let emailAlertController = UIAlertController(
+            title: "Export files to your email",
+            message: "Please enter your email below",
+            preferredStyle: UIAlertController.Style.alert)
+        
+        let sendEmail = UIAlertAction(title: "Send",
+                                      style: .default) {
+                                        [unowned self] action in
                                         
-                    let mail = MFMailComposeViewController()
-                    mail.mailComposeDelegate = self
+                    guard let textField = emailAlertController.textFields?.first
+                    else {return}
+                                
                                         
-                    //Set the subject and message of the email
-                    if let gestureName = self.gesture?.name,
-                        let gestureSensor = self.gesture?.sensor{
-                    
-                    mail.setSubject("Sensor Data for \(gestureName) using \(gestureSensor)")
-                    mail.setMessageBody("Attached", isHTML: false)
-                    }
-                    mail.setToRecipients([email])
+                    let email = textField.text as! String
+                                        
+                    print("Sending email to", email)
+                                        
+                do {//Check to see the device can send email.
+                     if(try MFMailComposeViewController.canSendMail()) {
+                        print("Can send email.")
+                        let mail = MFMailComposeViewController()
+                        mail.mailComposeDelegate = self
+                        if let gestureName = self.gesture?.name,
+                            let gestureSensor = self.gesture?.sensor{
                         
-                    for fileName in self.sampleFileNames {
-                        
-                        var uniqueFileName = self.fileNameToUniqueName[fileName]
-                        let fileManager = FileManager.default
-                        let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
-                        let fileURL = documentDirectory.appendingPathComponent(uniqueFileName!).appendingPathExtension("txt")
-                        print("File Path: \(fileURL.path)")
-                        let fileData = NSData(contentsOfFile: fileURL.path)
-                        print("File data loaded.")
-                        mail.addAttachmentData(fileData! as Data, mimeType: "text/txt", fileName: fileName + ".txt")
+                        mail.setSubject("Sensor Data for \(gestureName) using \(gestureSensor)")
+                        mail.setMessageBody("Attached", isHTML: false)
                         }
-                    self.present(mail, animated: true, completion: nil)
-                }
-            } catch {
-                
+                        mail.setToRecipients([email])
+                        for fileName in self.sampleFileNames {
+                            
+                            let uniqueFileName = self.fileNameToUniqueName[fileName]
+                            let fileManager = FileManager.default
+                            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
+                            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName!).appendingPathExtension("txt")
+                            print("File Path: \(fileURL.path)")
+                            let fileData = NSData(contentsOfFile: fileURL.path)
+                            print("File data loaded.")
+                            mail.addAttachmentData(fileData! as Data, mimeType: "text/txt", fileName: fileName + ".txt")
+                            }
+                        self.present(mail, animated: true, completion: nil)
+                    }
+                } catch {
+                    
                 }
             }
 
-      
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-    emailAlertController.addTextField()
-    emailAlertController.textFields?.first?.text = "sapkota@mit.edu"
-    emailAlertController.addAction(sendEmail)
-    emailAlertController.addAction(cancelAction)
-    
-    self.present(emailAlertController, animated: true, completion: nil)
-        
-}
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        emailAlertController.addTextField()
+        emailAlertController.textFields?.first?.text = "sapkota@mit.edu"
+        emailAlertController.addAction(sendEmail)
+        emailAlertController.addAction(cancelAction)
+        self.present(emailAlertController, animated: true, completion: nil)
+    }
 
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

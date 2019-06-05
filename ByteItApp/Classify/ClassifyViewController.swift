@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class ClassifyViewController: UITableViewController {
+class ClassifyViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var classifyBtn: UIBarButtonItem!
     @IBOutlet weak var testBtn: UIBarButtonItem!
     @IBOutlet weak var connectBtn: UIBarButtonItem!
@@ -402,4 +403,66 @@ class ClassifyViewController: UITableViewController {
         classifiedGestures.reverse()
         gestures = Shared.instance.loadData(entityName: "Gesture") as! [Gesture]
     }
+    
+    func createExportString() -> String {
+        var time: String?
+        var predicted: String?
+        var correct: NSNumber?
+        var actual: String?
+        var activity: String?
+        var export: String = NSLocalizedString("time,gesture,correct,actual,activity\n", comment: "")
+        for gesture in classifiedGestures {
+            time = gesture.getTime().replacingOccurrences(of: " ", with: "")
+            predicted = gesture.gesture
+            correct = gesture.correct
+            actual = gesture.actualGesture ?? "nil"
+            activity = gesture.activity ?? "nil"
+            export += "\(time!),\(predicted!),\(correct!),\(actual!),\(activity!)\n"
+        }
+        print("This is what the app will export: \(export)")
+        return export
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func exportData(_ sender: Any) {
+        
+        let emailAlertController = UIAlertController(
+            title: "Export files to your email",
+            message: "Please enter your email below",
+            preferredStyle: UIAlertController.Style.alert)
+        
+        let sendEmail = UIAlertAction(title: "Send",
+                                      style: .default) {
+                                        [unowned self] action in
+                                        guard let textField = emailAlertController.textFields?.first
+                                            else {return}
+                                        let email = textField.text!
+                                        print("Sending email to", email)
+                                        if (MFMailComposeViewController.canSendMail()) {
+                                            print("Can send email.")
+                                            let mail = MFMailComposeViewController()
+                                            mail.mailComposeDelegate = self
+                                            let date = self.getTime(date: Date())
+                                            mail.setSubject("GRU Data \(date)")
+                                            mail.setMessageBody("Attached", isHTML: false)
+                                            mail.setToRecipients([email])
+                                            let f = self.getTime(date: Date()) + ".txt"
+                                            let data = self.createExportString().data(using: .utf8)
+                                            mail.addAttachmentData(data!, mimeType: "text/txt", fileName: f)
+                                            self.present(mail, animated: true, completion: nil)
+                                        }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        emailAlertController.addTextField()
+        emailAlertController.textFields?.first?.text = "tomasero@mit.edu"
+        emailAlertController.addAction(sendEmail)
+        emailAlertController.addAction(cancelAction)
+        self.present(emailAlertController, animated: true, completion: nil)
+    }
+    
+    
 }

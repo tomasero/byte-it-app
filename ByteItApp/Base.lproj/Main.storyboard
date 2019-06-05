@@ -824,7 +824,7 @@
             </objects>
             <point key="canvasLocation" x="4616.8000000000002" y="-1528.0788177339903"/>
         </scene>
-        <!--Classified Gesture-->
+        <!--Classified-->
         <scene sceneID="JCE-QA-WIm">
             <objects>
                 <tableViewController id="Knc-Cs-ydw" customClass="ClassifyViewController" customModule="ByteItApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -866,7 +866,7 @@
                             <outlet property="delegate" destination="Knc-Cs-ydw" id="2We-92-hX5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Classified Gesture" id="KO0-NT-Nau">
+                    <navigationItem key="navigationItem" title="Classified" id="KO0-NT-Nau">
                         <leftBarButtonItems>
                             <barButtonItem title="Item" id="Nu9-hw-efP"/>
                             <barButtonItem title="0%" id="ShF-cO-daR"/>
@@ -880,6 +880,11 @@
                             <barButtonItem title="Test" id="dye-4m-VFS">
                                 <connections>
                                     <action selector="testAddGesture:" destination="Knc-Cs-ydw" id="GBX-rf-mrc"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="Nih-am-8qb">
+                                <connections>
+                                    <action selector="exportData:" destination="Knc-Cs-ydw" id="LSP-5K-sdA"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

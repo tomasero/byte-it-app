@@ -237,20 +237,20 @@ CBPeripheralDelegate {
         print("success")
         print(characteristic.uuid)
         print(error)
-        let vc = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
-        vc.peripheralStateChanged(state: "Connected")
-        
+        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
+        classifyVC.peripheralStateChanged(state: "Connected")
+        let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
+        gesturesVC.peripheralStateChanged(state: "Connected")
     }
     
     // Peripheral disconnected
     // Potentially hide relevant interface
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         debugPrint("Disconnected.")
-        let vc = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
-//        let vc = UIApplication.shared.keyWindow!.rootViewController as! ViewController
-        vc.peripheralStateChanged(state: "Disconnected")
-        // Start scanning again
-        //        central.scanForPeripherals(withServices: nil, options: nil)
+        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
+        classifyVC.peripheralStateChanged(state: "Disconnected")
+        let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
+        gesturesVC.peripheralStateChanged(state: "Disconnected")
     }
     
 }

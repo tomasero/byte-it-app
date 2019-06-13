@@ -63,7 +63,8 @@ public class RTClassifier: NSObject {
             //            print("prediction: ", prediction.label)
             //            print("prediction probability: ", prediction.probability)
             //            if prediction.minDistance < self.distanceThreshold {
-            if prediction.label != "none" {
+            print(prediction.label)
+            if prediction.label.lowercased() != "none" {
                 print("predicted " + prediction.label, "with ", prediction.probability*100,"% certainty", "minDistance: ",prediction.minDistance)
                 return prediction.label
                 
@@ -109,11 +110,13 @@ public class RTClassifier: NSObject {
     func finalTrain() {
         var totalWindowLength = 0
         var n = 0
+        print(self.trainingData)
         for (label, sample) in self.trainingData {
             let properLabel = label.components(separatedBy: "-")[0]
             self.training_samples.append(knn_curve_label_pair(curveAccX: sample.accX, curveAccY: sample.accY, curveAccZ: sample.accZ , curveGyrX: sample.gyrX,curveGyrY: sample.gyrY, curveGyrZ: sample.gyrZ, label: properLabel))
             totalWindowLength += sample.accX.count
             n+=1
+            print(self.training_samples.count)
         }
         if training_samples.count < 12 {
             print("ERROR: Need more training data")

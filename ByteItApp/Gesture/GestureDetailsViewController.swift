@@ -70,7 +70,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             appDelegate!.persistentContainer.viewContext
         
         super.viewDidLoad()
-        gruController.connect()
+//        gruController.connect()
         sampleTableView.dataSource = dataSource
         sampleTableView.delegate = dataSource
         // Uncomment the following line to preserve selection between presentations
@@ -133,14 +133,11 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             return true
         } else if identifier == "SaveGestureDetail" {
             let gestureName = nameTextField.text ?? ""
-            
             saved = save(gestureName: gestureName, gestureSensor: detailLabel.text ?? "", samples: self.dataSource.getData())
             if saved {
                 print("saved")
-                gruController.disconnect()
-                
+//                gruController.disconnect()
             } else {
-                print("boooo")
                 let errorAlertController = UIAlertController(
                     title: "Error",
                     message: "Gesture must have at least one sample",
@@ -175,14 +172,14 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             
             self.gesture?.name = gestureName
             self.gesture?.sensor = gestureSensor
-            self.gesture?.samples = Set(samples)
+//            self.gesture?.samples = Set(samples)
         } else{
             if let id = self.gesture?.objectID {
                 do {
                     try self.gesture = managedContext!.existingObject(with: id) as? Gesture
                     self.gesture?.name = gestureName
                     self.gesture?.sensor = gestureSensor
-                    self.gesture?.samples = Set(samples)
+//                    self.gesture?.samples = Set(samples)
 //                    self.gesture?.samples = samples
                 } catch {
                     print("Error loading and editing existing CoreData object")
@@ -285,6 +282,18 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     
 
     @IBAction func addSample(_ sender: Any) {
+        if gruController.getPeripheralState() == "Disconnected" {
+            let disconnectedAlertController = UIAlertController(
+                title: "Disconnected",
+                message: "Please connect to a GRU first",
+                preferredStyle: UIAlertController.Style.alert)
+            disconnectedAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+                disconnectedAlertController.dismiss(animated: true, completion: nil)
+            }))
+            
+            self.present(disconnectedAlertController, animated: true)//, completion: nil)
+            
+        }
 
         let firstAlertController = UIAlertController(
             title: "Add a Sample",
@@ -356,12 +365,23 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                         sample.accY = self.sampleDict["accY"]
                                         sample.accZ = self.sampleDict["accZ"]
                                         sample.gyrX = self.sampleDict["gyrX"]
-                                        sample.gyrY = self.sampleDict["gyrX"]
-                                        sample.gyrZ = self.sampleDict["gyrX"]
+                                        sample.gyrY = self.sampleDict["gyrY"]
+                                        sample.gyrZ = self.sampleDict["gyrZ"]
                                         sample.name = self.nameToSave
 //                                        print(self.sampleDict)
 //                                        print(self.samples)
                                         self.samples.append(sample)
+                                        self.gesture?.samples = Set(self.samples)
+                                        do {
+                                            print("Saving")
+                                            try self.managedContext!.save()
+                                            print("Saved")
+                                            
+                                        } catch let error as NSError {
+                                            print("Could not save. \(error), \(error.userInfo)")
+                                        }
+                                        
+                                        
 //                                        print(self.samples)
                                         self.dataSource.setData(samples: self.samples)
 //                                        print(self.sampleDict)
@@ -383,6 +403,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         thirdAlertController.addTextField()
+        thirdAlertController.textFields?.first?.text = "s\(samples.count + 1)"
         
         thirdAlertController.addAction(saveAction)
         thirdAlertController.addAction(cancelAction)
@@ -462,7 +483,35 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         let text = nameTextField.text ?? ""
         saveGesture.isEnabled = !text.isEmpty
     }
-  
+    
+//    func createExportString() -> String {
+//        let name = gesture?.name
+//        let sensor = gesture?.sensor
+//        let samples = Array(gesture!.samples)
+//        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
+//        export += "\(name!),\(sensor!)\n"
+//        for sample in samples {
+//            export += "\(sample.getString())\n"
+//        }
+//        print("This is what the app will export: \(export)")
+//        return export
+//    }
+    
+    func createExportString() -> String {
+        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
+        export += (self.gesture?.getString())!
+        print("This is what the app will export: \(export)")
+        return export
+    }
+    
+    func getTime(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
+        let time = formatter.string(from: date)
+        return time
+    }
+    
     @IBAction func exportData(_ sender: Any) {
         
         let emailAlertController = UIAlertController(
@@ -473,52 +522,88 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         let sendEmail = UIAlertAction(title: "Send",
                                       style: .default) {
                                         [unowned self] action in
-                                        
-                    guard let textField = emailAlertController.textFields?.first
-                    else {return}
-                                
-                                        
-                    let email = textField.text as! String
-                                        
-                    print("Sending email to", email)
-                                        
-                do {//Check to see the device can send email.
-                     if(try MFMailComposeViewController.canSendMail()) {
-                        print("Can send email.")
-                        let mail = MFMailComposeViewController()
-                        mail.mailComposeDelegate = self
-                        if let gestureName = self.gesture?.name,
-                            let gestureSensor = self.gesture?.sensor{
-                        
-                        mail.setSubject("Sensor Data for \(gestureName) using \(gestureSensor)")
-                        mail.setMessageBody("Attached", isHTML: false)
-                        }
-                        mail.setToRecipients([email])
-                        for fileName in self.sampleFileNames {
-                            
-                            let uniqueFileName = self.fileNameToUniqueName[fileName]
-                            let fileManager = FileManager.default
-                            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
-                            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName!).appendingPathExtension("txt")
-                            print("File Path: \(fileURL.path)")
-                            let fileData = NSData(contentsOfFile: fileURL.path)
-                            print("File data loaded.")
-                            mail.addAttachmentData(fileData! as Data, mimeType: "text/txt", fileName: fileName + ".txt")
-                            }
-                        self.present(mail, animated: true, completion: nil)
-                    }
-                } catch {
-                    
-                }
-            }
-
+                                        guard let textField = emailAlertController.textFields?.first
+                                            else {return}
+                                        let email = textField.text!
+                                        print("Sending email to", email)
+                                        if (MFMailComposeViewController.canSendMail()) {
+                                            print("Can send email.")
+                                            let mail = MFMailComposeViewController()
+                                            mail.mailComposeDelegate = self
+                                            let date = self.getTime(date: Date()).replacingOccurrences(of: " ", with: "")
+                                            mail.setSubject("GRU Gesture \(date)")
+                                            mail.setMessageBody("Attached", isHTML: false)
+                                            mail.setToRecipients([email])
+                                            let f = "gesture_\(date).txt"
+                                            let data =  self.createExportString().data(using: .utf8)
+                                            mail.addAttachmentData(data!, mimeType: "text/txt", fileName: f)
+                                            self.present(mail, animated: true, completion: nil)
+                                        }
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         emailAlertController.addTextField()
-        emailAlertController.textFields?.first?.text = "sapkota@mit.edu"
+        emailAlertController.textFields?.first?.text = "tomasero@mit.edu"
         emailAlertController.addAction(sendEmail)
         emailAlertController.addAction(cancelAction)
         self.present(emailAlertController, animated: true, completion: nil)
     }
+  
+//    @IBAction func exportData(_ sender: Any) {
+//
+//        let emailAlertController = UIAlertController(
+//            title: "Export files to your email",
+//            message: "Please enter your email below",
+//            preferredStyle: UIAlertController.Style.alert)
+//
+//        let sendEmail = UIAlertAction(title: "Send",
+//                                      style: .default) {
+//                                        [unowned self] action in
+//
+//                    guard let textField = emailAlertController.textFields?.first
+//                    else { return }
+//
+//                    let email = textField.text!
+//
+//                    print("Sending email to", email)
+//
+//                do {//Check to see the device can send email.
+//                     if(try MFMailComposeViewController.canSendMail()) {
+//                        print("Can send email.")
+//                        let mail = MFMailComposeViewController()
+//                        mail.mailComposeDelegate = self
+//                        if let gestureName = self.gesture?.name,
+//                            let gestureSensor = self.gesture?.sensor{
+//
+//                        mail.setSubject("Sensor Data for \(gestureName) using \(gestureSensor)")
+//                        mail.setMessageBody("Attached", isHTML: false)
+//                        }
+//                        mail.setToRecipients([email])
+//                        for fileName in self.sampleFileNames {
+//
+//                            let uniqueFileName = self.fileNameToUniqueName[fileName]
+//                            let fileManager = FileManager.default
+//                            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
+//                            let fileURL = documentDirectory.appendingPathComponent(uniqueFileName!).appendingPathExtension("txt")
+//                            print("File Path: \(fileURL.path)")
+//                            let fileData = NSData(contentsOfFile: fileURL.path)
+//                            print("File data loaded.")
+//                            mail.addAttachmentData(fileData! as Data, mimeType: "text/txt", fileName: fileName + ".txt")
+//                            }
+//                        self.present(mail, animated: true, completion: nil)
+//                    }
+//                } catch {
+//
+//                }
+//            }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//        emailAlertController.addTextField()
+//        emailAlertController.textFields?.first?.text = "sapkota@mit.edu"
+//        emailAlertController.addAction(sendEmail)
+//        emailAlertController.addAction(cancelAction)
+//        self.present(emailAlertController, animated: true, completion: nil)
+//    }
 
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

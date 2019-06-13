@@ -29,4 +29,12 @@ extension ClassifiedGesture {
         let time = formatter.string(from: self.time!)
         return time
     }
+    
+    func getString() -> String {
+        let timeStr = self.getTime().replacingOccurrences(of: " ", with: "")
+        let predictedStr = gesture ?? "nil"
+        let actualStr = actualGesture ?? "nil"
+        let activityStr = activity ?? "nil"
+        return "\(timeStr),\(predictedStr),\(correct!),\(actualStr),\(activityStr)"
+    }
 }

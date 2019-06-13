@@ -21,10 +21,7 @@ class CommandsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        gestures = Shared.instance.loadData(entityName: "Gesture") as! [Gesture]
-        commands = Shared.instance.loadData(entityName: "Command") as! [Command]
-        print(gestures)
-        print(commands)
+        reloadGestures()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -102,5 +99,55 @@ class CommandsViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func reloadGestures() {
+        gestures = Shared.instance.loadData(entityName: "Gesture") as! [Gesture]
+        commands = Shared.instance.loadData(entityName: "Command") as! [Command]
+    }
+    
+    @IBAction func unwindToCommandsViewController(_ segue: UIStoryboardSegue) {
+        print("unwind")
+    }
+    
+    @IBAction func saveCommand(_ segue: UIStoryboardSegue) {
+        print("saveCommand on Commands")
+        
+        if let commandVC = segue.source as? CommandViewController {
+//            commandVC.saveGesture()
+            commandVC.saveCommand()
+            reloadGestures()
+            tableView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? "") {
+        case "AddCommand":
+            print("AddCommand")
+            
+        case "EditCommand":
+            guard let commandViewController = segue.destination as? CommandViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedCommandCell = sender as? UITableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedCommandCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedCommand = commands[indexPath.row]
+            commandViewController.command = selectedCommand
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            
+            
+        }
+    }
 
 }

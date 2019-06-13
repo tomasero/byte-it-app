@@ -95,6 +95,7 @@ class ClassifiedGestureFeedbackViewController: UITableViewController, UIPickerVi
         }) ?? 0
         
         activityPicker.selectRow(activityIndex, inComponent: 0, animated: false)
+        
         switchView.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         classifiedGestureCell.accessoryView = switchView
     }

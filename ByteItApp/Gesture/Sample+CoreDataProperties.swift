@@ -36,4 +36,15 @@ extension Sample {
         let maxAccZ = self.accZ!.max()!
         self.accZ = self.accZ!.map{$0/maxAccZ}
     }
+    
+    func getString() -> String{
+        var str = name!
+        let atts = [accX, accY, accZ, gyrX, gyrY, gyrZ]
+        for att in atts {
+            let stringArray = att!.map { String($0) }
+            let string = stringArray.joined(separator: "|")
+            str += ",\(string)"
+        }
+        return str
+    }
 }

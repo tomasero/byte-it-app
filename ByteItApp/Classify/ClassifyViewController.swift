@@ -25,49 +25,42 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.classifier.configure()
-        batBtn.tintColor = UIColor.black
-        
-        let circBtn = UIButton()
-        circBtn.contentEdgeInsets = .zero
-        circBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        print(connectBtn.width)
-        circBtn.backgroundColor = UIColor.red
-        circBtn.layer.cornerRadius = 20
-        circBtn.layer.masksToBounds = true
-        
-        circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
-        connectBtn.customView = circBtn
-        stopVBatUpdate()
-        
-//        let vc = UIApplication.shared.keyWindow!.rootViewController as! ViewController
-        
-//        vc.peripheralStateChanged(state: "Connected")
-
+        setupConnectionInterface()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //1
-        print("hello")
         reloadGestures()
-//        tableView.reloadData()
+        loadConnectionState()
     }
     
-    var isConnected = false
+    func loadConnectionState() {
+        let state = gruController.getPeripheralState()
+        peripheralStateChanged(state: state)
+    }
+    
+    func setupConnectionInterface() {
+        batBtn.tintColor = UIColor.black
+        let circBtn = UIButton()
+        circBtn.contentEdgeInsets = .zero
+        circBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        circBtn.backgroundColor = UIColor.red
+        circBtn.layer.cornerRadius = 20
+        circBtn.layer.masksToBounds = true
+        circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connectBtn.customView = circBtn
+        stopVBatUpdate()
+    }
     
     @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
         print("toggleConnect")
         if gruController.getPeripheralState() == "Disconnected" {
             gruController.connect()
-            // disconnet
             connectBtn.customView?.backgroundColor = UIColor.lightGray
         } else {
             gruController.disconnect()
-//            connectBtn.customView?.backgroundColor = UIColor.green
-            // connect
         }
-//        isConnected = !isConnected
     }
     
     func peripheralStateChanged(state: String) {
@@ -82,8 +75,6 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         if connectBtn.customView != nil {
             connectBtn.customView!.backgroundColor = UIColor.red
         }
-        
-//        self.connectBtn.setTitle("Connect", for: .normal)
         stopVBatUpdate()
     }
     
@@ -91,7 +82,6 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         if connectBtn.customView != nil {
             connectBtn.customView!.backgroundColor = UIColor.green
         }
-//        self.connectBtn.setTitle("Disconnect", for: .normal)
         startVBatUpdate()
     }
     
@@ -175,6 +165,10 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
     
     func addClassifiedGesture(predictedLabel: String) {
         
+        if predictedLabel == "None" {
+            return;
+        }
+        
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -207,8 +201,17 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
     }
     
     @IBAction func testAddGesture(_ sender: UIBarButtonItem) {
-        addRandomClassifiedGesture()
+//        addRandomClassifiedGesture()
 //        self.tableView.reloadData()
+        if sender.title == "Test" {
+            train()
+            classifier.startRecording()
+            sender.title = "Testing"
+        } else {
+            let lbl = classifier.doPrediction()
+            addClassifiedGesture(predictedLabel: lbl)
+            sender.title = "Test"
+        }
     }
 
 
@@ -241,40 +244,42 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
             // stop classifying
             self.classifier.stopTrain()
         } else {
-            let gestureClasses = gestures
-            if gestureClasses.count == 0 {
-                let alert = UIAlertController(title: "No gestures available", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true)
-                return
-            }
+            train()
             btn = getButton(item: UIBarButtonItem.SystemItem.pause)
-            // training...
-            var n=0
-            for gesture in self.gestures {
-                let gestureName = gesture.name
-                var samples = gesture.samples
-                
-                for sample in samples {
-                    let currentSample = SampleData(number: 0)
-                    currentSample.accX = sample.accX!.map {Float($0)}
-                    currentSample.accY = sample.accY!.map {Float($0)}
-                    currentSample.accZ = sample.accZ!.map {Float($0)}
-                    currentSample.gyrX = sample.gyrX!.map {Float($0)}
-                    currentSample.gyrY = sample.gyrY!.map {Float($0)}
-                    currentSample.gyrZ = sample.gyrZ!.map {Float($0)}
-                    
-                    self.classifier.stepTrain(gesture: gestureName!, count: n, sample: currentSample)
-                    n+=1
-                }
-            }
-            self.classifier.finalTrain()
             //now doing real time classification
             self.classifier.runRealTime()
             
         }
         classifying = !classifying
         navigationItem.rightBarButtonItems?[0] = btn
+    }
+    
+    func train() {
+        let gestureClasses = gestures
+        if gestureClasses.count == 0 {
+            let alert = UIAlertController(title: "No gestures available", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
+        }
+        var n=0
+        for gesture in self.gestures {
+            let gestureName = gesture.name
+            let samples = gesture.samples
+            for sample in samples {
+                let currentSample = SampleData(number: 0)
+                currentSample.accX = sample.accX!.map {Float($0)}
+                currentSample.accY = sample.accY!.map {Float($0)}
+                currentSample.accZ = sample.accZ!.map {Float($0)}
+                currentSample.gyrX = sample.gyrX!.map {Float($0)}
+                currentSample.gyrY = sample.gyrY!.map {Float($0)}
+                currentSample.gyrZ = sample.gyrZ!.map {Float($0)}
+                
+                self.classifier.stepTrain(gesture: gestureName!, count: n, sample: currentSample)
+                n+=1
+            }
+        }
+        self.classifier.finalTrain()
     }
     
     func getButton(item: UIBarButtonItem.SystemItem) -> UIBarButtonItem {
@@ -405,19 +410,9 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
     }
     
     func createExportString() -> String {
-        var time: String?
-        var predicted: String?
-        var correct: NSNumber?
-        var actual: String?
-        var activity: String?
         var export: String = NSLocalizedString("time,gesture,correct,actual,activity\n", comment: "")
         for gesture in classifiedGestures {
-            time = gesture.getTime().replacingOccurrences(of: " ", with: "")
-            predicted = gesture.gesture
-            correct = gesture.correct
-            actual = gesture.actualGesture ?? "nil"
-            activity = gesture.activity ?? "nil"
-            export += "\(time!),\(predicted!),\(correct!),\(actual!),\(activity!)\n"
+            export += "\(gesture.getString())\n"
         }
         print("This is what the app will export: \(export)")
         return export
@@ -445,11 +440,11 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
                                             print("Can send email.")
                                             let mail = MFMailComposeViewController()
                                             mail.mailComposeDelegate = self
-                                            let date = self.getTime(date: Date())
-                                            mail.setSubject("GRU Data \(date)")
+                                            let date = self.getTime(date: Date()).replacingOccurrences(of: " ", with: "")
+                                            mail.setSubject("GRU Classified Gestures \(date)")
                                             mail.setMessageBody("Attached", isHTML: false)
                                             mail.setToRecipients([email])
-                                            let f = self.getTime(date: Date()) + ".txt"
+                                            let f = "classified_\(date).txt"
                                             let data = self.createExportString().data(using: .utf8)
                                             mail.addAttachmentData(data!, mimeType: "text/txt", fileName: f)
                                             self.present(mail, animated: true, completion: nil)

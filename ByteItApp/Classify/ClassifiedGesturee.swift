@@ -68,8 +68,6 @@ class Shared {
             for child in chichildren.children {
                 let vcName = NSStringFromClass(child.classForCoder).components(separatedBy: ".").last!
                 if vcName == name {
-                    print("found")
-                    print(child)
                     return child
                 }
             }

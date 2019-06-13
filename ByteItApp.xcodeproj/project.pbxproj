@@ -56,6 +56,12 @@
 		FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2622962BA40026E8BD /* MomentsViewController.swift */; };
 		FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */; };
 		FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2A2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift */; };
+		FFD168A322A9EA86009B1418 /* commandIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD168A022A9EA85009B1418 /* commandIcon.png */; };
+		FFD168A422A9EA86009B1418 /* commandIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD168A122A9EA86009B1418 /* commandIcon@2x.png */; };
+		FFD168A522A9EA86009B1418 /* commandIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD168A222A9EA86009B1418 /* commandIcon@3x.png */; };
+		FFD168A722AAF51A009B1418 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168A622AAF51A009B1418 /* Actions.swift */; };
+		FFD168AA22AB0074009B1418 /* MediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168A922AB0074009B1418 /* MediaPlayerViewController.swift */; };
+		FFD168AC22AB009C009B1418 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168AB22AB009C009B1418 /* AudioViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +134,12 @@
 		FFACFD2622962BA40026E8BD /* MomentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MomentsViewController.swift; sourceTree = "<group>"; };
 		FFACFD2822962C0F0026E8BD /* SensorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorPickerViewController.swift; sourceTree = "<group>"; };
 		FFACFD2A2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifiedGestureFeedbackViewController.swift; sourceTree = "<group>"; };
+		FFD168A022A9EA85009B1418 /* commandIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commandIcon.png; sourceTree = "<group>"; };
+		FFD168A122A9EA86009B1418 /* commandIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commandIcon@2x.png"; sourceTree = "<group>"; };
+		FFD168A222A9EA86009B1418 /* commandIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commandIcon@3x.png"; sourceTree = "<group>"; };
+		FFD168A622AAF51A009B1418 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		FFD168A922AB0074009B1418 /* MediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewController.swift; sourceTree = "<group>"; };
+		FFD168AB22AB009C009B1418 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +188,9 @@
 		FF44950B22A346CE009F46AA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				FFD168A022A9EA85009B1418 /* commandIcon.png */,
+				FFD168A122A9EA86009B1418 /* commandIcon@2x.png */,
+				FFD168A222A9EA86009B1418 /* commandIcon@3x.png */,
 				FF44950D22A34E13009F46AA /* startIcon.png */,
 				FF44950E22A34E14009F46AA /* startIcon@2x.png */,
 				FF44950C22A34E13009F46AA /* startIcon@3x.png */,
@@ -207,6 +222,7 @@
 				FF44951622A5C3A7009F46AA /* NewDynamicDataSource.swift */,
 				FFACFCDD2296231E0026E8BD /* Objects.swift */,
 				FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */,
+				FFD168A822AB005A009B1418 /* Applications */,
 				FF44951822A6149D009F46AA /* Command */,
 				FFACFCDF2296231E0026E8BD /* Classify */,
 				FFACFCE52296231E0026E8BD /* Moment */,
@@ -218,6 +234,7 @@
 				FFACFCFE2296231E0026E8BD /* AppDelegate.swift */,
 				FFACFD022296231E0026E8BD /* Info.plist */,
 				FF44950322A30EB7009F46AA /* GRUController.swift */,
+				FFD168A622AAF51A009B1418 /* Actions.swift */,
 			);
 			path = ByteItApp;
 			sourceTree = "<group>";
@@ -267,6 +284,15 @@
 				FF44951422A5C0A1009F46AA /* Sample+CoreDataProperties.swift */,
 			);
 			path = Gesture;
+			sourceTree = "<group>";
+		};
+		FFD168A822AB005A009B1418 /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				FFD168A922AB0074009B1418 /* MediaPlayerViewController.swift */,
+				FFD168AB22AB009C009B1418 /* AudioViewController.swift */,
+			);
+			path = Applications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,14 +401,17 @@
 			files = (
 				FFACFD222296231E0026E8BD /* Info.plist in Resources */,
 				FFACFD122296231E0026E8BD /* Main.storyboard in Resources */,
+				FFD168A522A9EA86009B1418 /* commandIcon@3x.png in Resources */,
 				FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */,
 				FF44950922A3463B009F46AA /* gestureIcon@2x.png in Resources */,
 				FF44951122A34E14009F46AA /* startIcon@2x.png in Resources */,
 				FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */,
 				FF44950F22A34E14009F46AA /* startIcon@3x.png in Resources */,
+				FFD168A422A9EA86009B1418 /* commandIcon@2x.png in Resources */,
 				FF44950822A3463B009F46AA /* gestureIcon@3x.png in Resources */,
 				FF44951022A34E14009F46AA /* startIcon.png in Resources */,
 				FF44950A22A3463B009F46AA /* gestureIcon.png in Resources */,
+				FFD168A322A9EA86009B1418 /* commandIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +441,7 @@
 				FFACFD0A2296231E0026E8BD /* ClassifiedGestureTableViewCell.swift in Sources */,
 				FFACFD142296231E0026E8BD /* GestureDetailsViewController.swift in Sources */,
 				FFACFD042296231E0026E8BD /* Objects.swift in Sources */,
+				FFD168AC22AB009C009B1418 /* AudioViewController.swift in Sources */,
 				0829B5CB22A6F3F1003BE532 /* RTClassifier.swift in Sources */,
 				FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */,
 				FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */,
@@ -432,9 +462,11 @@
 				FF44951322A5C08C009F46AA /* Sample+CoreDataClass.swift in Sources */,
 				FFACFD072296231E0026E8BD /* ClassifiedGesturee.swift in Sources */,
 				FFACFD1A2296231E0026E8BD /* GesturesViewController.swift in Sources */,
+				FFD168A722AAF51A009B1418 /* Actions.swift in Sources */,
 				FF44952022A618F2009F46AA /* Command+CoreDataProperties.swift in Sources */,
 				FF44951A22A614BD009F46AA /* CommandsViewController.swift in Sources */,
 				FFACFD1C2296231E0026E8BD /* GestureTableViewCell.swift in Sources */,
+				FFD168AA22AB0074009B1418 /* MediaPlayerViewController.swift in Sources */,
 				FFACFD172296231E0026E8BD /* PlaceTableViewCell.swift in Sources */,
 				FFACFD2B2297279A0026E8BD /* ClassifiedGestureFeedbackViewController.swift in Sources */,
 				FFACFD2922962C0F0026E8BD /* SensorPickerViewController.swift in Sources */,

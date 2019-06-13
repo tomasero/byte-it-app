@@ -25,4 +25,12 @@ extension Gesture {
     @NSManaged public var samples: Set<Sample>
     @NSManaged public var commands: Set<Command>
 
+    func getString() -> String{
+//        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
+        var export = "\(name!),\(sensor!)"
+        for sample in Array(samples) {
+            export += ",\(sample.getString())"
+        }
+        return export
+    }
 }

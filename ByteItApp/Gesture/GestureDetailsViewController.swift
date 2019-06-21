@@ -323,7 +323,10 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //                                        self.sampleFileNames = self.dataSource.getData()
 //                                        self.fileNameCount = self.dataSource.getCount()
 //                                        self.fileNameToUniqueName = self.dataSource.getName()
+                                        
                                         let newIndexPath = IndexPath(row: self.dataSource.samples.count, section: 0)
+                                        print("newIndexPath")
+                                        print(newIndexPath)
                                         
                                         //make filename unique
                                         
@@ -368,8 +371,8 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                         sample.gyrY = self.sampleDict["gyrY"]
                                         sample.gyrZ = self.sampleDict["gyrZ"]
                                         sample.name = self.nameToSave
-//                                        print(self.sampleDict)
-//                                        print(self.samples)
+
+                                        self.samples = self.dataSource.samples
                                         self.samples.append(sample)
                                         self.gesture?.samples = Set(self.samples)
                                         do {
@@ -394,7 +397,6 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //                                        self.saveToFile(fileName: self.fileNameToUniqueName[self.nameToSave]!, stringToWrite: self.sensorData)
 //                                        self.sensorData = []
                                         self.sampleDict = self.newSampleDict()
-                                        
                                         self.sampleTableView.beginUpdates()
                                         self.sampleTableView.insertRows(at: [newIndexPath], with: .automatic)
                                         self.sampleTableView.endUpdates()

@@ -48,9 +48,20 @@ class NewDynamicDataSource: NSObject,UITableViewDataSource,UITableViewDelegate {
             let managedContext =
                 appDelegate.persistentContainer.viewContext
             
-            managedContext.delete(samples[indexPath.row] as NSManagedObject)
-            samples.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let id = (samples[indexPath.row] as Sample).objectID
+            do {
+                let sample = try managedContext.existingObject(with: id) as? Sample
+                print("delete")
+                print(tableView.numberOfRows(inSection: 0))
+                managedContext.delete(sample! as NSManagedObject)
+                samples.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                print(tableView.numberOfRows(inSection: 0))
+
+            } catch {
+                print("Error loading and editing existing CoreData object")
+            }
+            
             
             do {
                 try managedContext.save()

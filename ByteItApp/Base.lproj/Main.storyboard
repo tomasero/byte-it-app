@@ -915,6 +915,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <textView key="tableFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="WUA-iz-s39">
+                            <rect key="frame" x="0.0" y="253" width="375" height="91"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                         <sections>
                             <tableViewSection id="yUQ-gd-c1g">
                                 <cells>
@@ -972,6 +979,9 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Your Minder" id="xHC-82-7yk">
+                                <cells/>
+                            </tableViewSection>
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Minders" id="aaF-ay-2Xt">
@@ -982,11 +992,14 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="BXN-7f-p9T"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="momentName" destination="aBX-Os-aw0" id="6p7-5x-cON"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tNs-4t-K5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ryp-d5-cVj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3737" y="842"/>
+            <point key="canvasLocation" x="3736.8000000000002" y="841.62561576354688"/>
         </scene>
         <!--Minders-->
         <scene sceneID="3z4-EA-lkc">
@@ -1095,7 +1108,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="l4U-rm-6a1" kind="unwind" identifier="SaveSelectedMoment" trigger="accessoryAction" unwindAction="unwindWithSelectedMomentWithSegue:" id="LlA-CE-Nd6"/>
+                                    <segue destination="l4U-rm-6a1" kind="unwind" identifier="SaveSelectedMoment" unwindAction="unwindWithSelectedMomentWithSegue:" id="n1K-TQ-hSh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

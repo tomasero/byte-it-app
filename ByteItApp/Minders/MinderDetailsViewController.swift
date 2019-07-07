@@ -10,7 +10,15 @@ import UIKit
 
 class MinderDetailsViewController: UITableViewController {
     
-    var moment: String = ""
+    
+    @IBOutlet weak var momentName: UILabel!
+    
+    
+    var moment: String = ""{
+        didSet{
+            momentName.text = moment
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

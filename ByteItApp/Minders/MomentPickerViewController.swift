@@ -20,6 +20,17 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
     var delegate: isAbleToReceiveMinder?
     var moments = [Moment]()
     
+    var selectedMomentIndex: Int?
+    
+    var selectedMoment: Moment? {
+        didSet {
+            if let selectedMoment = selectedMoment,
+                let index = moments.index(of: selectedMoment) {
+                selectedMomentIndex = index
+            }
+        }
+    }
+    
     func pass(moment: Moment) {
         print("Moments of success")
         print(moment)
@@ -49,16 +60,7 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
     }
     
     
-    var selectedMomentIndex: Int?
-    
-    var selectedMoment: Moment? {
-        didSet {
-            if let selectedMoment = selectedMoment,
-                let index = moments.index(of: selectedMoment) {
-                selectedMomentIndex = index
-            }
-        }
-    }
+
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
@@ -79,6 +81,7 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let moment = moments[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MinderCell", for: indexPath)
         cell.textLabel?.text = moment.value(forKeyPath: "name") as? String
@@ -87,8 +90,8 @@ class MomentPickerViewController: UITableViewController, isAbleToReceiveMoment {
         let placeName = place ?? "None"
         let time = date?.description ?? "None"
         cell.detailTextLabel?.text = placeName + " | " + time
-        return cell
         if indexPath.row == selectedMomentIndex {
+            print("CHECKMARK")
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none

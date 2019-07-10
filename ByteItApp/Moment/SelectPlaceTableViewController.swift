@@ -17,7 +17,7 @@ class SelectPlaceTableViewController: UITableViewController {
     var selectedPlace: MKMapItem? = nil
     var placeName: String = ""
     var testString: String = "test"
-    var momentVC: MomentViewController?
+    var momentVC: MomentDetailsViewController?
     var delegate: isAbleToReceivePlace?
     
     func locationCount() -> Int {
@@ -58,7 +58,7 @@ class SelectPlaceTableViewController: UITableViewController {
         self.tableView.dataSource = self
 //        self.tableView.allowsSelection = true
         
-        momentVC = self.presentingViewController?.presentingViewController as? MomentViewController
+        momentVC = self.presentingViewController?.presentingViewController as? MomentDetailsViewController
         
         searchCompleter.delegate = self
         

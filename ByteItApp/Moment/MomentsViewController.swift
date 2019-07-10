@@ -46,7 +46,7 @@ class MomentsViewController: UITableViewController, isAbleToReceiveMoment {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem
+//        navigationItem.leftBarButtonItem = editButtonItem
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -98,8 +98,8 @@ class MomentsViewController: UITableViewController, isAbleToReceiveMoment {
         return true
     }
     
-//    @IBAction func cancelToMomentsViewController(_ segue: UIStoryboardSegue) {
-//    }
+    @IBAction func cancelToMomentsViewController(_ segue: UIStoryboardSegue) {
+    }
 //    
 //    @IBAction func saveMomentDetail(_ segue: UIStoryboardSegue) {
 //        if let momentDetailsViewController = segue.source as? MomentViewController {
@@ -124,7 +124,7 @@ class MomentsViewController: UITableViewController, isAbleToReceiveMoment {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        print(moments)
-        print(indexPath.row)
+//        print(indexPath.row)
         let moment = moments[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 //        cell.textLabel?.text = moments[indexPath.row].name
@@ -195,12 +195,12 @@ class MomentsViewController: UITableViewController, isAbleToReceiveMoment {
         case "AddMoment":
             print ("it is show modal")
             let nav = segue.destination as! UINavigationController
-            let momentVC = nav.topViewController as! MomentViewController
+            let momentVC = nav.topViewController as! MomentDetailsViewController
             momentVC.delegate = self
 //            momentVC.momentName = place
             
         case "EditMoment":
-            guard let momentViewController = segue.destination as? MomentViewController else {
+            guard let momentViewController = segue.destination as? MomentDetailsViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             

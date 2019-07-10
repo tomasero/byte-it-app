@@ -12,6 +12,11 @@
         <attribute name="uniqueFileCount" optional="YES" attributeType="Transformable" customClassName="[String:Int]" syncable="YES"/>
         <attribute name="uniqueFileName" optional="YES" attributeType="Transformable" customClassName="[String:String]" syncable="YES"/>
     </entity>
+    <entity name="Minder" representedClassName="Minder" syncable="YES">
+        <attribute name="minderOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="minderText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="moment" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Moment" representedClassName=".Moment" syncable="YES">
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -27,5 +32,6 @@
         <element name="ClassifiedGesture" positionX="-54" positionY="36" width="128" height="90"/>
         <element name="Gesture" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Moment" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Minder" positionX="-54" positionY="54" width="128" height="90"/>
     </elements>
 </model>

@@ -1,5 +1,5 @@
 //
-//  MomentViewController.swift
+//  MomentDetailsViewController.swift
 //  GestureiOS
 //
 //  Created by Tomás Vega on 1/14/19.
@@ -17,7 +17,7 @@ protocol isAbleToReceivePlace {
     func pass(data:MKMapItem)
 }
 
-class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, isAbleToReceivePlace  {
+class MomentDetailsViewController: UITableViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, isAbleToReceivePlace  {
     
     var moment: Moment?
     var delegate: isAbleToReceiveMoment?
@@ -68,6 +68,8 @@ class MomentViewController: UITableViewController, MKMapViewDelegate, CLLocation
             didToggleSwitch(switchPlace)
             didToggleSwitch(switchPerson)
         }
+        
+        self.hideKeyboardWhenTappedAround()
         
     }
     
@@ -291,5 +293,18 @@ extension CLPlacemark {
             return result
         }
         return nil
+    }
+}
+
+// Put this piece of code anywhere you like
+extension MomentDetailsViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(GestureDetailsViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

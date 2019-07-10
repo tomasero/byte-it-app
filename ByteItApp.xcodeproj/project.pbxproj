@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E80A626522D42855004950FA /* Minder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80A626422D42855004950FA /* Minder.swift */; };
 		E82D516E22A4D446004B1A55 /* MomentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */; };
 		E82D517122A4D9D5004B1A55 /* MindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D517022A4D9D5004B1A55 /* MindersViewController.swift */; };
 		E82D517322A4DA14004B1A55 /* MinderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */; };
@@ -39,7 +40,6 @@
 		FFACFD1E2296231E0026E8BD /* GestureData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFD2296231E0026E8BD /* GestureData+CoreDataClass.swift */; };
 		FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCFE2296231E0026E8BD /* AppDelegate.swift */; };
 		FFACFD212296231E0026E8BD /* ExoEarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD012296231E0026E8BD /* ExoEarController.swift */; };
-		FFACFD222296231E0026E8BD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FFACFD022296231E0026E8BD /* Info.plist */; };
 		FFACFD23229623670026E8BD /* ByteIt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCF02296231E0026E8BD /* ByteIt.xcdatamodeld */; };
 		FFACFD2522962B440026E8BD /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2422962B440026E8BD /* MapDataSource.swift */; };
 		FFACFD2722962BA40026E8BD /* MomentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFD2622962BA40026E8BD /* MomentsViewController.swift */; };
@@ -67,6 +67,7 @@
 		00CD72812194CEA10063DC56 /* ByteItApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByteItApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72982194CEAC0063DC56 /* ByteItAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00CD72A32194CEAC0063DC56 /* ByteItAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ByteItAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E80A626422D42855004950FA /* Minder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minder.swift; sourceTree = "<group>"; };
 		E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentPickerViewController.swift; sourceTree = "<group>"; };
 		E82D517022A4D9D5004B1A55 /* MindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindersViewController.swift; sourceTree = "<group>"; };
 		E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 				E82D517222A4DA14004B1A55 /* MinderDetailsViewController.swift */,
 				E82D517422A4DBBC004B1A55 /* MinderTableViewCell.swift */,
 				E82D516D22A4D446004B1A55 /* MomentPickerViewController.swift */,
+				E80A626422D42855004950FA /* Minder.swift */,
 			);
 			path = Minders;
 			sourceTree = "<group>";
@@ -329,7 +331,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFACFD222296231E0026E8BD /* Info.plist in Resources */,
 				FFACFD122296231E0026E8BD /* Main.storyboard in Resources */,
 				FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */,
 				FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */,
@@ -365,6 +366,7 @@
 				FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */,
 				FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */,
 				FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */,
+				E80A626522D42855004950FA /* Minder.swift in Sources */,
 				FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */,
 				FFACFD0C2296231E0026E8BD /* MomentTableViewCell.swift in Sources */,
 				FFACFD1F2296231E0026E8BD /* AppDelegate.swift in Sources */,

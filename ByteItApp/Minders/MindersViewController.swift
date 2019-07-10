@@ -7,8 +7,38 @@
 //
 
 import UIKit
+import CoreData
+import os.log
 
-class MindersViewController: UITableViewController {
+
+protocol isAbleToReceiveMindersForMindersVC {
+    func pass(minder: Minder)
+}
+
+
+class MindersViewController: UITableViewController, isAbleToReceiveMindersForMindersVC {
+    
+    var delegate: isAbleToReceiveMindersForMindersVC?
+    var minders: [Minder] = []
+    
+    func pass(minder: Minder) {
+    
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            // Update an existing gesture.
+            minders[selectedIndexPath.row] = minder
+            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+        } else {
+            // Add a new gesture.
+            let newIndexPath = IndexPath(row: minders.count, section: 0)
+            
+            minders.append(minder)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +46,9 @@ class MindersViewController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func cancelToMindersViewController(_ segue: UIStoryboardSegue) {
+    }
+
 
     /*
     // MARK: - Navigation
@@ -26,8 +59,136 @@ class MindersViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+        //1
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Minder")
+        
+        //3
+        do {
+            minders = try managedContext.fetch(fetchRequest) as! [Minder]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return minders.count
+    }
+    
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 1
+//    }
+    
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //        print(moments)
+//        print(indexPath.row)
+        let minder = minders[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = minder.moment
+        cell.detailTextLabel?.text = minder.minderText
+
+        return cell
+    }
+    
+
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //Delete from CoreData
+            
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return
+            }
+            
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            
+            managedContext.delete(minders[indexPath.row] as NSManagedObject)
+            
+            // Delete the row from the data source
+            minders.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            do {
+                try managedContext.save()
+                
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+            
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "AddMinder":
+            os_log("Adding a new gesture.", log: OSLog.default, type: .debug)
+            let nav = segue.destination as! UINavigationController
+            let minderVC = nav.topViewController as! MinderDetailsViewController
+            minderVC.delegate = self
+            
+        case "EditMinder":
+            print("Editing a new minder")
+            guard let minderDetailsViewController = segue.destination as? MinderDetailsViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedMinderCell = sender as? MinderTableViewCell else {
+                fatalError("Unexpected sender: \(String(describing: sender))")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedMinderCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedMinder = minders[indexPath.row]
+            minderDetailsViewController.minder = selectedMinder
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            
+            
+        }
+    }
+    
+
+
 
 }
+
+
 
 /*
  

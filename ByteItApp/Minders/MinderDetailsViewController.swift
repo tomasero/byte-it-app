@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 
 class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
@@ -25,11 +26,12 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
     var minderText: String?
     var flag = true
     var delegate: isAbleToReceiveMindersForMindersVC?
+     let notificationManager = LocalNotificationManager()
+    var notifications: [LocalNotificationManager.Notification]?
     
-    
-    var moment: String = ""{
+    var moment: Moment!{
         didSet{
-            momentName.text = moment
+            momentName.text = moment.name
         }
     }
     
@@ -56,7 +58,7 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
         if let momentPickerViewController = segue.source as? MomentPickerViewController,
             let selectedMoment = momentPickerViewController.selectedMoment {
 //            print("herererere")
-            moment = selectedMoment.name!
+            moment = selectedMoment
             print(moment)
         }
     }
@@ -97,6 +99,27 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
             self.minder?.setValue(momentNameText, forKey:"moment")
             self.minder?.setValue(minderText, forKey:"minderText")
             self.minder?.setValue(minderOn, forKey: "minderOn")
+            
+            // trigger the notification here
+            print("SAVED MOMENT TIME")
+            var momentTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self.moment.time ?? Date())
+            print(momentTime)
+            
+            print("SAVED MOMENT LAT")
+            print(self.moment.lat)
+            
+            print("SAVED MOMENT LONG")
+            print(self.moment.lon)
+            
+//            notifications
+            var notif = LocalNotificationManager.Notification(id: self.moment.name!, title: self.minderText!, datetime: momentTime, location: CLLocationCoordinate2D(latitude: self.moment!.lat as! CLLocationDegrees, longitude: self.moment!.lon as! CLLocationDegrees))
+            
+            notificationManager.notifications.append(notif)
+            print("SCHEDULING NOTIFICAITON")
+            notificationManager.schedule()
+//            print(self.moment.)
+
+            
         } else {
             if let id = self.minder?.objectID{
                 do{
@@ -105,6 +128,9 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
                     self.minder?.setValue(minderText, forKey:"minderText")
                     self.minder?.setValue(minderOn, forKey: "minderOn")
                     self.delegate?.pass(minder:self.minder as! Minder)
+                    
+                    // delete the previous notification and trigger new one here
+                    
                 }catch{
                     print("Error loading and editing existing CoreData object")
                 }

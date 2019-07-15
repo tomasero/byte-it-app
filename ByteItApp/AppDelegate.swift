@@ -8,15 +8,24 @@
 
 import UIKit
 import CoreData
+import UserNotifications
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    //speech syntehsizer
+    var speechSynthesizer = AVSpeechSynthesizer()
+    var speechUtterance: AVSpeechUtterance = AVSpeechUtterance()
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
 
@@ -87,6 +96,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate
+{
+
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
+    {
+        let id = response.notification.request.identifier
+        print("Received notification with ID = \(id)")
+//        print(response.notification.request.content)
+        
+        
+        let utterance = AVSpeechUtterance(string: response.notification.request.content.title)
+        
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
+        self.speechSynthesizer.speak(utterance)
+
+
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        let id = notification.request.identifier
+        print("Received notification with ID = \(id)")
+//        print(notification.request.content)
+        
+        let utterance = AVSpeechUtterance(string: notification.request.content.title)
+        
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-gb")
+        self.speechSynthesizer.speak(utterance)
+
+
+        completionHandler([.sound, .alert])
     }
 
 }

@@ -67,6 +67,8 @@ CBPeripheralDelegate {
         let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey) as? NSString
         // Check if this is the device we want
         if device?.contains(NAME) == true {
+            print(peripheral.name)
+            print(peripheral.identifier)
             // Stop looking for devices
             // Track as connected peripheral
             // Setup delegate for events

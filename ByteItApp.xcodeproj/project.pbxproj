@@ -24,6 +24,7 @@
 		FF44951E22A618DF009F46AA /* Command+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951D22A618DF009F46AA /* Command+CoreDataClass.swift */; };
 		FF44952022A618F2009F46AA /* Command+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF44951F22A618F2009F46AA /* Command+CoreDataProperties.swift */; };
 		FF6DFBD022A728F900990347 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0829B5CC22A6F3FF003BE532 /* Helper.swift */; };
+		FF79DB4522E16D1300DD094C /* GRUSController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79DB4422E16D1300DD094C /* GRUSController.swift */; };
 		FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */; };
 		FFACFD042296231E0026E8BD /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDD2296231E0026E8BD /* Objects.swift */; };
 		FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */; };
@@ -102,6 +103,7 @@
 		FF44951B22A614D3009F46AA /* CommandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandViewController.swift; sourceTree = "<group>"; };
 		FF44951D22A618DF009F46AA /* Command+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FF44951F22A618F2009F46AA /* Command+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Command+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FF79DB4422E16D1300DD094C /* GRUSController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRUSController.swift; sourceTree = "<group>"; };
 		FFACFCDC2296231E0026E8BD /* DynamicDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicDataSource.swift; sourceTree = "<group>"; };
 		FFACFCDD2296231E0026E8BD /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		FFACFCDE2296231E0026E8BD /* DataSourceStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceStatic.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				FFACFCFE2296231E0026E8BD /* AppDelegate.swift */,
 				FFACFD022296231E0026E8BD /* Info.plist */,
 				FF44950322A30EB7009F46AA /* GRUController.swift */,
+				FF79DB4422E16D1300DD094C /* GRUSController.swift */,
 				FFD168A622AAF51A009B1418 /* Actions.swift */,
 			);
 			path = ByteItApp;
@@ -444,6 +447,7 @@
 				FFD168AC22AB009C009B1418 /* AudioViewController.swift in Sources */,
 				0829B5CB22A6F3F1003BE532 /* RTClassifier.swift in Sources */,
 				FFACFD032296231E0026E8BD /* DynamicDataSource.swift in Sources */,
+				FF79DB4522E16D1300DD094C /* GRUSController.swift in Sources */,
 				FFACFD062296231E0026E8BD /* ClassifiedGesture+CoreDataClass.swift in Sources */,
 				FFACFD052296231E0026E8BD /* DataSourceStatic.swift in Sources */,
 				FFACFD0D2296231E0026E8BD /* MomentDetailsViewController.swift in Sources */,

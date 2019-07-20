@@ -56,7 +56,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Gestures" id="eLh-wb-3Ju">
                         <leftBarButtonItems>
-                            <barButtonItem title="Item" id="Suy-VX-jCp"/>
+                            <barButtonItem title="L" id="Suy-VX-jCp"/>
+                            <barButtonItem tag="1" title="R" id="c59-wb-X4g"/>
                             <barButtonItem title="0%" id="ZEq-Hl-FkC"/>
                         </leftBarButtonItems>
                         <rightBarButtonItems>
@@ -74,7 +75,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="batBtn" destination="ZEq-Hl-FkC" id="FMY-eS-UpK"/>
-                        <outlet property="connectBtn" destination="Suy-VX-jCp" id="yg3-hM-a3S"/>
+                        <outlet property="connLeftBtn" destination="Suy-VX-jCp" id="QIm-JZ-mPs"/>
+                        <outlet property="connRightBtn" destination="c59-wb-X4g" id="9hK-bD-dK3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cOm-a8-NHB" userLabel="First Responder" sceneMemberID="firstResponder"/>

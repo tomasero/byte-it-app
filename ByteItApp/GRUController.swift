@@ -19,6 +19,7 @@ CBPeripheralDelegate {
     var _peripheral:CBPeripheral!
     var sendCharacteristic: CBCharacteristic!
     var loadedService: Bool = true
+    var tag = -1
     
     let NAME = "GVS"
     let UUID_SERVICE = CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
@@ -43,6 +44,7 @@ CBPeripheralDelegate {
         }
         return "Disconnected"
     }
+    
     
     func connect() {
         manager = CBCentralManager(delegate: self, queue: nil)
@@ -149,6 +151,7 @@ CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print(peripheral.identifier)
         // Make sure it is the peripheral we want
         if characteristic.uuid == UUID_READ {
             // Get bytes into string
@@ -242,7 +245,7 @@ CBPeripheralDelegate {
         let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
         classifyVC.peripheralStateChanged(state: "Connected")
         let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
-        gesturesVC.peripheralStateChanged(state: "Connected")
+        gesturesVC.peripheralStateChanged(tag: self.tag, state: "Connected")
     }
     
     // Peripheral disconnected
@@ -252,7 +255,7 @@ CBPeripheralDelegate {
         let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
         classifyVC.peripheralStateChanged(state: "Disconnected")
         let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
-        gesturesVC.peripheralStateChanged(state: "Disconnected")
+        gesturesVC.peripheralStateChanged(tag: self.tag, state: "Disconnected")
     }
     
 }

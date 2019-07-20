@@ -58,6 +58,9 @@ class Shared {
     private init() { }
     static let instance = Shared()
     var gestures: [ClassifiedGesturee] = []
+//    var gruController: GRUController = GRUController()
+    var lGRUController: GRUController = GRUController()
+    var rGRUController: GRUController = GRUController()
     var gruController: GRUController = GRUController()
     let activities = ["still", "walking", "running", "biking"]
     let classifier = RTClassifier()

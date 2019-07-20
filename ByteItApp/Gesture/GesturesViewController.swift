@@ -15,14 +15,18 @@ import os.log
 
 class GesturesViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet weak var connectBtn: UIBarButtonItem!
+    @IBOutlet weak var connLeftBtn: UIBarButtonItem!
+    @IBOutlet weak var connRightBtn: UIBarButtonItem!
     @IBOutlet weak var batBtn: UIBarButtonItem!
     
     var gestures = [Gesture]() //SampleData.generateGesturesData()
     var timer = Timer()
-    var gruController = Shared.instance.gruController
+    var lGRUController = Shared.instance.lGRUController
+    var rGRUController = Shared.instance.rGRUController
 
     override func viewDidLoad() {
+        lGRUController.tag = 0
+        rGRUController.tag = 1
         super.viewDidLoad()
         setupConnectionInterface()
         // Uncomment the following line to preserve selection between presentations
@@ -283,60 +287,82 @@ extension GesturesViewController{
     
 }
 
+var circRightBtn = UIButton()
+var circLeftBtn = UIButton()
+
 extension GesturesViewController {
     func loadConnectionState() {
-        let state = gruController.getPeripheralState()
-        peripheralStateChanged(state: state)
+        // to fix
+//        let state = gruController.getPeripheralState(tag:)
+//        peripheralStateChanged(state: state)
     }
     
     func setupConnectionInterface() {
         batBtn.tintColor = UIColor.black
-        let circBtn = UIButton()
-        circBtn.contentEdgeInsets = .zero
-        circBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        circBtn.backgroundColor = UIColor.red
-        circBtn.layer.cornerRadius = 20
-        circBtn.layer.masksToBounds = true
-        circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
-        connectBtn.customView = circBtn
+        circLeftBtn.tag = 0
+        circLeftBtn.contentEdgeInsets = .zero
+        circLeftBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        circLeftBtn.backgroundColor = UIColor.red
+        circLeftBtn.layer.cornerRadius = 20
+        circLeftBtn.layer.masksToBounds = true
+        circLeftBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connLeftBtn.customView = circLeftBtn
+        circRightBtn.tag = 1
+        circRightBtn.contentEdgeInsets = .zero
+        circRightBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        circRightBtn.backgroundColor = UIColor.red
+        circRightBtn.layer.cornerRadius = 20
+        circRightBtn.layer.masksToBounds = true
+        circRightBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connRightBtn.customView = circRightBtn
         stopVBatUpdate()
     }
     
     @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
-        print("toggleConnect")
+        let gruController = [lGRUController, rGRUController][sender.tag]
+        let connBtn = [connLeftBtn, connRightBtn][sender.tag]
         if gruController.getPeripheralState() == "Disconnected" {
             gruController.connect()
-            connectBtn.customView?.backgroundColor = UIColor.lightGray
+            connLeftBtn.customView?.backgroundColor = UIColor.lightGray
         } else {
             gruController.disconnect()
         }
     }
     
-    func peripheralStateChanged(state: String) {
+    func peripheralStateChanged(tag: Int, state: String) {
         if state == "Connected" {
-            connected()
+            connected(tag: tag)
         } else {
-            disconnected()
+            disconnected(tag: tag)
         }
     }
     
-    func disconnected() {
-        if connectBtn.customView != nil {
-            connectBtn.customView!.backgroundColor = UIColor.red
+    func disconnected(tag: Int) {
+        let connBtn = [connLeftBtn, connRightBtn][tag]
+        if connBtn!.customView != nil {
+            connBtn!.customView!.backgroundColor = UIColor.red
         }
         stopVBatUpdate()
     }
     
-    func connected() {
-        if connectBtn.customView != nil {
-            connectBtn.customView!.backgroundColor = UIColor.green
+    func connected(tag: Int) {
+        let connBtn = [connLeftBtn, connRightBtn][tag]
+        if connBtn!.customView != nil {
+            connBtn!.customView!.backgroundColor = UIColor.green
         }
         startVBatUpdate()
     }
     
     @objc func updateBattery() {
-        let vBat = gruController.getVBat()
-        batBtn.title = String(vBat) + "%"
+        let gruControllers = [lGRUController, rGRUController]
+        let connBtns = [circLeftBtn, circRightBtn]
+        for (i, gru) in gruControllers.enumerated() {
+            let state = gru.getPeripheralState()
+            let vBat = gru.getVBat()
+            if state == "Connected" {
+                connBtns[i].setTitle(String(vBat) + "%", for: UIControl.State.normal)
+            }
+        }
     }
     
     func startVBatUpdate() {
@@ -345,9 +371,20 @@ extension GesturesViewController {
     }
     
     func stopVBatUpdate() {
-        timer.invalidate()
-        timer = Timer()
-        batBtn.title = "0%"
+        let gruControllers = [lGRUController, rGRUController]
+        let connBtns = [circLeftBtn, circRightBtn]
+        var disconnected = 0
+        for (i, gru) in gruControllers.enumerated() {
+            let state = gru.getPeripheralState()
+            if state == "Disconnected" {
+                connBtns[i].setTitle("", for: UIControl.State.normal)
+                disconnected += 1
+            }
+        }
+        if disconnected == 2 {
+            timer.invalidate()
+            timer = Timer()
+        }
     }
 }
 

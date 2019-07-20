@@ -268,12 +268,18 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
             let samples = gesture.samples
             for sample in samples {
                 let currentSample = SampleData(number: 0)
-                currentSample.accX = sample.accX!.map {Float($0)}
-                currentSample.accY = sample.accY!.map {Float($0)}
-                currentSample.accZ = sample.accZ!.map {Float($0)}
-                currentSample.gyrX = sample.gyrX!.map {Float($0)}
-                currentSample.gyrY = sample.gyrY!.map {Float($0)}
-                currentSample.gyrZ = sample.gyrZ!.map {Float($0)}
+                currentSample.laccX = sample.laccX!.map {Float($0)}
+                currentSample.laccY = sample.laccY!.map {Float($0)}
+                currentSample.laccZ = sample.laccZ!.map {Float($0)}
+                currentSample.lgyrX = sample.lgyrX!.map {Float($0)}
+                currentSample.lgyrY = sample.lgyrY!.map {Float($0)}
+                currentSample.lgyrZ = sample.lgyrZ!.map {Float($0)}
+                currentSample.raccX = sample.raccX!.map {Float($0)}
+                currentSample.raccY = sample.raccY!.map {Float($0)}
+                currentSample.raccZ = sample.raccZ!.map {Float($0)}
+                currentSample.rgyrX = sample.rgyrX!.map {Float($0)}
+                currentSample.rgyrY = sample.rgyrY!.map {Float($0)}
+                currentSample.rgyrZ = sample.rgyrZ!.map {Float($0)}
                 
                 self.classifier.stepTrain(gesture: gestureName!, count: n, sample: currentSample)
                 n+=1

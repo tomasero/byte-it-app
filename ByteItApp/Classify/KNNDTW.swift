@@ -35,7 +35,7 @@ public class KNNDTW: NSObject {
         
         for set in data_sets {
             
-            if (set.curveAccX.count == 0 || set.curveAccY.count == 0 || set.curveAccZ.count == 0 || set.label == "") {
+            if (set.lcurveAccX.count == 0 || set.lcurveAccY.count == 0 || set.lcurveAccZ.count == 0 || set.label == "") {
                 print("HEY! BOTH CURVE AND LABEL ARE REQUIRED!")
             }
             
@@ -143,7 +143,7 @@ public class KNNDTW: NSObject {
     
     
     
-    public func predict(curveToTestAccX: [Float], curveToTestAccY: [Float], curveToTestAccZ: [Float], curveToTestGyrX: [Float], curveToTestGyrY: [Float], curveToTestGyrZ: [Float]) -> knn_certainty_label_pair {
+    public func predict(lcurveToTestAccX: [Float], lcurveToTestAccY: [Float], lcurveToTestAccZ: [Float], lcurveToTestGyrX: [Float], lcurveToTestGyrY: [Float], lcurveToTestGyrZ: [Float], rcurveToTestAccX: [Float], rcurveToTestAccY: [Float], rcurveToTestAccZ: [Float], rcurveToTestGyrX: [Float], rcurveToTestGyrY: [Float], rcurveToTestGyrZ: [Float]) -> knn_certainty_label_pair {
         
         if (self.n_neighbors == 0) {
             self.n_neighbors = Int(sqrt(Float(self.curve_label_pairs.count)))
@@ -162,16 +162,25 @@ public class KNNDTW: NSObject {
             
             //            let totalDistance = self.dtw_cost(s1: pair.curveAccX, s2: curveToTestAccX) + self.dtw_cost(s1: pair.curveAccY, s2: curveToTestAccY) + self.dtw_cost(s1: pair.curveAccZ, s2: curveToTestAccZ) + self.dtw_cost(s1: pair.curveGyrX, s2: curveToTestGyrX) + self.dtw_cost(s1: pair.curveGyrY, s2: curveToTestGyrY) + self.dtw_cost(s1: pair.curveGyrZ, s2: curveToTestGyrZ)
             
-            let xAccDist = self.dtw_cost(s1: pair.curveAccX, s2: curveToTestAccX)
-            let yAccDist = self.dtw_cost(s1: pair.curveAccY, s2: curveToTestAccY)
-            let zAccDist = self.dtw_cost(s1: pair.curveAccZ, s2: curveToTestAccZ)
-            let xGyrDist = self.dtw_cost(s1: pair.curveGyrX, s2: curveToTestGyrX)
-            let yGyrDist = self.dtw_cost(s1: pair.curveGyrY, s2: curveToTestGyrY)
-            let zGyrDist = self.dtw_cost(s1: pair.curveGyrZ, s2: curveToTestGyrZ)
+            let lxAccDist = self.dtw_cost(s1: pair.lcurveAccX, s2: lcurveToTestAccX)
+            let lyAccDist = self.dtw_cost(s1: pair.lcurveAccY, s2: lcurveToTestAccY)
+            let lzAccDist = self.dtw_cost(s1: pair.lcurveAccZ, s2: lcurveToTestAccZ)
+            let lxGyrDist = self.dtw_cost(s1: pair.lcurveGyrX, s2: lcurveToTestGyrX)
+            let lyGyrDist = self.dtw_cost(s1: pair.lcurveGyrY, s2: lcurveToTestGyrY)
+            let lzGyrDist = self.dtw_cost(s1: pair.lcurveGyrZ, s2: lcurveToTestGyrZ)
+            let rxAccDist = self.dtw_cost(s1: pair.rcurveAccX, s2: rcurveToTestAccX)
+            let ryAccDist = self.dtw_cost(s1: pair.rcurveAccY, s2: rcurveToTestAccY)
+            let rzAccDist = self.dtw_cost(s1: pair.rcurveAccZ, s2: rcurveToTestAccZ)
+            let rxGyrDist = self.dtw_cost(s1: pair.rcurveGyrX, s2: rcurveToTestGyrX)
+            let ryGyrDist = self.dtw_cost(s1: pair.rcurveGyrY, s2: rcurveToTestGyrY)
+            let rzGyrDist = self.dtw_cost(s1: pair.rcurveGyrZ, s2: rcurveToTestGyrZ)
             //            print(xAccDist, yAccDist, zAccDist, xGyrDist, yGyrDist, zGyrDist)
             //            let totalDistance = xAccDist + yAccDist + zAccDist + xGyrDist + yGyrDist + zGyrDist
-            let totalDistanceGyr = xGyrDist + yGyrDist + zGyrDist
-            let totalDistanceAcc = xAccDist + yAccDist + zAccDist
+//            let totalDistanceGyr = xGyrDist + yGyrDist + zGyrDist
+//            let totalDistanceAcc = xAccDist + yAccDist + zAccDist
+            
+            let totalDistanceGyr = lxGyrDist + lyGyrDist + lzGyrDist + rxGyrDist + ryGyrDist + rzGyrDist
+            let totalDistanceAcc = lxAccDist + lyAccDist + lzAccDist + rxAccDist + ryAccDist + rzAccDist
             //            print(totalDistance)
             //            print(pair.label)
             //            if totalDistanceGyr < minDistance {
@@ -245,12 +254,18 @@ public class KNNDTW: NSObject {
 
 //input type
 public struct knn_curve_label_pair {
-    let curveAccX: [Float]
-    let curveAccY: [Float]
-    let curveAccZ: [Float]
-    let curveGyrX: [Float]
-    let curveGyrY: [Float]
-    let curveGyrZ: [Float]
+    let lcurveAccX: [Float]
+    let lcurveAccY: [Float]
+    let lcurveAccZ: [Float]
+    let lcurveGyrX: [Float]
+    let lcurveGyrY: [Float]
+    let lcurveGyrZ: [Float]
+    let rcurveAccX: [Float]
+    let rcurveAccY: [Float]
+    let rcurveAccZ: [Float]
+    let rcurveGyrX: [Float]
+    let rcurveGyrY: [Float]
+    let rcurveGyrZ: [Float]
     let label: String
 }
 

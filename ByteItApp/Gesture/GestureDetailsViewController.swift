@@ -25,14 +25,22 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     var samples: [Sample] = [Sample]()
     var fileNameCount: [String: Int] = [:]
     var fileNameToUniqueName: [String: String] = [:]
-    var gruController = Shared.instance.gruController
+//    var gruController = Shared.instance.gruController
+    var lgruController = Shared.instance.lGRUController
+    var rgruController = Shared.instance.rGRUController
     var sampleDict: [String: [Double]] = [
-        "accX": [Double](),
-        "accY": [Double](),
-        "accZ": [Double](),
-        "gyrX": [Double](),
-        "gyrY": [Double](),
-        "gyrZ": [Double]()
+        "laccX": [Double](),
+        "laccY": [Double](),
+        "laccZ": [Double](),
+        "lgyrX": [Double](),
+        "lgyrY": [Double](),
+        "lgyrZ": [Double](),
+        "raccX": [Double](),
+        "raccY": [Double](),
+        "raccZ": [Double](),
+        "rgyrX": [Double](),
+        "rgyrY": [Double](),
+        "rgyrZ": [Double]()
     ]
   
     func newSampleDict() -> [String: [Double]] {
@@ -282,7 +290,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     
 
     @IBAction func addSample(_ sender: Any) {
-        if gruController.getPeripheralState() == "Disconnected" {
+        if lgruController.getPeripheralState() == "Disconnected" || rgruController.getPeripheralState() == "Disconnected" {
             let disconnectedAlertController = UIAlertController(
                 title: "Disconnected",
                 message: "Please connect to a GRU first",
@@ -364,13 +372,19 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                                             insertInto: self.managedContext)
                                         
                                         
-                                        sample.accX = self.sampleDict["accX"]
-                                        sample.accY = self.sampleDict["accY"]
-                                        sample.accZ = self.sampleDict["accZ"]
-                                        sample.gyrX = self.sampleDict["gyrX"]
-                                        sample.gyrY = self.sampleDict["gyrY"]
-                                        sample.gyrZ = self.sampleDict["gyrZ"]
+                                        sample.laccX = self.sampleDict["laccX"]
+                                        sample.laccY = self.sampleDict["laccY"]
+                                        sample.laccZ = self.sampleDict["laccZ"]
+                                        sample.lgyrX = self.sampleDict["lgyrX"]
+                                        sample.lgyrY = self.sampleDict["lgyrY"]
+                                        sample.lgyrZ = self.sampleDict["lgyrZ"]
                                         sample.name = self.nameToSave
+                                        sample.raccX = self.sampleDict["raccX"]
+                                        sample.raccY = self.sampleDict["raccY"]
+                                        sample.raccZ = self.sampleDict["raccZ"]
+                                        sample.rgyrX = self.sampleDict["rgyrX"]
+                                        sample.rgyrY = self.sampleDict["rgyrY"]
+                                        sample.rgyrZ = self.sampleDict["rgyrZ"]
 
                                         self.samples = self.dataSource.samples
                                         self.samples.append(sample)
@@ -437,17 +451,30 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
               self.sampleDict = self.newSampleDict()
               self.timer = Timer(fire: Date(), interval: (1.0/60.0),
                                  repeats: true, block: { (timer) in
-                                    let data = self.gruController.getData()
-                                    let acc = data[0]
-                                    let gyr = data[1]
-                                    self.sampleDict["accX"]!.append(Double(acc.0))
-                                    self.sampleDict["accY"]!.append(Double(acc.1))
-                                    self.sampleDict["accZ"]!.append(Double(acc.2))
-                                    self.sampleDict["gyrX"]!.append(Double(gyr.0))
-                                    self.sampleDict["gyrY"]!.append(Double(gyr.1))
-                                    self.sampleDict["gyrZ"]!.append(Double(gyr.2))
+                                    //let data = self.gruController.getData()
+                                    let ldata = self.lgruController.getData()
+                                    let rdata = self.rgruController.getData()
+                                    
+                                    let lacc = ldata[0]
+                                    let lgyr = ldata[1]
+                                    
+                                    let racc = rdata[0]
+                                    let rgyr = rdata[1]
+                                    
+                                    self.sampleDict["laccX"]!.append(Double(lacc.0))
+                                    self.sampleDict["laccY"]!.append(Double(lacc.1))
+                                    self.sampleDict["laccZ"]!.append(Double(lacc.2))
+                                    self.sampleDict["lgyrX"]!.append(Double(lgyr.0))
+                                    self.sampleDict["lgyrY"]!.append(Double(lgyr.1))
+                                    self.sampleDict["lgyrZ"]!.append(Double(lgyr.2))
+                                    self.sampleDict["raccX"]!.append(Double(racc.0))
+                                    self.sampleDict["raccY"]!.append(Double(racc.1))
+                                    self.sampleDict["raccZ"]!.append(Double(racc.2))
+                                    self.sampleDict["rgyrX"]!.append(Double(rgyr.0))
+                                    self.sampleDict["rgyrY"]!.append(Double(rgyr.1))
+                                    self.sampleDict["rgyrZ"]!.append(Double(rgyr.2))
 //                                    self.sensorData.append("\(data)")
-                                    secondAlertController.message = "Recording values: Acc: \(data[0]), Gyr: \(data[1]))"
+                                    secondAlertController.message = "Recording values: Acc_1: \(ldata[0]), Gyr_1: \(ldata[1])) Acc_2: \(rdata[0]), Gyr_2: \(rdata[1]))"
               })
                 
               //self.timer.fire()

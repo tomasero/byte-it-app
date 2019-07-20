@@ -52,9 +52,10 @@ public class RTClassifier: NSObject {
         var prediction:knn_certainty_label_pair
         
         if realtime {
-            prediction  = knn.predict(curveToTestAccX: self.realtimeSample.accX, curveToTestAccY: self.realtimeSample.accY, curveToTestAccZ: self.realtimeSample.accZ, curveToTestGyrX: self.realtimeSample.gyrX, curveToTestGyrY: self.realtimeSample.gyrY, curveToTestGyrZ: self.realtimeSample.gyrZ)
+//            prediction  = knn.predict(curveToTestAccX: self.realtimeSample.accX, curveToTestAccY: self.realtimeSample.accY, curveToTestAccZ: self.realtimeSample.accZ, curveToTestGyrX: self.realtimeSample.gyrX, curveToTestGyrY: self.realtimeSample.gyrY, curveToTestGyrZ: self.realtimeSample.gyrZ)
+            prediction  = knn.predict(lcurveToTestAccX: self.sample.laccX, lcurveToTestAccY: self.sample.laccY, lcurveToTestAccZ: self.sample.laccZ, lcurveToTestGyrX: self.sample.lgyrX, lcurveToTestGyrY: self.sample.lgyrY, lcurveToTestGyrZ: self.sample.lgyrZ, rcurveToTestAccX: self.sample.raccX, rcurveToTestAccY: self.sample.raccY, rcurveToTestAccZ: self.sample.raccZ, rcurveToTestGyrX: self.sample.rgyrX, rcurveToTestGyrY: self.sample.rgyrY, rcurveToTestGyrZ: self.sample.rgyrZ)
         } else {
-            prediction  = knn.predict(curveToTestAccX: self.sample.accX, curveToTestAccY: self.sample.accY, curveToTestAccZ: self.sample.accZ, curveToTestGyrX: self.sample.gyrX, curveToTestGyrY: self.sample.gyrY, curveToTestGyrZ: self.sample.gyrZ)
+            prediction  = knn.predict(lcurveToTestAccX: self.sample.laccX, lcurveToTestAccY: self.sample.laccY, lcurveToTestAccZ: self.sample.laccZ, lcurveToTestGyrX: self.sample.lgyrX, lcurveToTestGyrY: self.sample.lgyrY, lcurveToTestGyrZ: self.sample.lgyrZ, rcurveToTestAccX: self.sample.raccX, rcurveToTestAccY: self.sample.raccY, rcurveToTestAccZ: self.sample.raccZ, rcurveToTestGyrX: self.sample.rgyrX, rcurveToTestGyrY: self.sample.rgyrY, rcurveToTestGyrZ: self.sample.rgyrZ)
         }
         
         if realtime {
@@ -83,16 +84,27 @@ public class RTClassifier: NSObject {
         print("startTrain")
         print(label, number)
         self.trainingData[label] = SampleData(number: 0)
-        let exoEar = Shared.instance.gruController
+//        let exoEar = Shared.instance.gruController
+        let lexoEar = Shared.instance.gruController
+        let rexoEar = Shared.instance.gruController
         self.timer.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: ModelConstants.sensorsUpdateInterval, repeats: true) { timer in
-            let data = exoEar.getData()
-            self.trainingData[label]!.accX.append(Float(data[0].0))
-            self.trainingData[label]!.accY.append(Float(data[0].1))
-            self.trainingData[label]!.accZ.append(Float(data[0].2))
-            self.trainingData[label]!.gyrX.append(Float(data[1].0))
-            self.trainingData[label]!.gyrY.append(Float(data[1].1))
-            self.trainingData[label]!.gyrZ.append(Float(data[1].2))
+            let ldata = lexoEar.getData()
+            let rdata = rexoEar.getData()
+            
+            self.trainingData[label]!.laccX.append(Float(ldata[0].0))
+            self.trainingData[label]!.laccY.append(Float(ldata[0].1))
+            self.trainingData[label]!.laccZ.append(Float(ldata[0].2))
+            self.trainingData[label]!.lgyrX.append(Float(ldata[1].0))
+            self.trainingData[label]!.lgyrY.append(Float(ldata[1].1))
+            self.trainingData[label]!.lgyrZ.append(Float(ldata[1].2))
+            
+            self.trainingData[label]!.raccX.append(Float(rdata[0].0))
+            self.trainingData[label]!.raccY.append(Float(rdata[0].1))
+            self.trainingData[label]!.raccZ.append(Float(rdata[0].2))
+            self.trainingData[label]!.rgyrX.append(Float(rdata[1].0))
+            self.trainingData[label]!.rgyrY.append(Float(rdata[1].1))
+            self.trainingData[label]!.rgyrZ.append(Float(rdata[1].2))
         }
         //        self.trainingData[label]?.normalizeVals() //note
     }
@@ -113,8 +125,8 @@ public class RTClassifier: NSObject {
         print(self.trainingData)
         for (label, sample) in self.trainingData {
             let properLabel = label.components(separatedBy: "-")[0]
-            self.training_samples.append(knn_curve_label_pair(curveAccX: sample.accX, curveAccY: sample.accY, curveAccZ: sample.accZ , curveGyrX: sample.gyrX,curveGyrY: sample.gyrY, curveGyrZ: sample.gyrZ, label: properLabel))
-            totalWindowLength += sample.accX.count
+            self.training_samples.append(knn_curve_label_pair(lcurveAccX: sample.laccX, lcurveAccY: sample.laccY, lcurveAccZ: sample.laccZ , lcurveGyrX: sample.lgyrX,lcurveGyrY: sample.lgyrY, lcurveGyrZ: sample.lgyrZ, rcurveAccX: sample.raccX, rcurveAccY: sample.raccY, rcurveAccZ: sample.raccZ , rcurveGyrX: sample.rgyrX,rcurveGyrY: sample.rgyrY, rcurveGyrZ: sample.rgyrZ, label: properLabel))
+            totalWindowLength += sample.laccX.count
             n+=1
             print(self.training_samples.count)
         }
@@ -134,18 +146,27 @@ public class RTClassifier: NSObject {
         //        var currentIndexInPredictionWindow = 0
         
         //TODO:
-        let exoEar = Shared.instance.gruController
+//        let exoEar = Shared.instance.gruController
+        let lexoEar = Shared.instance.lGRUController
+        let rexoEar = Shared.instance.rGRUController
         self.timer.invalidate()
         self.timer = Timer.scheduledTimer(withTimeInterval: ModelConstants.sensorsUpdateInterval, repeats: true) { timer in
-            let data = exoEar.getData()
+            let ldata = lexoEar.getData()
+            let rdata = rexoEar.getData()
             //            NSLog("")
             //            print(data)
-            self.sample.accX.append(Float(data[0].0))
-            self.sample.accY.append(Float(data[0].1))
-            self.sample.accZ.append(Float(data[0].2))
-            self.sample.gyrX.append(Float(data[1].0))
-            self.sample.gyrY.append(Float(data[1].1))
-            self.sample.gyrZ.append(Float(data[1].2))
+            self.sample.laccX.append(Float(ldata[0].0))
+            self.sample.laccY.append(Float(ldata[0].1))
+            self.sample.laccZ.append(Float(ldata[0].2))
+            self.sample.lgyrX.append(Float(ldata[1].0))
+            self.sample.lgyrY.append(Float(ldata[1].1))
+            self.sample.lgyrZ.append(Float(ldata[1].2))
+            self.sample.raccX.append(Float(rdata[0].0))
+            self.sample.raccY.append(Float(rdata[0].1))
+            self.sample.raccZ.append(Float(rdata[0].2))
+            self.sample.rgyrX.append(Float(rdata[1].0))
+            self.sample.rgyrY.append(Float(rdata[1].1))
+            self.sample.rgyrZ.append(Float(rdata[1].2))
         }
     }
     public func doPrediction() -> String {
@@ -179,36 +200,36 @@ public class RTClassifier: NSObject {
                 
                 //                self.sampleBuffer.normalizeVals()
                 
-                var accX = self.sampleBuffer.accX.getArray()
-                //                print(accX)
-                //                let maxAccX = accX.max()
-                //                accX = accX.map{$0/maxAccX!}
-                self.realtimeSample.accX = accX
-                
-                var accY = self.sampleBuffer.accY.getArray()
-                //                let maxAccY = accY.max()
-                //                accY = accY.map{$0/maxAccY!}
-                self.realtimeSample.accY = accY
-                
-                var accZ = self.sampleBuffer.accZ.getArray()
-                //                let maxAccZ = accZ.max()
-                //                accZ = accZ.map{$0/maxAccZ!}
-                self.realtimeSample.accZ = accZ
-                
-                var gyrX = self.sampleBuffer.gyrX.getArray()
-                //                let maxGyrX = gyrX.max()
-                //                gyrX = gyrX.map{$0/maxGyrX!}
-                self.realtimeSample.gyrX = gyrX
-                
-                var gyrY = self.sampleBuffer.gyrY.getArray()
-                //                let maxGyrY = gyrY.max()
-                //                gyrY = gyrY.map{$0/maxGyrY!}
-                self.realtimeSample.gyrY = gyrY
-                
-                var gyrZ = self.sampleBuffer.gyrZ.getArray()
-                //                let maxGyrZ = gyrZ.max()
-                //                gyrZ = gyrZ.map{$0/maxGyrZ!}
-                self.realtimeSample.gyrZ = gyrZ
+//                var accX = self.sampleBuffer.accX.getArray()
+//                //                print(accX)
+//                //                let maxAccX = accX.max()
+//                //                accX = accX.map{$0/maxAccX!}
+//                self.realtimeSample.accX = accX
+//
+//                var accY = self.sampleBuffer.accY.getArray()
+//                //                let maxAccY = accY.max()
+//                //                accY = accY.map{$0/maxAccY!}
+//                self.realtimeSample.accY = accY
+//
+//                var accZ = self.sampleBuffer.accZ.getArray()
+//                //                let maxAccZ = accZ.max()
+//                //                accZ = accZ.map{$0/maxAccZ!}
+//                self.realtimeSample.accZ = accZ
+//
+//                var gyrX = self.sampleBuffer.gyrX.getArray()
+//                //                let maxGyrX = gyrX.max()
+//                //                gyrX = gyrX.map{$0/maxGyrX!}
+//                self.realtimeSample.gyrX = gyrX
+//
+//                var gyrY = self.sampleBuffer.gyrY.getArray()
+//                //                let maxGyrY = gyrY.max()
+//                //                gyrY = gyrY.map{$0/maxGyrY!}
+//                self.realtimeSample.gyrY = gyrY
+//
+//                var gyrZ = self.sampleBuffer.gyrZ.getArray()
+//                //                let maxGyrZ = gyrZ.max()
+//                //                gyrZ = gyrZ.map{$0/maxGyrZ!}
+//                self.realtimeSample.gyrZ = gyrZ
                 
                 result = self.performModelPrediction(realtime: true)!
                 //                ClassifyViewController.addClassifiedGesture(predictedLabel: result)

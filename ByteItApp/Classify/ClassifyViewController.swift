@@ -151,6 +151,7 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         } else {
             let lbl = classifier.doPrediction()
             addClassifiedGesture(predictedLabel: lbl)
+            print("label is: ", lbl)
             sender.title = "Test"
         }
     }

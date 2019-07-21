@@ -45,12 +45,18 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
   
     func newSampleDict() -> [String: [Double]] {
         return [
-            "accX": [Double](),
-            "accY": [Double](),
-            "accZ": [Double](),
-            "gyrX": [Double](),
-            "gyrY": [Double](),
-            "gyrZ": [Double]()
+            "laccX": [Double](),
+            "laccY": [Double](),
+            "laccZ": [Double](),
+            "lgyrX": [Double](),
+            "lgyrY": [Double](),
+            "lgyrZ": [Double](),
+            "raccX": [Double](),
+            "raccY": [Double](),
+            "raccZ": [Double](),
+            "rgyrX": [Double](),
+            "rgyrY": [Double](),
+            "rgyrZ": [Double]()
         ]
     }
     

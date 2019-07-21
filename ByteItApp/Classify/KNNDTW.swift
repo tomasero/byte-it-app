@@ -162,6 +162,8 @@ public class KNNDTW: NSObject {
             
             //            let totalDistance = self.dtw_cost(s1: pair.curveAccX, s2: curveToTestAccX) + self.dtw_cost(s1: pair.curveAccY, s2: curveToTestAccY) + self.dtw_cost(s1: pair.curveAccZ, s2: curveToTestAccZ) + self.dtw_cost(s1: pair.curveGyrX, s2: curveToTestGyrX) + self.dtw_cost(s1: pair.curveGyrY, s2: curveToTestGyrY) + self.dtw_cost(s1: pair.curveGyrZ, s2: curveToTestGyrZ)
             
+            print("traiing values", pair)
+            
             let lxAccDist = self.dtw_cost(s1: pair.lcurveAccX, s2: lcurveToTestAccX)
             let lyAccDist = self.dtw_cost(s1: pair.lcurveAccY, s2: lcurveToTestAccY)
             let lzAccDist = self.dtw_cost(s1: pair.lcurveAccZ, s2: lcurveToTestAccZ)
@@ -221,6 +223,7 @@ public class KNNDTW: NSObject {
         }
         
         //        put the first n elements in the vote count
+        
         for i in 0...self.n_neighbors-1 {
             votes[distancesGyr[i].label] = votes[distancesGyr[i].label]! + 1
         }

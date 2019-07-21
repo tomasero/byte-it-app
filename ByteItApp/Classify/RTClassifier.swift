@@ -130,7 +130,7 @@ public class RTClassifier: NSObject {
             n+=1
             print(self.training_samples.count)
         }
-        if training_samples.count < 12 {
+        if training_samples.count < 9 {
             print("ERROR: Need more training data")
         } else {
             self.knn.train(data_sets: self.training_samples)

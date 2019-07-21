@@ -151,7 +151,7 @@ CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print(peripheral.identifier)
+//        print(peripheral.identifier)
         // Make sure it is the peripheral we want
         if characteristic.uuid == UUID_READ {
             // Get bytes into string
@@ -242,8 +242,9 @@ CBPeripheralDelegate {
         print("success")
         print(characteristic.uuid)
         print(error)
-        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
-        classifyVC.peripheralStateChanged(state: "Connected")
+        debugPrint("Connected.", self.tag)
+//        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
+//        classifyVC.peripheralStateChanged(state: "Connected")
         let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
         gesturesVC.peripheralStateChanged(tag: self.tag, state: "Connected")
     }
@@ -251,9 +252,9 @@ CBPeripheralDelegate {
     // Peripheral disconnected
     // Potentially hide relevant interface
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        debugPrint("Disconnected.")
-        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
-        classifyVC.peripheralStateChanged(state: "Disconnected")
+        debugPrint("Disconnected.", self.tag)
+//        let classifyVC = Shared.instance.getVC(name: "ClassifyViewController") as! ClassifyViewController
+//        classifyVC.peripheralStateChanged(state: "Disconnected")
         let gesturesVC = Shared.instance.getVC(name: "GesturesViewController") as! GesturesViewController
         gesturesVC.peripheralStateChanged(tag: self.tag, state: "Disconnected")
     }

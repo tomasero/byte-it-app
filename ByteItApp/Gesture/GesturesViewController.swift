@@ -17,7 +17,8 @@ class GesturesViewController: UITableViewController, MFMailComposeViewController
     
     @IBOutlet weak var connLeftBtn: UIBarButtonItem!
     @IBOutlet weak var connRightBtn: UIBarButtonItem!
-    @IBOutlet weak var batBtn: UIBarButtonItem!
+    var circRightBtn = UIButton()
+    var circLeftBtn = UIButton()
     
     var gestures = [Gesture]() //SampleData.generateGesturesData()
     var timer = Timer()
@@ -287,18 +288,19 @@ extension GesturesViewController{
     
 }
 
-var circRightBtn = UIButton()
-var circLeftBtn = UIButton()
-
 extension GesturesViewController {
     func loadConnectionState() {
         // to fix
 //        let state = gruController.getPeripheralState(tag:)
 //        peripheralStateChanged(state: state)
+        let gruControllers = [lGRUController, rGRUController]
+        for (i, gru) in gruControllers.enumerated() {
+            let state = gru.getPeripheralState()
+            peripheralStateChanged(tag: i, state: state)
+        }
     }
     
     func setupConnectionInterface() {
-        batBtn.tintColor = UIColor.black
         circLeftBtn.tag = 0
         circLeftBtn.contentEdgeInsets = .zero
         circLeftBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)

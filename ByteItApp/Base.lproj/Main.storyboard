@@ -58,7 +58,6 @@
                         <leftBarButtonItems>
                             <barButtonItem title="L" id="Suy-VX-jCp"/>
                             <barButtonItem tag="1" title="R" id="c59-wb-X4g"/>
-                            <barButtonItem title="0%" id="ZEq-Hl-FkC"/>
                         </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="lOo-bj-3Ft">
@@ -74,7 +73,6 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="batBtn" destination="ZEq-Hl-FkC" id="FMY-eS-UpK"/>
                         <outlet property="connLeftBtn" destination="Suy-VX-jCp" id="QIm-JZ-mPs"/>
                         <outlet property="connRightBtn" destination="c59-wb-X4g" id="9hK-bD-dK3"/>
                     </connections>
@@ -840,8 +838,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Classified" id="KO0-NT-Nau">
                         <leftBarButtonItems>
-                            <barButtonItem title="Item" id="Nu9-hw-efP"/>
-                            <barButtonItem title="0%" id="ShF-cO-daR"/>
+                            <barButtonItem title="L" id="Nu9-hw-efP"/>
+                            <barButtonItem title="R" id="kVe-pS-ar9"/>
                             <barButtonItem systemItem="action" id="Nih-am-8qb">
                                 <connections>
                                     <action selector="exportData:" destination="Knc-Cs-ydw" id="LSP-5K-sdA"/>
@@ -862,9 +860,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="batBtn" destination="ShF-cO-daR" id="Y0g-We-rGT"/>
                         <outlet property="classifyBtn" destination="5Q7-dI-WfR" id="v9W-Ei-pb8"/>
-                        <outlet property="connectBtn" destination="Nu9-hw-efP" id="ynP-MI-ZQx"/>
+                        <outlet property="connLeftBtn" destination="Nu9-hw-efP" id="mgg-5l-fWC"/>
+                        <outlet property="connRightBtn" destination="kVe-pS-ar9" id="JoZ-L4-ljI"/>
                         <outlet property="testBtn" destination="dye-4m-VFS" id="Q1M-2N-o6D"/>
                     </connections>
                 </tableViewController>

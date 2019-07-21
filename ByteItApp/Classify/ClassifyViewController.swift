@@ -13,18 +13,25 @@ import MessageUI
 class ClassifyViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var classifyBtn: UIBarButtonItem!
     @IBOutlet weak var testBtn: UIBarButtonItem!
-    @IBOutlet weak var connectBtn: UIBarButtonItem!
-    @IBOutlet weak var batBtn: UIBarButtonItem!
+
+    @IBOutlet weak var connLeftBtn: UIBarButtonItem!
+    @IBOutlet weak var connRightBtn: UIBarButtonItem!
+    var circRightBtn = UIButton()
+    var circLeftBtn = UIButton()
+
     
     let classifier = Shared.instance.classifier
     var classifiedGestures = [ClassifiedGesture]()
     var gestures = [Gesture]()
-    var gruController = Shared.instance.gruController
     var timer = Timer()
+    var lGRUController = Shared.instance.lGRUController
+    var rGRUController = Shared.instance.rGRUController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.classifier.configure()
+        lGRUController.tag = 0
+        rGRUController.tag = 1
         setupConnectionInterface()
     }
     
@@ -33,72 +40,6 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         super.viewWillAppear(animated)
         reloadGestures()
         loadConnectionState()
-    }
-    
-    func loadConnectionState() {
-        let state = gruController.getPeripheralState()
-        peripheralStateChanged(state: state)
-    }
-    
-    func setupConnectionInterface() {
-        batBtn.tintColor = UIColor.black
-        let circBtn = UIButton()
-        circBtn.contentEdgeInsets = .zero
-        circBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        circBtn.backgroundColor = UIColor.red
-        circBtn.layer.cornerRadius = 20
-        circBtn.layer.masksToBounds = true
-        circBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
-        connectBtn.customView = circBtn
-        stopVBatUpdate()
-    }
-    
-    @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
-        print("toggleConnect")
-        if gruController.getPeripheralState() == "Disconnected" {
-            gruController.connect()
-            connectBtn.customView?.backgroundColor = UIColor.lightGray
-        } else {
-            gruController.disconnect()
-        }
-    }
-    
-    func peripheralStateChanged(state: String) {
-        if state == "Connected" {
-            connected()
-        } else {
-            disconnected()
-        }
-    }
-    
-    func disconnected() {
-        if connectBtn.customView != nil {
-            connectBtn.customView!.backgroundColor = UIColor.red
-        }
-        stopVBatUpdate()
-    }
-    
-    func connected() {
-        if connectBtn.customView != nil {
-            connectBtn.customView!.backgroundColor = UIColor.green
-        }
-        startVBatUpdate()
-    }
-    
-    @objc func updateBattery() {
-        let vBat = gruController.getVBat()
-        batBtn.title = String(vBat) + "%"
-    }
-    
-    func startVBatUpdate() {
-        timer.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateBattery), userInfo: nil, repeats: true)
-    }
-    
-    func stopVBatUpdate() {
-        timer.invalidate()
-        timer = Timer()
-        batBtn.title = "0%"
     }
     
     // MARK: - Table view data source
@@ -459,5 +400,114 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         self.present(emailAlertController, animated: true, completion: nil)
     }
     
+}
+
+
+
+extension ClassifyViewController {
+    func loadConnectionState() {
+        // to fix
+        //        let state = gruController.getPeripheralState(tag:)
+        //        peripheralStateChanged(state: state)
+        let gruControllers = [lGRUController, rGRUController]
+        for (i, gru) in gruControllers.enumerated() {
+            let state = gru.getPeripheralState()
+            peripheralStateChanged(tag: i, state: state)
+        }
+    }
     
+    func setupConnectionInterface() {
+        circLeftBtn.tag = 0
+        circLeftBtn.contentEdgeInsets = .zero
+        circLeftBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        circLeftBtn.backgroundColor = UIColor.red
+        circLeftBtn.layer.cornerRadius = 20
+        circLeftBtn.layer.masksToBounds = true
+        circLeftBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connLeftBtn.customView = circLeftBtn
+        circRightBtn.tag = 1
+        circRightBtn.contentEdgeInsets = .zero
+        circRightBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        circRightBtn.backgroundColor = UIColor.red
+        circRightBtn.layer.cornerRadius = 20
+        circRightBtn.layer.masksToBounds = true
+        circRightBtn.addTarget(self, action: Selector(("toggleConnect:")), for: .touchUpInside)
+        connRightBtn.customView = circRightBtn
+        stopVBatUpdate()
+    }
+    
+    @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
+        print("toggleConnect: ", sender.tag)
+        let gruController = [lGRUController, rGRUController][sender.tag]
+        let connBtn = [connLeftBtn, connRightBtn][sender.tag]
+        let state = gruController.getPeripheralState()
+        switch state {
+        case "Disconnected":
+            gruController.connect()
+            connBtn!.customView?.backgroundColor = UIColor.lightGray
+        default:
+            gruController.disconnect()
+        }
+    }
+    
+    func peripheralStateChanged(tag: Int, state: String) {
+        print("peripheralStateChanged:", tag, state)
+        if state == "Connected" {
+            connected(tag: tag)
+        } else {
+            disconnected(tag: tag)
+        }
+    }
+    
+    func disconnected(tag: Int) {
+        let connBtn = [connLeftBtn, connRightBtn][tag]
+        if connBtn!.customView != nil {
+            connBtn!.customView!.backgroundColor = UIColor.red
+        }
+        stopVBatUpdate()
+    }
+    
+    func connected(tag: Int) {
+        let connBtn = [connLeftBtn, connRightBtn][tag]
+        if connBtn!.customView != nil {
+            connBtn!.customView!.backgroundColor = UIColor.green
+        }
+        startVBatUpdate()
+    }
+    
+    @objc func updateBattery() {
+        let gruControllers = [lGRUController, rGRUController]
+        let connBtns = [circLeftBtn, circRightBtn]
+        for (i, gru) in gruControllers.enumerated() {
+            //            print(i)
+            let state = gru.getPeripheralState()
+            //            print(state)
+            let vBat = gru.getVBat()
+            if state == "Connected" {
+                connBtns[i].setTitle(String(vBat) + "%", for: UIControl.State.normal)
+            }
+        }
+    }
+    
+    func startVBatUpdate() {
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateBattery), userInfo: nil, repeats: true)
+    }
+    
+    func stopVBatUpdate() {
+        let gruControllers = [lGRUController, rGRUController]
+        let connBtns = [circLeftBtn, circRightBtn]
+        var disconnected = 0
+        for (i, gru) in gruControllers.enumerated() {
+            let state = gru.getPeripheralState()
+            if state == "Disconnected" {
+                connBtns[i].setTitle("", for: UIControl.State.normal)
+                disconnected += 1
+            }
+        }
+        if disconnected == 2 {
+            timer.invalidate()
+            timer = Timer()
+        }
+    }
 }

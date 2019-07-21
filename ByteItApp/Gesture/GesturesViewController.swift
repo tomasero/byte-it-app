@@ -25,9 +25,9 @@ class GesturesViewController: UITableViewController, MFMailComposeViewController
     var rGRUController = Shared.instance.rGRUController
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         lGRUController.tag = 0
         rGRUController.tag = 1
-        super.viewDidLoad()
         setupConnectionInterface()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -319,17 +319,21 @@ extension GesturesViewController {
     }
     
     @objc @IBAction func toggleConnect(_ sender: UIBarButtonItem) {
+        print("toggleConnect: ", sender.tag)
         let gruController = [lGRUController, rGRUController][sender.tag]
         let connBtn = [connLeftBtn, connRightBtn][sender.tag]
-        if gruController.getPeripheralState() == "Disconnected" {
+        let state = gruController.getPeripheralState()
+        switch state {
+        case "Disconnected":
             gruController.connect()
-            connLeftBtn.customView?.backgroundColor = UIColor.lightGray
-        } else {
+            connBtn!.customView?.backgroundColor = UIColor.lightGray
+        default:
             gruController.disconnect()
         }
     }
     
     func peripheralStateChanged(tag: Int, state: String) {
+        print("peripheralStateChanged:", tag, state)
         if state == "Connected" {
             connected(tag: tag)
         } else {
@@ -357,7 +361,9 @@ extension GesturesViewController {
         let gruControllers = [lGRUController, rGRUController]
         let connBtns = [circLeftBtn, circRightBtn]
         for (i, gru) in gruControllers.enumerated() {
+//            print(i)
             let state = gru.getPeripheralState()
+//            print(state)
             let vBat = gru.getVBat()
             if state == "Connected" {
                 connBtns[i].setTitle(String(vBat) + "%", for: UIControl.State.normal)

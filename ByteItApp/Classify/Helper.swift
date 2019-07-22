@@ -44,22 +44,22 @@ class Helper{
         return files
     }
     
-    static func populateValues(sampleData:String, sample:SampleData) -> () {
-        var dataArray = sampleData.components(separatedBy: "\n")
-        dataArray.removeFirst(1)
-        for row in dataArray {
-            if row.count > 0 {
-                let rowArray = row.components(separatedBy: ",").map {Float($0)}
-                sample.accX.append(rowArray[0]!)
-                sample.accY.append(rowArray[1]!)
-                sample.accZ.append(rowArray[2]!)
-                sample.gyrX.append(rowArray[3]!)
-                sample.gyrY.append(rowArray[4]!)
-                sample.gyrZ.append(rowArray[5]!)
-            }
-        }
-        //        sample.normalizeVals()
-    }
+//    static func populateValues(sampleData:String, sample:SampleData) -> () {
+//        var dataArray = sampleData.components(separatedBy: "\n")
+//        dataArray.removeFirst(1)
+//        for row in dataArray {
+//            if row.count > 0 {
+//                let rowArray = row.components(separatedBy: ",").map {Float($0)}
+//                sample.accX.append(rowArray[0]!)
+//                sample.accY.append(rowArray[1]!)
+//                sample.accZ.append(rowArray[2]!)
+//                sample.gyrX.append(rowArray[3]!)
+//                sample.gyrY.append(rowArray[4]!)
+//                sample.gyrZ.append(rowArray[5]!)
+//            }
+//        }
+//        //        sample.normalizeVals()
+//    }
     static func createDataDict(path:String) -> Dictionary<String, Participant> {
         var data: [String: Participant] = [:]
         let participantFiles = listFilesInDirectory(path: path)
@@ -94,7 +94,8 @@ class Helper{
                     //                    sample = Sample(number: 0)
                     sample = SampleData(number: n)
                 }
-                populateValues(sampleData: sampleData!, sample: sample)
+                // re enable later
+                //populateValues(sampleData: sampleData!, sample: sample)
                 participantGesture.append(sample)
                 n+=1
             }
@@ -138,22 +139,28 @@ class SampleData {
         self.number = number
     }
     
-    var accX = Array<Float>()
-    var accY = Array<Float>()
-    var accZ = Array<Float>()
-    var gyrX = Array<Float>()
-    var gyrY = Array<Float>()
-    var gyrZ = Array<Float>()
+    var laccX = Array<Float>()
+    var laccY = Array<Float>()
+    var laccZ = Array<Float>()
+    var lgyrX = Array<Float>()
+    var lgyrY = Array<Float>()
+    var lgyrZ = Array<Float>()
+    var raccX = Array<Float>()
+    var raccY = Array<Float>()
+    var raccZ = Array<Float>()
+    var rgyrX = Array<Float>()
+    var rgyrY = Array<Float>()
+    var rgyrZ = Array<Float>()
     
     func normalizeVals() {
-        let maxAccX = self.accX.max()
-        self.accX = self.accX.map{$0/maxAccX!}
+        let maxAccX = self.laccX.max()
+        self.laccX = self.laccX.map{$0/maxAccX!}
         
-        let maxAccY = self.accY.max()
-        self.accY = self.accY.map{$0/maxAccY!}
+        let maxAccY = self.laccY.max()
+        self.laccY = self.laccY.map{$0/maxAccY!}
         
-        let maxAccZ = self.accZ.max()
-        self.accZ = self.accZ.map{$0/maxAccZ!}
+        let maxAccZ = self.laccZ.max()
+        self.laccZ = self.laccZ.map{$0/maxAccZ!}
         
         //        let maxGyrX = self.gyrX.max()
         //        self.gyrX = self.gyrX.map{$0/maxGyrX!}

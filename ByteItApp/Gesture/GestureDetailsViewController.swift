@@ -87,7 +87,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             self.fileNameCount = gesture.uniqueFileCount ?? [:]
             self.fileNameToUniqueName = gesture.uniqueFileName ?? [:]
             self.dataSource.setData(samples: Array(gesture.samples))
-            self.samples.append(contentsOf: self.dataSource.getData())
+//            self.samples.append(contentsOf: self.dataSource.getData())
             
 //            self.dataSource.setData(sampleFileNames: self.sampleFileNames)
 //            self.dataSource.setCount(fileDict: self.fileNameCount)
@@ -172,15 +172,14 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             
             self.gesture?.name = gestureName
             self.gesture?.sensor = gestureSensor
-//            self.gesture?.samples = Set(samples)
+            self.gesture?.samples = Set(samples)
         } else{
             if let id = self.gesture?.objectID {
                 do {
                     try self.gesture = managedContext!.existingObject(with: id) as? Gesture
                     self.gesture?.name = gestureName
                     self.gesture?.sensor = gestureSensor
-//                    self.gesture?.samples = Set(samples)
-//                    self.gesture?.samples = samples
+                    self.gesture?.samples = Set(samples)
                 } catch {
                     print("Error loading and editing existing CoreData object")
                 }
@@ -372,9 +371,10 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                         sample.gyrZ = self.sampleDict["gyrZ"]
                                         sample.name = self.nameToSave
 
-                                        self.samples = self.dataSource.samples
-                                        self.samples.append(sample)
-                                        self.gesture?.samples = Set(self.samples)
+//                                        self.samples = self.dataSource.samples
+//                                        self.samples.append(sample)
+                                        self.dataSource.samples.append(sample)
+                                        self.gesture?.samples = Set(self.dataSource.samples)
                                         do {
                                             print("Saving")
                                             try self.managedContext!.save()
@@ -383,19 +383,9 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                         } catch let error as NSError {
                                             print("Could not save. \(error), \(error.userInfo)")
                                         }
+       
+//                                        self.dataSource.setData(samples: self.samples)
                                         
-                                        
-//                                        print(self.samples)
-                                        self.dataSource.setData(samples: self.samples)
-//                                        print(self.sampleDict)
-//                                        print("print getData")
-//                                        print(self.samples.first?.accX)
-//                                        self.dataSource.setCount(fileDict: self.fileNameCount)
-//                                        self.dataSource.setName(fileNameDict: self.fileNameToUniqueName)
-//                                        print("name of file", self.nameToSave)
-                                        
-//                                        self.saveToFile(fileName: self.fileNameToUniqueName[self.nameToSave]!, stringToWrite: self.sensorData)
-//                                        self.sensorData = []
                                         self.sampleDict = self.newSampleDict()
                                         self.sampleTableView.beginUpdates()
                                         self.sampleTableView.insertRows(at: [newIndexPath], with: .automatic)

@@ -22,7 +22,7 @@ extension Minder {
     }
     
     @NSManaged public var minderOn: Bool
-    @NSManaged public var moment: String?
+    @NSManaged public var moment: Moment
     @NSManaged public var minderText: String?
     
 }

@@ -107,7 +107,7 @@ class MindersViewController: UITableViewController, isAbleToReceiveMindersForMin
 //        print(indexPath.row)
         let minder = minders[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = minder.moment
+        cell.textLabel?.text = minder.moment.name
         cell.detailTextLabel?.text = minder.minderText
 
         return cell

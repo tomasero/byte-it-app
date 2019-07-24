@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import UserNotifications
 
 
 class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
@@ -21,7 +22,7 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
     
     var minder: Minder?
     
-    var minderOn: Bool = false
+    var minderOn: Bool = true
 //    var momentCoreData: String?
     var minderText: String?
     var flag = true
@@ -43,7 +44,7 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
             print("Inside existing minder")
             self.flag = false
             self.toggleMinder.isOn = minder.minderOn as! Bool
-            self.momentName.text = minder.moment as! String
+            self.momentName.text = minder.moment.name as! String
             self.minderTextView.text = minder.minderText as! String
         }
         
@@ -68,13 +69,6 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
         let id: String = sender.restorationIdentifier!
         let state: Bool = sender.isOn
         minderOn = state
-//        switch id {
-//        case "switchMinder":
-//            minderOn = state
-//            break
-//        default:
-//            break
-//        }
         tableView.beginUpdates()
         tableView.endUpdates()
     }
@@ -96,7 +90,8 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
         if self.flag{
             let entity = NSEntityDescription.entity(forEntityName: "Minder", in: managedContext)!
             self.minder = Minder(entity: entity, insertInto: managedContext)
-            self.minder?.setValue(momentNameText, forKey:"moment")
+            self.minder?.setValue(self.moment, forKey:"moment")
+//            self.minder?.setValue(momentNameText, forKey:"moment")
             self.minder?.setValue(minderText, forKey:"minderText")
             self.minder?.setValue(minderOn, forKey: "minderOn")
             
@@ -111,25 +106,73 @@ class MinderDetailsViewController: UITableViewController, UITextViewDelegate {
             print("SAVED MOMENT LONG")
             print(self.moment.lon)
             
+            if minderOn{
 //            notifications
-            var notif = LocalNotificationManager.Notification(id: self.moment.name!, title: self.minderText!, datetime: momentTime, location: CLLocationCoordinate2D(latitude: self.moment!.lat as! CLLocationDegrees, longitude: self.moment!.lon as! CLLocationDegrees))
+                var notif = LocalNotificationManager.Notification(id: self.moment.name!, title: self.minderText!, datetime: momentTime, date:self.moment.time!,location: CLLocationCoordinate2D(latitude: Double(self.moment!.lat!), longitude: Double(self.moment!.lon!)), timeBool: self.moment.timeBool as! Bool, placeBool: self.moment.placeBool as! Bool)
             
             notificationManager.notifications.append(notif)
             print("SCHEDULING NOTIFICAITON")
             notificationManager.schedule()
 //            print(self.moment.)
-
+            } else{
+                print("Minder not scheduled")
+            }
             
         } else {
             if let id = self.minder?.objectID{
                 do{
                     try self.minder = managedContext.existingObject(with: id) as? Minder
-                    self.minder?.setValue(momentName.text, forKey:"moment")
+                    print("EDITING123")
+                    
+                    print(self.minder?.moment)
+                    if (self.moment == nil){
+                        self.moment = self.minder?.moment
+                    }
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [self.moment.name!])
+                    
+                    self.minder?.setValue(self.moment, forKey:"moment")
                     self.minder?.setValue(minderText, forKey:"minderText")
                     self.minder?.setValue(minderOn, forKey: "minderOn")
+                    
+                    // trigger the notification here
+                    print("SAVED MOMENT TIME")
+                    var momentTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self.moment.time ?? Date())
+                    print(momentTime)
+                    
+                    print("SAVED MOMENT LAT")
+                    print(self.moment!.lat!)
+                    
+                    print("SAVED MOMENT LONG")
+                    print(self.moment!.lon!)
+                    
+                    if minderOn{
+                        //            notifications
+                        var notif = LocalNotificationManager.Notification(id: self.moment.name!, title: self.minderText!, datetime: momentTime, date:self.moment.time!, location: CLLocationCoordinate2D(latitude: Double(self.moment!.lat!), longitude: Double(self.moment!.lon!)), timeBool: self.moment.timeBool as! Bool, placeBool: self.moment.placeBool as! Bool)
+                        
+                        notificationManager.notifications.append(notif)
+                        print("SCHEDULING NOTIFICAITON")
+                        notificationManager.schedule()
+                        //            print(self.moment.)
+                    } else{
+                        print("Minder not scheduled")
+                    }
+
                     self.delegate?.pass(minder:self.minder as! Minder)
                     
-                    // delete the previous notification and trigger new one here
+                    
+//                    // delete the previous notification and trigger new one here
+//                    if minderOn{
+//                        //            notifications
+//                        var notif = LocalNotificationManager.Notification(id: self.moment.name!, title: self.minderText!, datetime: momentTime, location: CLLocationCoordinate2D(latitude: self.moment!.lat as! CLLocationDegrees, longitude: self.moment!.lon as! CLLocationDegrees))
+//
+//                        notificationManager.notifications.append(notif)
+//                        print("SCHEDULING NOTIFICAITON")
+//                        notificationManager.schedule()
+//                        //            print(self.moment.)
+//                    } else{
+//                        print("Minder not scheduled")
+//                    }
+
                     
                 }catch{
                     print("Error loading and editing existing CoreData object")

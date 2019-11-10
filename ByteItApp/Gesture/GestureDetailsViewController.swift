@@ -276,22 +276,22 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         return true
     }
     
-    
-    func saveToFile(fileName: String, stringToWrite: [String]){
-        let fileManager = FileManager.default
-        do {
-            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
-            let fileURL = documentDirectory.appendingPathComponent(fileName).appendingPathExtension("txt")
-            print("File Path: \(fileURL.path)")
-            
-            let stringToWrite = stringToWrite.joined(separator: "\n")
-            try stringToWrite.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
-            
-        } catch {
-            print(error)
-        }
-        
-    }
+//
+//    func saveToFile(fileName: String, stringToWrite: [String]){
+//        let fileManager = FileManager.default
+//        do {
+//            let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
+//            let fileURL = documentDirectory.appendingPathComponent(fileName).appendingPathExtension("txt")
+//            print("File Path: \(fileURL.path)")
+//
+//            let stringToWrite = stringToWrite.joined(separator: "\n")
+//            try stringToWrite.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+//
+//        } catch {
+//            print(error)
+//        }
+//
+//    }
     
 
     @IBAction func addSample(_ sender: Any) {
@@ -329,46 +329,18 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                         
                                         guard let textField = thirdAlertController.textFields?.first
                                         else {
-                                                return
-                                            }
-                                        self.nameToSave = textField.text as! String
+                                            return
+                                        }
+                                        if let name = textField.text {
+                                            self.nameToSave = name
+                                        } else {
+                                            self.nameToSave = "Empty"
+                                        }
                                         
-//                                        self.sampleFileNames = self.dataSource.getData()
-//                                        self.fileNameCount = self.dataSource.getCount()
-//                                        self.fileNameToUniqueName = self.dataSource.getName()
                                         
-                                        let newIndexPath = IndexPath(row: self.dataSource.samples.count, section: 0)
-                                        print("newIndexPath")
-                                        print(newIndexPath)
                                         
-                                        //make filename unique
-                                        
-//                                        if self.sampleFileNames.contains(self.nameToSave){
-//                                            if self.fileNameCount[self.nameToSave] == nil {
-//                                                self.fileNameCount[self.nameToSave] = 1
-//                                            } else {
-//                                                if let count = self.fileNameCount[self.nameToSave]
-//                                                {
-//                                                    self.fileNameCount[self.nameToSave] = count + 1
-//                                                }
-//                                            }
-//                                            if let count = self.fileNameCount[self.nameToSave]{
-//                                                self.nameToSave = self.nameToSave + "-\(count)"
-//                                            }
-//                                        }
-                                        
-                                        // convert fileName to unique fileName using UUID
+   
                                         var uuid = UUID().uuidString
-//                                        var uniqueNameToSave = self.nameToSave + "_\(uuid)"
-//                                        self.fileNameToUniqueName[self.nameToSave] = uniqueNameToSave
-                                        
-//                                        self.sampleFileNames.append(self.nameToSave)
-                                        
-//                                        self.dataSource.setData(sampleFileNames: self.sampleFileNames)
-                                        
-
-
-                                        // 2
                                         let entity =
                                             NSEntityDescription.entity(forEntityName: "Sample",
                                                                        in: self.managedContext!)!
@@ -393,7 +365,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 
 //                                        self.samples = self.dataSource.samples
 //                                        self.samples.append(sample)
-                                        self.dataSource.samples.append(sample)
+                                        self.dataSource.samples.insert(sample, at: 0)
                                         self.gesture?.samples = Set(self.dataSource.samples)
                                         do {
                                             print("Saving")
@@ -407,20 +379,21 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //                                        self.dataSource.setData(samples: self.samples)
                                         
                                         self.sampleDict = self.newSampleDict()
-                                        self.sampleTableView.beginUpdates()
+//                                        self.sampleTableView.beginUpdates()
+//                                        let newIndexPath = IndexPath(row: self.dataSource.samples.count, section: 0)
+                                        let newIndexPath = IndexPath(row: 0, section: 0)
                                         self.sampleTableView.insertRows(at: [newIndexPath], with: .automatic)
-                                        self.sampleTableView.endUpdates()
+//                                        self.sampleTableView.endUpdates()
                                     }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         thirdAlertController.addTextField()
-        thirdAlertController.textFields?.first?.text = "s\(samples.count + 1)"
+        thirdAlertController.textFields?.first?.text = "s\(self.dataSource.samples.count + 1)"
         
         thirdAlertController.addAction(saveAction)
         thirdAlertController.addAction(cancelAction)
         
-
         secondAlertController.addAction(UIAlertAction(title: "Stop", style: UIAlertAction.Style.default, handler: { (action) in
             firstAlertController.dismiss(animated: true, completion: nil)
                 print("STOP")
@@ -470,7 +443,21 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                     self.sampleDict["rgyrY"]!.append(Double(rgyr.1))
                                     self.sampleDict["rgyrZ"]!.append(Double(rgyr.2))
 //                                    self.sensorData.append("\(data)")
-                                    secondAlertController.message = "Recording values: Acc_1: \(ldata[0]), Gyr_1: \(ldata[1])) Acc_2: \(rdata[0]), Gyr_2: \(rdata[1]))"
+                                    
+                                    let paragraphStyle = NSMutableParagraphStyle()
+                                    paragraphStyle.alignment = .left
+                                    let messageText = NSMutableAttributedString(
+                                        string: "AccL: \(ldata[0]) \nGyrL: \(ldata[1]) \nAccR: \(rdata[0]) \nGyrR: \(rdata[1])",
+                                        attributes: [
+                                            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+//                                            NSFontAttributeName : UIFont.preferredFont(forTextStyle: .body),
+//                                            NSForegroundColorAttributeName : UIColor.black
+                                        ]
+                                    )
+                                    
+//                                    secondAlertController.message = "Acc_L: \(ldata[0]), \nGyr_L: \(ldata[1]), \nAcc_R: \(rdata[0]), \nGyr_R: \(rdata[1])"
+                                    secondAlertController.setValue(messageText, forKey: "attributedMessage")
+                                    
               })
                 
               //self.timer.fire()
@@ -523,7 +510,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //    }
     
     func createExportString() -> String {
-        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
+        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
         export += (self.gesture?.getString())!
         print("This is what the app will export: \(export)")
         return export

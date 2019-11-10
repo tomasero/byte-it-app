@@ -203,7 +203,7 @@ class GesturesViewController: UITableViewController, MFMailComposeViewController
     }
     
     func createExportString() -> String {
-        var export: String = NSLocalizedString("name,sensor,samples(name,accx,accy, accz,gyrx,gyry,gyrz)\n", comment: "")
+        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
         for gesture in gestures {
             export += "\(gesture.getString())\n"
         }
@@ -277,7 +277,7 @@ extension GesturesViewController{
         if let name = gesture.name,
             let sensor = gesture.sensor{
             cell.textLabel?.text = name //gesture.value(forKeyPath: "name") as? String
-            cell.detailTextLabel?.text = sensor//gesture.value(forKeyPath: "sensor") as? String//gesture.sensor
+            cell.detailTextLabel?.text = "\(sensor) | \(gesture.samples.count) samples"//gesture.value(forKeyPath: "sensor") as? String//gesture.sensor
             return cell
         }
         

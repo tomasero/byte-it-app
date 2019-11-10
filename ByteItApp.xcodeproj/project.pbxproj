@@ -63,6 +63,9 @@
 		FFD168A722AAF51A009B1418 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168A622AAF51A009B1418 /* Actions.swift */; };
 		FFD168AA22AB0074009B1418 /* MediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168A922AB0074009B1418 /* MediaPlayerViewController.swift */; };
 		FFD168AC22AB009C009B1418 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD168AB22AB009C009B1418 /* AudioViewController.swift */; };
+		FFD782C922F2D47600D2F43C /* musicIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD782C622F2D47500D2F43C /* musicIcon.png */; };
+		FFD782CA22F2D47600D2F43C /* musicIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD782C722F2D47500D2F43C /* musicIcon@3x.png */; };
+		FFD782CB22F2D47600D2F43C /* musicIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFD782C822F2D47500D2F43C /* musicIcon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +145,9 @@
 		FFD168A622AAF51A009B1418 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		FFD168A922AB0074009B1418 /* MediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewController.swift; sourceTree = "<group>"; };
 		FFD168AB22AB009C009B1418 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
+		FFD782C622F2D47500D2F43C /* musicIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = musicIcon.png; sourceTree = "<group>"; };
+		FFD782C722F2D47500D2F43C /* musicIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "musicIcon@3x.png"; sourceTree = "<group>"; };
+		FFD782C822F2D47500D2F43C /* musicIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "musicIcon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +196,9 @@
 		FF44950B22A346CE009F46AA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				FFD782C622F2D47500D2F43C /* musicIcon.png */,
+				FFD782C822F2D47500D2F43C /* musicIcon@2x.png */,
+				FFD782C722F2D47500D2F43C /* musicIcon@3x.png */,
 				FFD168A022A9EA85009B1418 /* commandIcon.png */,
 				FFD168A122A9EA86009B1418 /* commandIcon@2x.png */,
 				FFD168A222A9EA86009B1418 /* commandIcon@3x.png */,
@@ -402,17 +411,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFD782C922F2D47600D2F43C /* musicIcon.png in Resources */,
 				FFACFD222296231E0026E8BD /* Info.plist in Resources */,
 				FFACFD122296231E0026E8BD /* Main.storyboard in Resources */,
 				FFD168A522A9EA86009B1418 /* commandIcon@3x.png in Resources */,
 				FFACFD0F2296231E0026E8BD /* Assets.xcassets in Resources */,
 				FF44950922A3463B009F46AA /* gestureIcon@2x.png in Resources */,
 				FF44951122A34E14009F46AA /* startIcon@2x.png in Resources */,
+				FFD782CB22F2D47600D2F43C /* musicIcon@2x.png in Resources */,
 				FFACFD112296231E0026E8BD /* LaunchScreen.storyboard in Resources */,
 				FF44950F22A34E14009F46AA /* startIcon@3x.png in Resources */,
 				FFD168A422A9EA86009B1418 /* commandIcon@2x.png in Resources */,
 				FF44950822A3463B009F46AA /* gestureIcon@3x.png in Resources */,
 				FF44951022A34E14009F46AA /* startIcon.png in Resources */,
+				FFD782CA22F2D47600D2F43C /* musicIcon@3x.png in Resources */,
 				FF44950A22A3463B009F46AA /* gestureIcon.png in Resources */,
 				FFD168A322A9EA86009B1418 /* commandIcon.png in Resources */,
 			);
@@ -656,14 +668,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4D734D2GN8;
+				DEVELOPMENT_TEAM = 7UQD3GFB9F;
 				INFOPLIST_FILE = ByteItApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fluid.ByteItApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fluid.ByteItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -676,14 +688,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4D734D2GN8;
+				DEVELOPMENT_TEAM = 7UQD3GFB9F;
 				INFOPLIST_FILE = ByteItApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fluid.ByteItApp2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fluid.ByteItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -12,9 +12,8 @@ class SensorPickerViewController: UITableViewController {
 
     // MARK: - Properties
     var sensors = [
-        "Accelerometer",
-        "Gyroscope",
-        "Magnetometer",
+        "GRU",
+        "iPhone"
     ]
     
     var selectedSensor: String? {

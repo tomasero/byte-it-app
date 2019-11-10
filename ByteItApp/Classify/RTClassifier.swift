@@ -122,14 +122,18 @@ public class RTClassifier: NSObject {
     func finalTrain() {
         var totalWindowLength = 0
         var n = 0
+        print("training data")
         print(self.trainingData)
         for (label, sample) in self.trainingData {
             let properLabel = label.components(separatedBy: "-")[0]
+//            let properLabel = label
             self.training_samples.append(knn_curve_label_pair(lcurveAccX: sample.laccX, lcurveAccY: sample.laccY, lcurveAccZ: sample.laccZ , lcurveGyrX: sample.lgyrX,lcurveGyrY: sample.lgyrY, lcurveGyrZ: sample.lgyrZ, rcurveAccX: sample.raccX, rcurveAccY: sample.raccY, rcurveAccZ: sample.raccZ , rcurveGyrX: sample.rgyrX,rcurveGyrY: sample.rgyrY, rcurveGyrZ: sample.rgyrZ, label: properLabel))
             totalWindowLength += sample.laccX.count
             n+=1
             print(self.training_samples.count)
         }
+        print("training samples")
+        print(training_samples)
         if training_samples.count < 9 {
             print("ERROR: Need more training data")
         } else {

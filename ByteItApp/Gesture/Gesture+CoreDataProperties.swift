@@ -29,7 +29,7 @@ extension Gesture {
 //        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
         var export = "\(name!),\(sensor!)"
         for sample in Array(samples) {
-            export += ",\(sample.getString())"
+            export += ";\(sample.getString())"
         }
         return export
     }

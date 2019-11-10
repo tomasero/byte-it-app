@@ -19,6 +19,12 @@ class NewDynamicDataSource: NSObject,UITableViewDataSource,UITableViewDelegate {
     
     func setData(samples: [Sample]){
         self.samples = samples
+        self.samples.sort {
+            let a = Int($0.name!.dropFirst()) ?? 0
+            let b = Int($1.name!.dropFirst()) ?? 0
+            print(a,b, a<b)
+            return a > b
+        }
     }
     
     func getData() -> [Sample] {

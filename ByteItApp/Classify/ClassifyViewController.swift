@@ -197,6 +197,7 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
     }
     
     func train() {
+        print("train")
         let gestureClasses = gestures
         if gestureClasses.count == 0 {
             let alert = UIAlertController(title: "No gestures available", message: "", preferredStyle: .alert)
@@ -207,6 +208,7 @@ class ClassifyViewController: UITableViewController, MFMailComposeViewController
         var n=0
         for gesture in self.gestures {
             let gestureName = gesture.name
+            print(gesture.name)
             let samples = gesture.samples
             for sample in samples {
                 let currentSample = SampleData(number: 0)

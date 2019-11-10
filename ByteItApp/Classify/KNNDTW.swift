@@ -127,7 +127,6 @@ public class KNNDTW: NSObject {
         }
         path.append([0,0])
         
-        
         //FOURTH, add up all the costs of the selected path
         var cost: Float = 0.0
         for sub in path {
@@ -136,12 +135,8 @@ public class KNNDTW: NSObject {
             //print(x, ",", y)
             cost = cost + distances[y][x]
         }
-        
         return cost
     }
-    
-    
-    
     
     public func predict(lcurveToTestAccX: [Float], lcurveToTestAccY: [Float], lcurveToTestAccZ: [Float], lcurveToTestGyrX: [Float], lcurveToTestGyrY: [Float], lcurveToTestGyrZ: [Float], rcurveToTestAccX: [Float], rcurveToTestAccY: [Float], rcurveToTestAccZ: [Float], rcurveToTestGyrX: [Float], rcurveToTestGyrY: [Float], rcurveToTestGyrZ: [Float]) -> knn_certainty_label_pair {
         

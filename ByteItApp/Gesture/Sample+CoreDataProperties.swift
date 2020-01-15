@@ -44,13 +44,37 @@ extension Sample {
     }
     
     func getString() -> String{
-        var str = name!
-        let atts = [laccX, laccY, laccZ, lgyrX, lgyrY, lgyrZ, raccX, raccY, raccZ, rgyrX, rgyrY, rgyrZ]
-        for att in atts {
-            let stringArray = att!.map { String($0) }
-            let string = stringArray.joined(separator: "|")
-            str += ",\(string)"
+        let _sampleName = name!
+        let _gestureName = gesture.name!
+        var str = ""
+        let header = "\(_gestureName),\(_sampleName)"
+        var atts = [laccX, laccY, laccZ, lgyrX, lgyrY, lgyrZ, raccX, raccY, raccZ, rgyrX, rgyrY, rgyrZ]
+        if gesture.sensor == "Left" {
+            atts = [laccX, laccY, laccZ, lgyrX, lgyrY, lgyrZ]
+        } else if gesture.sensor == "Right" {
+            atts = [raccX, raccY, raccZ, rgyrX, rgyrY, rgyrZ]
+        } else {
+            atts = [laccX, laccY, laccZ, lgyrX, lgyrY, lgyrZ]
         }
+//        let header = "\(gesture.name!),\(str)"
+//        print(header)
+        for i in 0..<40 {
+            str += header
+            for att in atts {
+                if att!.count < 40 {
+                    continue
+                }
+                let val = att![i]
+                str += ",\(val)"
+            }
+            str += "\n"
+        }
+//        for att in atts {
+//            print(att!.count)
+//            let stringArray = att!.map { String($0) }
+//            let string = stringArray.joined(separator: "|")
+//            str += ",\(string)"
+//        }
         return str
     }
 }

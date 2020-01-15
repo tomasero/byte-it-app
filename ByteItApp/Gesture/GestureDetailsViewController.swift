@@ -295,10 +295,31 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
     
 
     @IBAction func addSample(_ sender: Any) {
-        if lgruController.getPeripheralState() == "Disconnected" || rgruController.getPeripheralState() == "Disconnected" {
+        if let sensor = detailLabel.text {
+            if sensor == "" {
+                let sensorsAlertController = UIAlertController(
+                    title: "Sensors not selected",
+                    message: "Please choose sensors",
+                    preferredStyle: UIAlertController.Style.alert)
+                sensorsAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+                    sensorsAlertController.dismiss(animated: true, completion: nil)
+                }))
+                
+                self.present(sensorsAlertController, animated: true)//, completion: nil)
+                return
+            }
+        }
+        
+        let leftConnected = lgruController.getPeripheralState() == "Connected",
+            rightConnected = rgruController.getPeripheralState() == "Connected"
+        let bothConnected = leftConnected && rightConnected
+        
+        if sensor == "Left" && !leftConnected
+        || sensor == "Right" && !rightConnected
+        || sensor == "Both" && !bothConnected {
             let disconnectedAlertController = UIAlertController(
                 title: "Disconnected",
-                message: "Please connect to a GRU first",
+                message: "Please connect the appropriate GRUs first",
                 preferredStyle: UIAlertController.Style.alert)
             disconnectedAlertController.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
                 disconnectedAlertController.dismiss(animated: true, completion: nil)
@@ -394,12 +415,12 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
         thirdAlertController.addAction(saveAction)
         thirdAlertController.addAction(cancelAction)
         
-        secondAlertController.addAction(UIAlertAction(title: "Stop", style: UIAlertAction.Style.default, handler: { (action) in
-            firstAlertController.dismiss(animated: true, completion: nil)
-                print("STOP")
-                self.timer.invalidate()
-                self.present(thirdAlertController, animated: true, completion: nil)
-        }))
+//        secondAlertController.addAction(UIAlertAction(title: "Stop", style: UIAlertAction.Style.default, handler: { (action) in
+//            firstAlertController.dismiss(animated: true, completion: nil)
+//            print("STOP")
+//            self.timer.invalidate()
+//            self.present(thirdAlertController, animated: true, completion: nil)
+//        }))
         
         secondAlertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (action) in
             firstAlertController.dismiss(animated: true, completion: nil)
@@ -418,7 +439,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
             
             func startAccelerometers(){
               self.sampleDict = self.newSampleDict()
-              self.timer = Timer(fire: Date(), interval: (1.0/60.0),
+              self.timer = Timer(fire: Date(), interval: (1.0/20.0),
                                  repeats: true, block: { (timer) in
                                     //let data = self.gruController.getData()
                                     let ldata = self.lgruController.getData()
@@ -447,7 +468,7 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
                                     let paragraphStyle = NSMutableParagraphStyle()
                                     paragraphStyle.alignment = .left
                                     let messageText = NSMutableAttributedString(
-                                        string: "AccL: \(ldata[0]) \nGyrL: \(ldata[1]) \nAccR: \(rdata[0]) \nGyrR: \(rdata[1])",
+                                        string: "AccL: \(ldata[0])\nGyrL: \(ldata[1])\nAccR: \(rdata[0])\nGyrR: \(rdata[1])",
                                         attributes: [
                                             NSAttributedString.Key.paragraphStyle: paragraphStyle,
 //                                            NSFontAttributeName : UIFont.preferredFont(forTextStyle: .body),
@@ -458,18 +479,30 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //                                    secondAlertController.message = "Acc_L: \(ldata[0]), \nGyr_L: \(ldata[1]), \nAcc_R: \(rdata[0]), \nGyr_R: \(rdata[1])"
                                     secondAlertController.setValue(messageText, forKey: "attributedMessage")
                                     
-              })
+                })
                 
               //self.timer.fire()
               // Add the timer to the current run loop.
-              RunLoop.current.add(self.timer, forMode: RunLoop.Mode.default)
+                RunLoop.current.add(self.timer, forMode: RunLoop.Mode.default)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                    print(secondAlertController.isBeingPresented)
+                    if (self.timer.isValid) {
+                        secondAlertController.dismiss(animated: true, completion: nil)
+                        print("STOP")
+                        self.timer.invalidate()
+                        self.present(thirdAlertController, animated: true, completion: nil)
+                    }
+                }
             }
             startAccelerometers()
+            // Show another alert view
+            self.present(secondAlertController, animated: true, completion: nil)
           
             //save the x y z reading to file system
             
-            // Show another alert view
-            self.present(secondAlertController, animated: true, completion: nil)
+            
+            
+
         }))
         
         firstAlertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { (action) in
@@ -510,7 +543,13 @@ class GestureDetailsViewController: UITableViewController, UITextFieldDelegate, 
 //    }
     
     func createExportString() -> String {
-        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
+//        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
+        var export: String = NSLocalizedString("name,sampleNum,accX,accY,accZ,gyrX,gyrY,gyrZ\n", comment: "")
+//        if detailLabel.text == "Both" {
+//            export = NSLocalizedString("name,sampleNum,accX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ\n", comment: "")
+//        } else {
+//            export = NSLocalizedString("name,sampleNum,accX,accY,accZ,gyrX,gyrY,gyrZ\n", comment: "")
+//        }
         export += (self.gesture?.getString())!
         print("This is what the app will export: \(export)")
         return export

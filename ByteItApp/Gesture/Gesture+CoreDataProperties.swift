@@ -27,9 +27,11 @@ extension Gesture {
 
     func getString() -> String{
 //        var export: String = NSLocalizedString("name,sensor,samples(name, accx, accy, accz, gyrx, gyry, gyrz)\n", comment: "")
-        var export = "\(name!),\(sensor!)"
+        var export = ""
+//        var header = "\(name!),\(sensor!),"
+//        var header = "\(name!),"
         for sample in Array(samples) {
-            export += ";\(sample.getString())"
+            export += "\(sample.getString())"
         }
         return export
     }

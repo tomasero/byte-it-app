@@ -30,7 +30,8 @@ extension ClassifiedGesture {
         return time
     }
     
-    func getString() -> String {
+    func
+        getString() -> String {
         let timeStr = self.getTime().replacingOccurrences(of: " ", with: "")
         let predictedStr = gesture ?? "nil"
         let actualStr = actualGesture ?? "nil"

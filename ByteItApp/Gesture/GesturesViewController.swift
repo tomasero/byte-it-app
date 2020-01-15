@@ -203,9 +203,11 @@ class GesturesViewController: UITableViewController, MFMailComposeViewController
     }
     
     func createExportString() -> String {
-        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
+//        var export: String = NSLocalizedString("name,sensor,samples(name,laccX,laccY,laccZ,lgyrX,lgyrY,lgyrZ,raccX,raccY,raccZ,rgyrX,rgyrY,rgyrZ)\n", comment: "")
+//        var export: String = NSLocalizedString("name,sensor,sampleNum,accX,accY,accZ,gyrX,gyrY,gyrZ\n", comment: "")
+        var export: String = NSLocalizedString("name,sample,accX,accY,accZ,gyrX,gyrY,gyrZ\n", comment: "")
         for gesture in gestures {
-            export += "\(gesture.getString())\n"
+            export += "\(gesture.getString())"
         }
         print("This is what the app will export: \(export)")
         return export
@@ -237,9 +239,9 @@ class GesturesViewController: UITableViewController, MFMailComposeViewController
                                             mail.setSubject("GRU Gestures \(date)")
                                             mail.setMessageBody("Attached", isHTML: false)
                                             mail.setToRecipients([email])
-                                            let f = "gestures_\(date).txt"
+                                            let f = "gestures_\(date).csv"
                                             let data = self.createExportString().data(using: .utf8)
-                                            mail.addAttachmentData(data!, mimeType: "text/txt", fileName: f)
+                                            mail.addAttachmentData(data!, mimeType: "text/csv", fileName: f)
                                             self.present(mail, animated: true, completion: nil)
                                         }
         }

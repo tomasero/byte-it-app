@@ -205,19 +205,26 @@ CBPeripheralDelegate {
                 gyrZ = gyrZ - max
             }
             
-            currAccX = Int32(alpha * Float(accX) + (1 - alpha) * Float(currAccX))
-            currAccY = Int32(alpha * Float(accY) + (1 - alpha) * Float(currAccY))
-            currAccZ = Int32(alpha * Float(accZ) + (1 - alpha) * Float(currAccZ))
+//            currAccX = Int32(alpha * Float(accX) + (1 - alpha) * Float(currAccX))
+//            currAccY = Int32(alpha * Float(accY) + (1 - alpha) * Float(currAccY))
+//            currAccZ = Int32(alpha * Float(accZ) + (1 - alpha) * Float(currAccZ))
+//
+//            currGyrX = Int32(alpha * Float(gyrX) + (1 - alpha) * Float(currGyrX))
+//            currGyrY = Int32(alpha * Float(gyrY) + (1 - alpha) * Float(currGyrY))
+//            currGyrZ = Int32(alpha * Float(gyrZ) + (1 - alpha) * Float(currGyrZ))
+            currAccX = accX
+            currAccY = accY
+            currAccZ = accZ
             
-            currGyrX = Int32(alpha * Float(gyrX) + (1 - alpha) * Float(currGyrX))
-            currGyrY = Int32(alpha * Float(gyrY) + (1 - alpha) * Float(currGyrY))
-            currGyrZ = Int32(alpha * Float(gyrZ) + (1 - alpha) * Float(currGyrZ))
+            currGyrX = gyrX
+            currGyrY = gyrY
+            currGyrZ = gyrZ
             
             self.currVBat = Int32(alpha * Float(vBat) + (1 - alpha) * Float(currVBat))
             //            print(self.currVBat)
-            let distX = abs(currAccX - oldAccX)
-            let distY = abs(currAccY - oldAccY)
-            let distZ = abs(currAccZ - oldAccZ)
+//            let distX = abs(currAccX - oldAccX)
+//            let distY = abs(currAccY - oldAccY)
+//            let distZ = abs(currAccZ - oldAccZ)
 
             
             oldAccX = currAccX

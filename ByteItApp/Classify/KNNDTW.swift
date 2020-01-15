@@ -25,21 +25,13 @@ public class KNNDTW: NSObject {
         self.n_neighbors = neighbors
         self.max_warping_window = max_warp // not implemented
     }
-    
-    
-    
+
     public func train(data_sets: [knn_curve_label_pair]) {
-        
-        
         self.curve_label_pairs = data_sets
-        
         for set in data_sets {
-            
             if (set.lcurveAccX.count == 0 || set.lcurveAccY.count == 0 || set.lcurveAccZ.count == 0 || set.label == "") {
                 print("HEY! BOTH CURVE AND LABEL ARE REQUIRED!")
             }
-            
-            
             //we'll need a list of unique labels for later
             var unique = true
             for in_label in self.unique_labels {
@@ -56,11 +48,8 @@ public class KNNDTW: NSObject {
     
     
     private func dtw_cost(s1: [Float], s2: [Float]) -> Float {
-        
         //FIRST, we get the distance between each point
-        
         var distances = [[Float]](repeating: [Float](repeating: 0, count: s2.count), count: s1.count)
-        
         //use euclidean distance between the pairs of points.
         for (i,_) in s1.enumerated() {
             for (j,_) in s2.enumerated() {
@@ -68,8 +57,6 @@ public class KNNDTW: NSObject {
                 distances[i][j] = pow(abs( s2[j] - s1[i] ), 2)
             }
         }
-        
-        
         
         //SECOND, we compute the warp path (basically cost of each path)
         
@@ -110,15 +97,12 @@ public class KNNDTW: NSObject {
             }
             else if (j==0) {
                 i = i - 1
-            }
-            else {
+            } else {
                 if ( acc_cost[i-1][j] == min(acc_cost[i-1][j-1], acc_cost[i-1][j], acc_cost[i][j-1]) ) {
                     i = i - 1
-                }
-                else if (acc_cost[i][j-1] == min(acc_cost[i-1][j-1], acc_cost[i-1][j], acc_cost[i][j-1])) {
+                } else if (acc_cost[i][j-1] == min(acc_cost[i-1][j-1], acc_cost[i-1][j], acc_cost[i][j-1])) {
                     j = j - 1
-                }
-                else {
+                } else {
                     i = i - 1
                     j = j - 1
                 }
@@ -191,8 +175,7 @@ public class KNNDTW: NSObject {
         distancesGyr = distancesGyr.sorted(by: { (a, b) -> Bool in
             if (a.distance < b.distance) {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         })
@@ -201,8 +184,7 @@ public class KNNDTW: NSObject {
         distancesAcc = distancesAcc.sorted(by: { (a, b) -> Bool in
             if (a.distance < b.distance) {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         })
@@ -231,15 +213,13 @@ public class KNNDTW: NSObject {
         let sorted_votes = votes.max(by: { (a, b) -> Bool in
             if (a.1 < b.1) {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         })
         
         //return the label and a certainty
         return knn_certainty_label_pair(probability: Float(sorted_votes!.1)/Float(self.n_neighbors), label: (sorted_votes?.0)!, minDistance: minDistance)
-        
     }
     
     
